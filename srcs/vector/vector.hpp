@@ -19,8 +19,6 @@ namespace ft
 		typedef typename allocator_type::const_pointer 		const_pointer;
 		typedef typename allocator_type::size_type 			size_type;
 
-		Iterator_traits<const_iterator> it;
-
 		public :
 			Vector() {};
 			~Vector() {};

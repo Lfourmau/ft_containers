@@ -20,8 +20,13 @@ namespace ft
 		typedef typename allocator_type::size_type 			size_type;
 
 		public :
-			Vector() {};
-			~Vector() {};
+			Vector() { std::cout << "Vector construct called" << std::endl; };
+			// Vector (const allocator_type& alloc = allocator_type());
+			// Vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
+			// template <class InputIterator>
+         	// 	Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
+			// Vector (const Vector& x);
+			// ~Vector() {};
 
 			typedef ft::reverse_iterator<value_type> reverse_iterator;
 			typedef ft::reverse_iterator<value_type> iterator;

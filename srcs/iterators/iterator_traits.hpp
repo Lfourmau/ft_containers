@@ -41,19 +41,20 @@ namespace ft
 		typedef typename ft::Iterator_traits<Iter>::pointer pointer;
 		typedef typename ft::Iterator_traits<Iter>::reference reference;
 
-		reverse_iterator() {};
-		~reverse_iterator() {};
+		public:
+			reverse_iterator() { std::cout << "Construct called" << std::endl; };
+			~reverse_iterator() {};
 
-		iterator_type base() {};
-		reverse_iterator& operator*(reverse_iterator const& rhs);
-		reverse_iterator& operator+(reverse_iterator const& rhs);
-		reverse_iterator& operator++(reverse_iterator const& rhs);
-		reverse_iterator& operator+=(reverse_iterator const& rhs);
-		reverse_iterator& operator-(reverse_iterator const& rhs);
-		reverse_iterator& operator--(reverse_iterator const& rhs);
-		reverse_iterator& operator-=(reverse_iterator const& rhs);
-		//reverse_iterator& operator->(reverse_iterator const& rhs);
-		reverse_iterator& operator[](reverse_iterator const& rhs);
+			// iterator_type base() {};
+			// reverse_iterator& operator*(reverse_iterator const& rhs);
+			// reverse_iterator& operator+(reverse_iterator const& rhs);
+			// reverse_iterator& operator++(reverse_iterator const& rhs);
+			// reverse_iterator& operator+=(reverse_iterator const& rhs);
+			// reverse_iterator& operator-(reverse_iterator const& rhs);
+			// reverse_iterator& operator--(reverse_iterator const& rhs);
+			// reverse_iterator& operator-=(reverse_iterator const& rhs);
+			// //reverse_iterator& operator->(reverse_iterator const& rhs);
+			// reverse_iterator& operator[](reverse_iterator const& rhs);
 	};
 }
 

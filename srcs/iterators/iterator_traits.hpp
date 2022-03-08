@@ -43,7 +43,7 @@ namespace ft
 		typedef typename ft::Iterator_traits<Iter>::reference reference;
 
 		public:
-			reverse_iterator() { std::cout << "Rev it construct called" << std::endl; };
+			reverse_iterator() { std::cout << "Rev it default construct called" << std::endl; };
 			reverse_iterator (iterator_type it) : iter(it) {};
 			template <class Iterator>
   				reverse_iterator (const reverse_iterator<Iterator>& rev_it) : iter(rev_it.iter) {};
@@ -57,7 +57,14 @@ namespace ft
 				cpy--;
 				return (*cpy);
 			};
-			// reverse_iterator operator+(difference_type n) const;
+			// reverse_iterator operator+(difference_type n) const
+			// {
+			// 	this->iter -= n;
+
+			// 	reverse_iterator<Iter> cpy(*this);
+			// 	return (cpy);
+
+			// };
 			reverse_iterator& operator++()
 			{
 				iter--;
@@ -65,7 +72,7 @@ namespace ft
 			};
 			reverse_iterator  operator++(int)
 			{
-				Iter tmp(*this);
+				reverse_iterator<Iter> tmp;
 
 				this->iter--;
 				return (tmp);
@@ -84,10 +91,11 @@ namespace ft
 			};
 			reverse_iterator  operator--(int)
 			{
-				Iter tmp(*this);
+				reverse_iterator<Iter> tmp;
 
 				this->iter++;
 				return (tmp);
+
 			};
 			reverse_iterator& operator-=(difference_type n)
 			{

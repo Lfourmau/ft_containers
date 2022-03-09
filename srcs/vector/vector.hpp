@@ -19,10 +19,22 @@ namespace ft
 		typedef typename allocator_type::const_pointer 		const_pointer;
 		typedef typename allocator_type::size_type 			size_type;
 
+
+		private:
+			T *_data;
+			int _capacity;
+        	int _size;
+
 		public :
-			Vector() { std::cout << "Vector construct called" << std::endl; };
-			// Vector (const allocator_type& alloc = allocator_type());
-			// Vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
+			Vector() : _data(nullptr), _capacity(0), _size(0) {};
+			Vector (const allocator_type& alloc = allocator_type()) : _data(nullptr), _capacity(0), _size(0) {};
+			Vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
+			{
+				_data = (new T[n]);
+				_size = n;
+				_capacity = n;
+				//fill with copy of val ?
+			};
 			// template <class InputIterator>
          	// 	Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
 			// Vector (const Vector& x);
@@ -44,7 +56,7 @@ namespace ft
 			const_reverse_iterator rend() const;
 
 			//Capacity
-			size_type size() const;
+			size_type size() const {return (this->_size)};
 			size_type max_size() const;
 			void resize (size_type n, value_type val = value_type());
 			size_type capacity() const;
@@ -54,11 +66,11 @@ namespace ft
 			//Elements access
 			reference operator[] (size_type n);
 			const_reference operator[] (size_type n) const;
-			reference at (size_type n);
+			reference at (size_type n) {return (data[n])};
 			const_reference at (size_type n) const;
-			reference front();
+			reference front() {return (this->data[0])};
 			const_reference front() const;
-			reference back();
+			reference back() {return (this->data[size])};
 			const_reference back() const;
 
 			//Modifiers

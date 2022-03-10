@@ -44,7 +44,7 @@ namespace ft
 
 		public:
 			reverse_iterator() { std::cout << "Rev it default construct called" << std::endl; };
-			reverse_iterator (iterator_type it) : iter(it) {};
+			reverse_iterator (iterator_type it) : iter(it--) {};
 			template <class Iterator>
   				reverse_iterator (const reverse_iterator<Iterator>& rev_it) : iter(rev_it.iter) {};
 			~reverse_iterator() {};
@@ -57,14 +57,13 @@ namespace ft
 				cpy--;
 				return (*cpy);
 			};
-			// reverse_iterator operator+(difference_type n) const
-			// {
-			// 	this->iter -= n;
+			 reverse_iterator operator+(difference_type n) const
+			 {
+			 	this->iter -= n;
 
-			// 	reverse_iterator<Iter> cpy(*this);
-			// 	return (cpy);
-
-			// };
+			 	reverse_iterator<Iter> cpy(*this);
+			 	return (cpy);
+			 };
 			reverse_iterator& operator++()
 			{
 				iter--;
@@ -83,7 +82,13 @@ namespace ft
 				this->iter -= n;
 				return (*this);
 			};
-			// reverse_iterator operator-(difference_type n) const;
+			reverse_iterator operator-(difference_type n) const
+			{
+				this->iter += n;
+
+			 	reverse_iterator<Iter> cpy(*this);
+			 	return (cpy);
+			};
 			reverse_iterator& operator--()
 			{
 				iter++;
@@ -106,7 +111,14 @@ namespace ft
 			{
 				return &(this->operator*());
 			};
-			// reference operator[](difference_type n) const;
+			reference operator[](difference_type n) const
+			{
+				int i = -1;
+
+				while (++i < n)
+					this->iter--;
+				return (*(this->iter));
+			};
 	};
 }
 

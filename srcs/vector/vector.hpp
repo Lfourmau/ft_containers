@@ -1,6 +1,7 @@
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
+#include <vector>
 #include <iostream>
 #include <iterator>
 #include <memory>
@@ -18,37 +19,46 @@ namespace ft
 		typedef typename allocator_type::pointer 			pointer;
 		typedef typename allocator_type::const_pointer 		const_pointer;
 		typedef typename allocator_type::size_type 			size_type;
+		typedef ft::reverse_iterator<value_type> 			iterator;
+		typedef ft::reverse_iterator<value_type>	 		reverse_iterator;
+		typedef ft::reverse_iterator<const value_type> 		const_iterator;
+		typedef ft::reverse_iterator<const value_type> 		const_reverse_iterator;
 
 
 		private:
 			T *_data;
 			int _capacity;
-        	int _size;
-
+        	size_t _size;
+			allocator_type my_alloc;
+			//iterator _begin;
+			//iterator _end;
 		public :
-			Vector() : _data(nullptr), _capacity(0), _size(0) {};
-			Vector (const allocator_type& alloc = allocator_type()) : _data(nullptr), _capacity(0), _size(0) {};
+			Vector () : _data(nullptr), _capacity(0), _size(0) {};
 			Vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
 			{
-				_data = (new T[n]);
+				my_alloc = alloc;
+				_data = my_alloc.allocate(n);
 				_size = n;
 				_capacity = n;
-				//fill with copy of val ?
+				for (size_t i = 0; i < n; i++)
+					my_alloc.construct(_data + i, val);
+				
+			};
+			void print()
+			{
+				for (size_t i = 0; i < this->_size; i++)
+					std::cout << _data[i] << std::endl;
 			};
 			// template <class InputIterator>
          	// 	Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
 			// Vector (const Vector& x);
 			// ~Vector() {};
 
-			typedef ft::reverse_iterator<value_type> reverse_iterator;
-			typedef ft::reverse_iterator<value_type> iterator;
-			typedef ft::reverse_iterator<const value_type> const_iterator;
-			typedef ft::reverse_iterator<const value_type> const_reverse_iterator;
 			//Iterators
-			Vector& operator=(Vector const& rhs);
-			iterator begin();
-			const_iterator begin() const;
-			iterator end();
+			Vector& 				operator=(Vector const& rhs);
+			iterator 				begin();
+			const_iterator 			begin() const;
+			iterator 				end();
 			const_iterator end() const;
 			reverse_iterator rbegin();
 			const_reverse_iterator rbegin() const;
@@ -56,7 +66,7 @@ namespace ft
 			const_reverse_iterator rend() const;
 
 			//Capacity
-			size_type size() const {return (this->_size)};
+			size_type size() const { return (this->_size); };
 			size_type max_size() const;
 			void resize (size_type n, value_type val = value_type());
 			size_type capacity() const;
@@ -66,11 +76,11 @@ namespace ft
 			//Elements access
 			reference operator[] (size_type n);
 			const_reference operator[] (size_type n) const;
-			reference at (size_type n) {return (data[n])};
+		//	reference at (size_type n) { return (data[n]); };
 			const_reference at (size_type n) const;
-			reference front() {return (this->data[0])};
+		//	reference front() { return (this->data[0]); };
 			const_reference front() const;
-			reference back() {return (this->data[size])};
+			//reference back() { return (this->data[size]); };
 			const_reference back() const;
 
 			//Modifiers

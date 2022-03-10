@@ -3,9 +3,11 @@
 
 int main()
 {
-	ft::Vector<int> myvect(10, 20);
-	myvect.print();
-	ft::reverse_iterator<std::vector<int>::iterator> mon_petit_rev_it;
+	std::vector<int> myvect(10, 120);
+	std::vector<int>::iterator it = myvect.end();
+	ft::reverse_iterator<std::vector<int>::iterator> rev_it(it);
+	std::cout << *rev_it << std::endl;
+	//myvect.print();
 	//std::vector<int> myvect;
 	//myvect.push_back(50);
 	//myvect.push_back(51);

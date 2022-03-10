@@ -30,12 +30,12 @@ namespace ft
 		typedef typename Iter::reference			reference;
 		typedef typename Iter::iterator_category	iterator_category;
 	};
-
+	
 	template <class Iter>
 	class reverse_iterator
 	{
 		Iter iter;
-		typedef typename ft::Iterator_traits<Iter>::iterator_category iterator_type;
+		typedef Iter iterator_type;
 		typedef typename ft::Iterator_traits<Iter>::iterator_category iterator_category;
 		typedef typename ft::Iterator_traits<Iter>::value_type value_type;
 		typedef typename ft::Iterator_traits<Iter>::difference_type difference_type;
@@ -43,12 +43,18 @@ namespace ft
 		typedef typename ft::Iterator_traits<Iter>::reference reference;
 
 		public:
-			reverse_iterator() { std::cout << "Rev it default construct called" << std::endl; };
-			reverse_iterator (iterator_type it) : iter(it--) {};
+			reverse_iterator() {};
+			reverse_iterator (iterator_type it) : iter(it) {};
 			template <class Iterator>
   				reverse_iterator (const reverse_iterator<Iterator>& rev_it) : iter(rev_it.iter) {};
 			~reverse_iterator() {};
 
+			template< class U >
+				reverse_iterator& operator=( const reverse_iterator<U>& other )
+				{ 
+					this->iter = other;
+					return (*this);
+				};
 			iterator_type base() { return (iter); };
 			reference operator*() const
 			{
@@ -115,7 +121,7 @@ namespace ft
 			{
 				int i = -1;
 
-				while (++i < n)
+				while (++i != n)
 					this->iter--;
 				return (*(this->iter));
 			};

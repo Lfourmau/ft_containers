@@ -19,29 +19,27 @@ namespace ft
 		typedef typename allocator_type::pointer 			pointer;
 		typedef typename allocator_type::const_pointer 		const_pointer;
 		typedef typename allocator_type::size_type 			size_type;
-		typedef ft::reverse_iterator<value_type> 			iterator;
-		typedef ft::reverse_iterator<value_type>	 		reverse_iterator;
-		typedef ft::reverse_iterator<const value_type> 		const_iterator;
-		typedef ft::reverse_iterator<const value_type> 		const_reverse_iterator;
-
+		typedef pointer 									iterator;
+		typedef ft::reverse_iterator<iterator>	 			reverse_iterator;
+		typedef const_pointer								const_iterator;
+		typedef ft::reverse_iterator<const_iterator> 		const_reverse_iterator;
 
 		private:
-			T *_data;
-			int _capacity;
-        	size_t _size;
-			allocator_type my_alloc;
-			//iterator _begin;
-			//iterator _end;
+			T 				*_data;
+			int 			_capacity;
+        	size_t 			_size;
+			allocator_type 	_my_alloc;
+
 		public :
 			Vector () : _data(nullptr), _capacity(0), _size(0) {};
 			Vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
 			{
-				my_alloc = alloc;
-				_data = my_alloc.allocate(n);
+				_my_alloc = alloc;
+				_data = _my_alloc.allocate(n);
 				_size = n;
 				_capacity = n;
 				for (size_t i = 0; i < n; i++)
-					my_alloc.construct(_data + i, val);
+					_my_alloc.construct(_data + i, val);
 				
 			};
 			void print()
@@ -56,9 +54,9 @@ namespace ft
 
 			//Iterators
 			Vector& 				operator=(Vector const& rhs);
-			iterator 				begin();
+			iterator 				begin() { return (_data); };
 			const_iterator 			begin() const;
-			iterator 				end();
+			iterator 				end() { return (&_data[_size]); };
 			const_iterator end() const;
 			reverse_iterator rbegin();
 			const_reverse_iterator rbegin() const;

@@ -60,5 +60,19 @@ int main()
 	swap1.print();
 	std::cout << "Vec2 after swapping : ";
 	swap2.print();
+
+	header_test_section("Insert");
+	std::vector<int> insertTest;
+	insertTest.push_back(44);
+	insertTest.push_back(443);
+	insertTest.push_back(442);
+	insertTest.push_back(4422);
+	std::vector<int>::iterator insert_it = insertTest.begin() + 2;
+	insertTest.insert(insert_it, 9);
+	for (std::vector<int>::iterator itloop = insertTest.begin(); itloop != insertTest.end(); itloop++)
+	{
+		std::cout << *itloop << std::endl;
+	}
+	
 	header_test_section("END PROGRAM");
 }

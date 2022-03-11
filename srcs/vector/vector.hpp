@@ -109,7 +109,20 @@ namespace ft
 				_my_alloc.destroy(_data + _size);
 				this->_size--;
 			};
-			iterator insert (iterator position, const value_type& val);
+			iterator insert (iterator position, const value_type& val)
+			{
+				T  *data_tmp = this->_data;
+
+				if (this->_size == this->capacity)
+				{
+					_data = this->_my_alloc.allocate(_size * 2);
+					this->_capacity *= 2;
+				}
+				std::copy(data_tmp, data_tmp + (position - 2), _data);
+				_my_alloc.construct(_data + (position - 1), val);
+				std::copy(data_tmp + position, data_tmp + _size, _data);
+				return (_data + (position - 1));
+			};
 			void insert (iterator position, size_type n, const value_type& val);
 			template <class InputIterator>
     			void insert (iterator position, InputIterator first, InputIterator last);

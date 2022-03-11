@@ -58,9 +58,9 @@ namespace ft
 			const_iterator 			begin() const;
 			iterator 				end() { return (&_data[_size]); };
 			const_iterator end() const;
-			reverse_iterator rbegin();
+			reverse_iterator rbegin() { return end(); };
 			const_reverse_iterator rbegin() const;
-			reverse_iterator rend();
+			reverse_iterator rend() { return begin(); };
 			const_reverse_iterator rend() const;
 
 			//Capacity
@@ -72,7 +72,7 @@ namespace ft
 			void reserve (size_type n);
 
 			//Elements access
-			reference operator[] (size_type n);
+			reference operator[] (size_type n) { return (_data[n]); };
 			const_reference operator[] (size_type n) const;
 		//	reference at (size_type n) { return (data[n]); };
 			const_reference at (size_type n) const;

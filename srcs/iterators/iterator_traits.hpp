@@ -46,16 +46,16 @@ namespace ft
 			reverse_iterator() {};
 			reverse_iterator (iterator_type it) : iter(it) {};
 			template <class Iterator>
-  				reverse_iterator (const reverse_iterator<Iterator>& rev_it) : iter(rev_it.iter) {};
+  			reverse_iterator (const reverse_iterator<Iterator>& rev_it) : iter(rev_it.iter) {};
 			~reverse_iterator() {};
 
 			template< class U >
-				reverse_iterator& operator=( const reverse_iterator<U>& other )
-				{ 
-					this->iter = other;
-					return (*this);
-				};
-			iterator_type base() { return (iter); };
+			reverse_iterator& operator=( const reverse_iterator<U>& other )
+			{ 
+				this->iter = other;
+				return (*this);
+			};
+			iterator_type base() { return (iter); }; //offset of 1 need to be implement
 			reference operator*() const
 			{
 				Iter cpy(iter);
@@ -119,11 +119,7 @@ namespace ft
 			};
 			reference operator[](difference_type n) const
 			{
-				int i = -1;
-
-				while (++i != n)
-					this->iter--;
-				return (*(this->iter));
+				return (*(this->iter - (n + 1)));
 			};
 	};
 }

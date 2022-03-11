@@ -2,6 +2,7 @@ NAME = containers
 
 INC = 	srcs/vector/vector.hpp \
 		srcs/iterators/iterator_traits.hpp \
+		debug_test.hpp \
 
 SRCS = 	main.cpp \
 

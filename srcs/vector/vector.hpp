@@ -26,7 +26,7 @@ namespace ft
 
 		private:
 			T 				*_data;
-			int 			_capacity;
+			size_t 			_capacity;
         	size_t 			_size;
 			allocator_type 	_my_alloc;
 
@@ -45,7 +45,8 @@ namespace ft
 			void print()
 			{
 				for (size_t i = 0; i < this->_size; i++)
-					std::cout << _data[i] << std::endl;
+					std::cout << _data[i] << "---";
+				std::cout << std::endl;
 			};
 			// template <class InputIterator>
          	// 	Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
@@ -85,15 +86,43 @@ namespace ft
 			template <class InputIterator>
   				void assign (InputIterator first, InputIterator last);
 			void assign (size_type n, const value_type& val);
-			void push_back (const value_type& val);
-			void pop_back();
+			void push_back (const value_type& val)
+			{
+				T *data_tmp = this->_data;
+				if (this->_size == this->_capacity)
+				{
+					_data = this->_my_alloc.allocate(_size * 2);
+					std::copy(data_tmp, data_tmp + _size, _data);
+					_my_alloc.construct(_data + _size, val); //before increment size, because size is equal to the number of element, not the index
+					this->_size++;
+					this->_capacity *= 2;
+				}
+				else
+				{
+					std::copy(data_tmp, data_tmp + _size, _data);
+					this->_data[_size] = val; //before increment size, because size is equal to the number of element, not the index
+					this->_size++;
+				}
+			};
+			void pop_back()
+			{
+				_my_alloc.destroy(_data + _size);
+				this->_size--;
+			};
 			iterator insert (iterator position, const value_type& val);
 			void insert (iterator position, size_type n, const value_type& val);
 			template <class InputIterator>
     			void insert (iterator position, InputIterator first, InputIterator last);
 			iterator erase (iterator position);
 			iterator erase (iterator first, iterator last);
-			void swap (Vector& x);
+			void swap (Vector& x)
+			{
+				T *tmp;
+	
+				tmp = x.begin();
+				x._data = this->_data;
+				this->_data = tmp;
+			};
 			void clear();
 
 			//Allocator

@@ -55,7 +55,7 @@ namespace ft
 				this->iter = other;
 				return (*this);
 			};
-			iterator_type base() { return (iter); }; //offset of 1 need to be implement
+			iterator_type base() const { return (iter); }; //offset of 1 need to be implement
 			reference operator*() const
 			{
 				Iter cpy(iter);
@@ -122,6 +122,18 @@ namespace ft
 				return (*(this->iter - (n + 1)));
 			};
 	};
+	template< class Iterator1, class Iterator2 >
+	bool operator==( const ft::reverse_iterator<Iterator1>& lhs, const ft::reverse_iterator<Iterator2>& rhs ) { return (lhs.base() == rhs.base()); };
+	template< class Iterator1, class Iterator2 >
+	bool operator!=( const ft::reverse_iterator<Iterator1>& lhs, const ft::reverse_iterator<Iterator2>& rhs ) { return (lhs.base() != rhs.base()); };
+	template< class Iterator1, class Iterator2 >
+	bool operator<( const ft::reverse_iterator<Iterator1>& lhs, const ft::reverse_iterator<Iterator2>& rhs ) { return (lhs.base() > rhs.base()); };
+	template< class Iterator1, class Iterator2 >
+	bool operator<=( const ft::reverse_iterator<Iterator1>& lhs, const ft::reverse_iterator<Iterator2>& rhs ) { return (lhs.base() >= rhs.base()); };
+	template< class Iterator1, class Iterator2 >
+	bool operator>( const ft::reverse_iterator<Iterator1>& lhs, const ft::reverse_iterator<Iterator2>& rhs ) { return (lhs.base() < rhs.base()); };
+	template< class Iterator1, class Iterator2 >
+	bool operator>=( const ft::reverse_iterator<Iterator1>& lhs, const ft::reverse_iterator<Iterator2>& rhs ) { return (lhs.base() <= rhs.base()); };
 }
 
 #endif

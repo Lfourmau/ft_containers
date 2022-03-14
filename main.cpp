@@ -105,5 +105,13 @@ int main()
 	for (std::vector<int>::iterator it = BaseVect.begin(); it != BaseVect.end(); it++)
 		std::cout << *it << "---";
 	std::cout << std::endl;
+	
+	header_test_section("Rev it comp. operators");
+	std::vector<int> comptest(10, 42);
+	std::vector<int>::iterator comp_it = comptest.begin() + 2;
+	ft::reverse_iterator<std::vector<int>::iterator> comp_rev_it(comp_it);
+	ft::reverse_iterator<std::vector<int>::iterator> comp_rev_it2(comp_it);
+	
+	std::cout << (comp_rev_it == comp_rev_it2) << std::endl;
 	header_test_section("END PROGRAM");
 }

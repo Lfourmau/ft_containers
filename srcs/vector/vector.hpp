@@ -50,8 +50,16 @@ namespace ft
 			};
 			// template <class InputIterator>
          	// 	Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
-			// Vector (const Vector& x);
-			// ~Vector() {};
+			Vector (const Vector& x)
+			{
+				this->_capacity = x._capacity;
+				this->_size = x._size;
+				this->_my_alloc = allocator_type();
+				this->_data = _my_alloc.allocate(this->_size);
+				for (size_t i = 0; i < _size; i++)
+					_my_alloc.construct(_data + i, *(x._data + i));
+			};
+			~Vector() {};
 
 			//Iterators
 			Vector& 				operator=(Vector const& rhs);
@@ -111,17 +119,30 @@ namespace ft
 			};
 			iterator insert (iterator position, const value_type& val)
 			{
-				T  *data_tmp = this->_data;
+				Vector tmp(*this);
+				T* ret;
+				int i = 0;
 
-				if (this->_size == this->capacity)
+				if (this->_size == this->_capacity)
 				{
-					_data = this->_my_alloc.allocate(_size * 2);
-					this->_capacity *= 2;
+					this->_data = this->_my_alloc.allocate(_size * 2);
+					this->_capacity *=2;
 				}
-				std::copy(data_tmp, data_tmp + (position - 2), _data);
-				_my_alloc.construct(_data + (position - 1), val);
-				std::copy(data_tmp + position, data_tmp + _size, _data);
-				return (_data + (position - 1));
+				while (&_data[i] != position)
+				{
+					_data[i] = tmp._data[i];
+					i++;
+				}
+				_data[i] = val;
+				ret = _data + i;
+				i++;
+				for (size_t j = i - 1; j < tmp._size; j++)
+				{
+					_data[i] = tmp._data[j];
+					i++;
+				}
+				this->_size++;
+				return (ret);
 			};
 			void insert (iterator position, size_type n, const value_type& val);
 			template <class InputIterator>
@@ -136,7 +157,11 @@ namespace ft
 				x._data = this->_data;
 				this->_data = tmp;
 			};
-			void clear();
+			void clear()
+			{
+				while (this->_size > 0)
+					this->pop_back();
+			};
 
 			//Allocator
 			allocator_type get_allocator() const;

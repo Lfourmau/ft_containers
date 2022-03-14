@@ -61,18 +61,49 @@ int main()
 	std::cout << "Vec2 after swapping : ";
 	swap2.print();
 
-	header_test_section("Insert");
-	std::vector<int> insertTest;
-	insertTest.push_back(44);
-	insertTest.push_back(443);
-	insertTest.push_back(442);
-	insertTest.push_back(4422);
-	std::vector<int>::iterator insert_it = insertTest.begin() + 2;
-	insertTest.insert(insert_it, 9);
-	for (std::vector<int>::iterator itloop = insertTest.begin(); itloop != insertTest.end(); itloop++)
-	{
-		std::cout << *itloop << std::endl;
-	}
+	header_test_section("Copy constructor");
+	ft::Vector<int> Base;
+	Base.push_back(44);
+	Base.push_back(443);
+	Base.push_back(442);
+	Base.push_back(4422);
+	std::cout << "Base vector : ";
+	Base.print();
+	std::cout << "Copy vector : ";
+	ft::Vector<int> Copy(Base);
+	Copy.print();
+	std::cout << "Modifying copy vector..." << std::endl;
+	Copy[1] = 42;
+	Copy[2] = 999;
+	std::cout << "Base vector : ";
+	Base.print();
+	std::cout << "Copy vector : ";
+	Copy.print();
 	
+	header_test_section("Insert");
+	ft::Vector<int> insertTest;
+	std::vector<int> BaseVect;
+	insertTest.push_back(44);BaseVect.push_back(44);
+	insertTest.push_back(443);BaseVect.push_back(443);
+	insertTest.push_back(442);BaseVect.push_back(442);
+	insertTest.push_back(4422);BaseVect.push_back(4422);
+	std::cout << "Test vect :" ;
+	insertTest.print();
+	std::cout << "Base vect :" ;
+	for (std::vector<int>::iterator it = BaseVect.begin(); it != BaseVect.end(); it++)
+		std::cout << *it << "---";
+	std::cout << std::endl;
+	std::cout << "Inserting elements.." << std::endl;
+	
+	BaseVect.insert(BaseVect.begin() + 2, 9);
+	insertTest.insert(insertTest.begin() + 2, 9);
+	BaseVect.insert(BaseVect.begin() + 4, 99);
+	insertTest.insert(insertTest.begin() + 4, 99);
+	std::cout << "Test vect :" ;
+	insertTest.print();
+	std::cout << "Base vect :" ;
+	for (std::vector<int>::iterator it = BaseVect.begin(); it != BaseVect.end(); it++)
+		std::cout << *it << "---";
+	std::cout << std::endl;
 	header_test_section("END PROGRAM");
 }

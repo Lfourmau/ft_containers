@@ -110,8 +110,112 @@ int main()
 	std::vector<int> comptest(10, 42);
 	std::vector<int>::iterator comp_it = comptest.begin() + 2;
 	ft::reverse_iterator<std::vector<int>::iterator> comp_rev_it(comp_it);
-	ft::reverse_iterator<std::vector<int>::iterator> comp_rev_it2(comp_it);
-	
+	ft::reverse_iterator<std::vector<int>::iterator> comp_rev_it2(comp_it);	
 	std::cout << (comp_rev_it == comp_rev_it2) << std::endl;
+	std::cout << (comp_rev_it != comp_rev_it2) << std::endl;
+	std::cout << (comp_rev_it >= comp_rev_it2) << std::endl;
+	comp_rev_it2++;
+	std::cout << (comp_rev_it < comp_rev_it2) << std::endl;
+	std::cout << (comp_rev_it > comp_rev_it2) << std::endl;
+	std::cout << (comp_rev_it <= comp_rev_it2) << std::endl;
+	std::cout << (comp_rev_it >= comp_rev_it2) << std::endl;
+
+	header_test_section("Normal iterator");
+	std::vector<int> normal_iterator_vect;
+	normal_iterator_vect.push_back(456);
+	normal_iterator_vect.push_back(45);
+	normal_iterator_vect.push_back(4);
+	normal_iterator_vect.push_back(56);
+	normal_iterator_vect.push_back(498);
+	normal_iterator_vect.push_back(99996);
+	std::vector<int>::iterator nrm_it = normal_iterator_vect.begin();
+	ft::normal_iterator<std::vector<int>::iterator> norm_it(nrm_it);
+	std::cout << *norm_it << std::endl;
+	norm_it++;
+	std::cout << *norm_it << std::endl;
+	norm_it+=2;
+	std::cout << *norm_it << std::endl;
+	norm_it-=2;
+	std::cout << *norm_it << std::endl;
+	std::cout << norm_it[5] << std::endl;
+	std::cout << norm_it[4] << std::endl;
+	norm_it--;
+	std::cout << *norm_it << std::endl;
+
+	header_test_section("Is the vector empty ?");
+	ft::Vector<int> NotEmpty(10,42);
+	ft::Vector<int> Empty;
+	std::cout << "Not empty : " << NotEmpty.empty() << std::endl;
+	std::cout << "Empty : " << Empty.empty() << std::endl;
+
+	header_test_section("Reserve");
+	ft::Vector<int> reserveVec(15, 256);
+	std::cout << "Capacity : " << reserveVec.capacity() << std::endl;
+	std::cout << "Size : " << reserveVec.size() << std::endl;
+	reserveVec.reserve(54);
+	std::cout << "Capacity : " << reserveVec.capacity() << std::endl;
+	std::cout << "Size : " << reserveVec.size() << std::endl;
+	reserveVec.reserve(54);
+	std::cout << "Capacity : " << reserveVec.capacity() << std::endl;
+	std::cout << "Size : " << reserveVec.size() << std::endl;
+	reserveVec.reserve(2);
+	std::cout << "Capacity : " << reserveVec.capacity() << std::endl;
+	std::cout << "Size : " << reserveVec.size() << std::endl;
+	reserveVec.reserve(89);
+	std::cout << "Capacity : " << reserveVec.capacity() << std::endl;
+	std::cout << "Size : " << reserveVec.size() << std::endl;
+
+	header_test_section("Resize");
+	ft::Vector<int> resize_vect(10, 42);
+	std::vector<int> resize_original_vect(10,42);
+	resize_vect.resize(4);
+	resize_original_vect.resize(4);
+	std::cout << "My vect capacity : " << resize_vect.capacity() << std::endl;
+	std::cout << "Original vect capacity : " << resize_original_vect.capacity() << std::endl;
+	std::cout << "My vect size : " << resize_vect.size() << std::endl;
+	std::cout << "Original vect size : " << resize_original_vect.size() << std::endl;
+	resize_vect.resize(12, 8);
+	resize_original_vect.resize(12, 8);
+	std::cout << "My vect capacity : " << resize_vect.capacity() << std::endl;
+	std::cout << "Original vect capacity : " << resize_original_vect.capacity() << std::endl;
+	std::cout << "My vect size : " << resize_vect.size() << std::endl;
+	std::cout << "Original vect size : " << resize_original_vect.size() << std::endl;
+	resize_vect.print();
+
+	//header_test_section("At");
+	//std::vector<int> base_at_vect;
+	//base_at_vect.push_back(56);
+	//base_at_vect.push_back(5);
+	//base_at_vect.push_back(6);
+	//base_at_vect.push_back(586);
+	//base_at_vect.push_back(8965);
+	//ft::Vector<int> My_at_vec;
+	//My_at_vec.push_back(56);
+	//My_at_vec.push_back(5);
+	//My_at_vec.push_back(6);
+	//My_at_vec.push_back(586);
+	//My_at_vec.push_back(8965);
+	//std::cout << "my vec at : " << My_at_vec.at(4) << std::endl;
+	//std::cout << "base vec at : " << base_at_vect.at(4) << std::endl;
+	//std::cout << "my vec at : " << My_at_vec.at(0) << std::endl;
+	//std::cout << "base vec at : " << base_at_vect.at(0) << std::endl;
+	//std::cout << "my vec at : " << My_at_vec.at(1) << std::endl;
+	//std::cout << "base vec at : " << base_at_vect.at(1) << std::endl;
+
+	header_test_section("Assign");
+	std::vector<int> base_assign_vec(10, 42);
+	ft::Vector<int> my_assign_vec(10, 42);
+	for (std::vector<int>::iterator it = base_assign_vec.begin(); it < base_assign_vec.end(); it++)
+		std::cout << *it << "---";
+	std::cout << std::endl;
+	my_assign_vec.print();
+	base_assign_vec.assign(5, 84);
+	my_assign_vec.assign(5, 84);
+	for (std::vector<int>::iterator it = base_assign_vec.begin(); it < base_assign_vec.end(); it++)
+		std::cout << *it << "---";
+	std::cout << std::endl;
+	my_assign_vec.print();
+
+
 	header_test_section("END PROGRAM");
 }

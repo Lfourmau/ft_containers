@@ -12,25 +12,18 @@ namespace ft
 	template <typename T, class Alloc = std::allocator<T> >
 	class Vector
 	{
-		typedef T value_type;
-		typedef Alloc allocator_type;
-		typedef typename allocator_type::reference 			reference;
-		typedef typename allocator_type::const_reference 	const_reference;
-		typedef typename allocator_type::pointer 			pointer;
-		typedef typename allocator_type::const_pointer 		const_pointer;
-		typedef typename allocator_type::size_type 			size_type;
-		typedef pointer 									iterator;
-		typedef ft::reverse_iterator<iterator>	 			reverse_iterator;
-		typedef const_pointer								const_iterator;
-		typedef ft::reverse_iterator<const_iterator> 		const_reverse_iterator;
-
-		private:
-			T 				*_data;
-			size_t 			_capacity;
-        	size_t 			_size;
-			allocator_type 	_my_alloc;
-
 		public :
+			typedef T value_type;
+			typedef Alloc allocator_type;
+			typedef typename allocator_type::reference 			reference;
+			typedef typename allocator_type::const_reference 	const_reference;
+			typedef typename allocator_type::pointer 			pointer;
+			typedef typename allocator_type::const_pointer 		const_pointer;
+			typedef typename allocator_type::size_type 			size_type;
+			typedef pointer 									iterator;
+			typedef ft::reverse_iterator<iterator>	 			reverse_iterator;
+			typedef const_pointer								const_iterator;
+			typedef ft::reverse_iterator<const_iterator> 		const_reverse_iterator;
 			Vector () : _data(nullptr), _capacity(0), _size(0) {};
 			Vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
 			{
@@ -75,25 +68,54 @@ namespace ft
 			//Capacity
 			size_type size() const { return (this->_size); };
 			size_type max_size() const;
-			void resize (size_type n, value_type val = value_type());
-			size_type capacity() const;
-			bool empty() const;
-			void reserve (size_type n);
+			void resize (size_type n, value_type val = value_type())
+			{
+				if (n < this->_size)
+				{
+					while (this->_size > n)
+						this->pop_back();
+				}
+				else if (n > this->_size)
+				{
+					if (this->_capacity < n)
+						this->reserve(n);
+					while (this->_size < n)
+						this->push_back(val);
+				}
+			};
+			size_type capacity() const { return (this->_capacity); };
+			bool empty() const { return(this->_size == 0); };
+			void reserve (size_type n)
+			{
+				if (n > this->_capacity)
+				{
+					Vector tmp(*this);
+					this->_data = this->_my_alloc.allocate(n);
+					std::copy(tmp.begin(), tmp.begin() + tmp._size, this->_data);
+					this->_capacity = n;
+				}
+			};
 
 			//Elements access
 			reference operator[] (size_type n) { return (_data[n]); };
 			const_reference operator[] (size_type n) const;
 		//	reference at (size_type n) { return (data[n]); };
-			const_reference at (size_type n) const;
+			const_reference at (size_type n) const { return (this->_data[n]); };
 		//	reference front() { return (this->data[0]); };
 			const_reference front() const;
 			//reference back() { return (this->data[size]); };
 			const_reference back() const;
 
 			//Modifiers
-			template <class InputIterator>
-  				void assign (InputIterator first, InputIterator last);
-			void assign (size_type n, const value_type& val);
+			//template <class InputIterator>
+  			//	void assign (InputIterator first, InputIterator last);
+			void assign (size_type n, const value_type& val)
+			{
+				this->clear();
+				reserve(n);
+				while (this->_size < n)
+					this->push_back(val);
+			};
 			void push_back (const value_type& val)
 			{
 				T *data_tmp = this->_data;
@@ -167,6 +189,14 @@ namespace ft
 			allocator_type get_allocator() const;
 
 			//Reltionnal operators
+
+
+			private:
+				T 				*_data;
+				size_t 			_capacity;
+				size_t 			_size;
+				allocator_type 	_my_alloc;
+
 	};
 }
 

@@ -94,7 +94,6 @@ int main()
 		std::cout << *it << "---";
 	std::cout << std::endl;
 	std::cout << "Inserting elements.." << std::endl;
-	
 	BaseVect.insert(BaseVect.begin() + 2, 9);
 	insertTest.insert(insertTest.begin() + 2, 9);
 	BaseVect.insert(BaseVect.begin() + 4, 99);
@@ -105,6 +104,14 @@ int main()
 	for (std::vector<int>::iterator it = BaseVect.begin(); it != BaseVect.end(); it++)
 		std::cout << *it << "---";
 	std::cout << std::endl;
+	//templated insert
+	BaseVect.insert(BaseVect.begin() + 2, BaseVect.begin(), BaseVect.end());
+	for (std::vector<int>::iterator it = BaseVect.begin(); it != BaseVect.end(); it++)
+		std::cout << *it << "---";
+	std::cout << std::endl;
+	insertTest.insert(insertTest.begin() + 2, insertTest.begin(), insertTest.end());
+	insertTest.print();
+
 	
 	header_test_section("Rev it comp. operators");
 	std::vector<int> comptest(10, 42);

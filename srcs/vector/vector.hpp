@@ -171,8 +171,23 @@ namespace ft
     		void insert (iterator position, InputIterator first, InputIterator last)
 			{
 				Vector tmp(*this);
+				size_t i = 0;
 
-				
+				while (&_data[i] != position)
+					i++;
+				this->resize(i);
+				while (first != last)
+				{
+					this->push_back(*first);
+					std::cout << "[" << *first << "]" << std::endl;
+					first++;
+				}
+				//while (i < tmp.size())
+				//{
+				//	this->push_back(tmp._data[i]);
+				//	i++;
+				//}
+				(void)first, (void)last;
 			};
 			iterator erase (iterator position);
 			iterator erase (iterator first, iterator last);

@@ -99,11 +99,11 @@ namespace ft
 			//Elements access
 			reference operator[] (size_type n) { return (_data[n]); };
 			const_reference operator[] (size_type n) const;
-		//	reference at (size_type n) { return (data[n]); };
-			const_reference at (size_type n) const { return (this->_data[n]); };
-		//	reference front() { return (this->data[0]); };
+			reference at (size_type n) { return (this->_data[n]); };
+			const_reference at (size_type n) const;
+			reference front() { return (this->data[0]); };
 			const_reference front() const;
-			//reference back() { return (this->data[size]); };
+			reference back() { return (this->data[_size]); };
 			const_reference back() const;
 
 			//Modifiers
@@ -168,7 +168,12 @@ namespace ft
 			};
 			void insert (iterator position, size_type n, const value_type& val);
 			template <class InputIterator>
-    			void insert (iterator position, InputIterator first, InputIterator last);
+    		void insert (iterator position, InputIterator first, InputIterator last)
+			{
+				Vector tmp(*this);
+
+				
+			};
 			iterator erase (iterator position);
 			iterator erase (iterator first, iterator last);
 			void swap (Vector& x)
@@ -186,7 +191,7 @@ namespace ft
 			};
 
 			//Allocator
-			allocator_type get_allocator() const;
+			allocator_type get_allocator() const { return (this->_my_alloc); };
 
 			//Reltionnal operators
 

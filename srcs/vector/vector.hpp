@@ -146,10 +146,7 @@ namespace ft
 				int i = 0;
 
 				if (this->_size == this->_capacity)
-				{
-					this->_data = this->_my_alloc.allocate(_size * 2);
-					this->_capacity *=2;
-				}
+					this->reserve(this->_capacity * 2);
 				while (&_data[i] != position)
 				{
 					_data[i] = tmp._data[i];
@@ -166,28 +163,16 @@ namespace ft
 				this->_size++;
 				return (ret);
 			};
-			void insert (iterator position, size_type n, const value_type& val);
+			//void insert (iterator position, size_type n, const value_type& val);
 			template <class InputIterator>
     		void insert (iterator position, InputIterator first, InputIterator last)
 			{
-				Vector tmp(*this);
-				size_t i = 0;
-
-				while (&_data[i] != position)
-					i++;
-				this->resize(i);
 				while (first != last)
 				{
-					this->push_back(*first);
-					std::cout << "[" << *first << "]" << std::endl;
+					this->insert(position, *first);
+					position++;
 					first++;
 				}
-				//while (i < tmp.size())
-				//{
-				//	this->push_back(tmp._data[i]);
-				//	i++;
-				//}
-				(void)first, (void)last;
 			};
 			iterator erase (iterator position);
 			iterator erase (iterator first, iterator last);
@@ -216,7 +201,6 @@ namespace ft
 				size_t 			_capacity;
 				size_t 			_size;
 				allocator_type 	_my_alloc;
-
 	};
 }
 

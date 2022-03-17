@@ -96,8 +96,10 @@ int main()
 	std::cout << "Inserting elements.." << std::endl;
 	BaseVect.insert(BaseVect.begin() + 2, 9);
 	insertTest.insert(insertTest.begin() + 2, 9);
-	BaseVect.insert(BaseVect.begin() + 4, 99);
-	insertTest.insert(insertTest.begin() + 4, 99);
+	BaseVect.insert(BaseVect.end(), 99);
+	insertTest.insert(insertTest.end(), 99);
+	BaseVect.insert(BaseVect.begin(), 99);
+	insertTest.insert(insertTest.begin(), 99);
 	std::cout << "Test vect :" ;
 	insertTest.print();
 	std::cout << "Base vect :" ;
@@ -105,11 +107,12 @@ int main()
 		std::cout << *it << "---";
 	std::cout << std::endl;
 	//templated insert
-	BaseVect.insert(BaseVect.begin() + 2, BaseVect.begin(), BaseVect.end());
+	std::vector<int> insertion_vect;insertion_vect.push_back(1);insertion_vect.push_back(2);insertion_vect.push_back(3);insertion_vect.push_back(4);
+	BaseVect.insert(BaseVect.begin() + 2, insertion_vect.begin(), insertion_vect.begin() + 4);
 	for (std::vector<int>::iterator it = BaseVect.begin(); it != BaseVect.end(); it++)
 		std::cout << *it << "---";
 	std::cout << std::endl;
-	insertTest.insert(insertTest.begin() + 2, insertTest.begin(), insertTest.end());
+	insertTest.insert(insertTest.begin() + 2, insertion_vect.begin(), insertion_vect.begin() + 4);
 	insertTest.print();
 
 	

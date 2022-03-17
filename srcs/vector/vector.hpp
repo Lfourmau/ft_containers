@@ -14,6 +14,7 @@ namespace ft
 	class Vector
 	{
 		public :
+			class vec_it;
 			typedef T value_type;
 			typedef Alloc allocator_type;
 			typedef typename allocator_type::reference 			reference;
@@ -21,7 +22,7 @@ namespace ft
 			typedef typename allocator_type::pointer 			pointer;
 			typedef typename allocator_type::const_pointer 		const_pointer;
 			typedef typename allocator_type::size_type 			size_type;
-			typedef pointer 								iterator;
+			typedef vec_it 										iterator;
 			typedef ft::reverse_iterator<iterator>	 			reverse_iterator;
 			typedef const_pointer								const_iterator;
 			typedef ft::reverse_iterator<const_iterator> 		const_reverse_iterator;
@@ -57,9 +58,9 @@ namespace ft
 
 			//Iterators
 			Vector& 				operator=(Vector const& rhs);
-			iterator 				begin() { return (_data); };
+			iterator 				begin() { return iterator(this, 0); };
 			const_iterator 			begin() const;
-			iterator 				end() { return (&_data[_size]); };
+			iterator 				end() { return iterator(this, _size); };
 			const_iterator end() const;
 			reverse_iterator rbegin() { return end(); };
 			const_reverse_iterator rbegin() const;
@@ -128,23 +129,11 @@ namespace ft
 			};
 			iterator insert (iterator position, const value_type& val)
 			{
-				int i = this->_size;
-				T* tmpo = _data;
-			
 				if (this->_size == this->_capacity)
 					this->reserve(std::max(this->_capacity * 2, static_cast<size_t>(1)));
-				while (&tmpo[i] != position)
-				{
-					_data[i] = tmpo[i - 1];
-					i--;
-				}
-				_data[i] = val;
-				i--;
-				while (i > 0)
-				{
-					_data[i] = tmpo[i];
-					i--;
-				}
+				for (iterator it = this->end(); it != position; --it)
+					*it = *(it - 1);
+				*position = val;
 				this->_size++;
 				return (position);
 			};
@@ -181,9 +170,9 @@ namespace ft
 			iterator erase (iterator first, iterator last);
 			void swap (Vector& x)
 			{
-				T *tmp;
+				T* tmp;
 	
-				tmp = x.begin();
+				tmp = x._data;
 				x._data = this->_data;
 				this->_data = tmp;
 			};
@@ -197,6 +186,65 @@ namespace ft
 			allocator_type get_allocator() const { return (this->_my_alloc); };
 
 			//Reltionnal operators
+
+
+
+			class vec_it : public std::iterator<std::random_access_iterator_tag, value_type> 
+			{
+				private:
+					const Vector *vp;
+					int index;
+
+				public:
+
+					vec_it() { this->vp = NULL; };
+					vec_it(const vec_it & it) { this->vp = it.vp; this->index = it.index; };
+					vec_it(const Vector *vp, int index) { this->vp = vp; this->index = index; };
+					vec_it & operator++() {
+						index++;
+						return *this;
+					}
+					vec_it operator++(int) {
+						vec_it copy(*this);
+						operator++();
+						return copy;
+					}
+					vec_it & operator--() {
+						index--;
+						return *this;
+					}
+					vec_it operator--(int) {
+						vec_it copy(*this);
+						operator--();
+						return copy;
+					}
+					vec_it&	operator=(vec_it const& rhs)
+					{
+						this->p = rhs.p;
+						this->index = rhs.index;
+						return (*this);
+					}
+					bool operator==(const vec_it & rhs) { return vp == rhs.vp && index == rhs.index; };
+					bool operator!=(const vec_it & rhs) { return !(*this == rhs); };
+					bool operator<(const vec_it & rhs) { return index < rhs.index; };
+					bool operator<=(const vec_it & rhs) { return index <= rhs.index; };
+					bool operator>(const vec_it & rhs) { return index > rhs.index; };
+					bool operator>=(const vec_it & rhs) { return index >= rhs.index; };
+					vec_it operator+(const int & rhs) { return vec_it(vp, index + rhs); };
+					vec_it operator-(const int & rhs) { return vec_it(vp, index - rhs); };
+					vec_it operator+=(const int & rhs) {
+						index += rhs;
+						return *this;
+					}
+					vec_it operator-=(const int & rhs) {
+						index -= rhs;
+						return *this;
+					}
+					int operator-(const vec_it & rhs) { return index - rhs.index; };
+					value_type & operator*() { return vp->_data[index]; };
+					value_type *operator->() { return &vp->_data[index]; };
+					value_type & operator[](int k) { return vp->_data[index + k]; };
+			};
 
 			private:
 				T 				*_data;

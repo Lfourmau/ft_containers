@@ -4,8 +4,38 @@
 
 void header_test_section(std::string title);
 
+void test1(void)
+{
+	header_test_section("Push Back");
+	ft::Vector<int> My_pushback_vect;
+	My_pushback_vect.push_back(1);
+	My_pushback_vect.push_back(2);
+	My_pushback_vect.push_back(4);
+	My_pushback_vect.push_back(9);
+	My_pushback_vect.push_back(953);
+	My_pushback_vect.push_back(98);
+	My_pushback_vect.push_back(100);
+
+	std::vector<int> base_pushback_vect;
+	base_pushback_vect.push_back(1);
+	base_pushback_vect.push_back(2);
+	base_pushback_vect.push_back(4);
+	base_pushback_vect.push_back(9);
+	base_pushback_vect.push_back(953);
+	base_pushback_vect.push_back(98);
+	base_pushback_vect.push_back(100);
+	std::cout << "Base vect : ";
+	for (std::vector<int>::iterator it = base_pushback_vect.begin(); it != base_pushback_vect.end(); it++)
+		std::cout << *it << "---";
+	std::cout << std::endl;
+	std::cout << "Test vect : ";
+	My_pushback_vect.print();
+}
+
 int main()
 {
+	test1();
+	header_test_section("REV IT : |[]|");
 	std::vector<int> myvect;
 	myvect.push_back(2);
 	myvect.push_back(4);
@@ -16,7 +46,6 @@ int main()
 	std::vector<int>::iterator it = myvect.end();
 	std::vector<int>::reverse_iterator base_rev_it(it);
 	ft::reverse_iterator<std::vector<int>::iterator> rev_it(it);
-	header_test_section("REV IT : |[]|");
 	std::cout << "MY IT >>" << rev_it[5] << std::endl;
 	std::cout << "BASE IT >>" << base_rev_it[5] << std::endl;
 	rev_it++;
@@ -226,7 +255,32 @@ int main()
 	std::cout << std::endl;
 	my_assign_vec.print();
 
-
-
+	header_test_section("Erase");
+	std::vector<int> erase_base_vect;
+	ft::Vector<int> erase_test_vect;
+	erase_base_vect.push_back(85);erase_test_vect.push_back(85);
+	erase_base_vect.push_back(856);erase_test_vect.push_back(856);
+	erase_base_vect.push_back(8);erase_test_vect.push_back(8);
+	erase_base_vect.push_back(41);erase_test_vect.push_back(41);
+	erase_base_vect.push_back(21);erase_test_vect.push_back(21);
+	erase_base_vect.push_back(2333);erase_test_vect.push_back(2333);
+	std::cout << "Vectors before erase : " << std::endl;
+	std::cout << "Base vect : ";
+	for (std::vector<int>::iterator it = erase_base_vect.begin(); it < erase_base_vect.end(); it++)
+			std::cout << *it << "---";
+	std::cout << std::endl;
+	std::cout << "Test vect : ";
+	erase_test_vect.print();
+	std::cout << "Erasing..." << std::endl;
+	erase_base_vect.erase(erase_base_vect.begin() + 2);
+	erase_base_vect.erase(erase_base_vect.end() - 1);
+	std::cout << "Base vect : ";
+	for (std::vector<int>::iterator it = erase_base_vect.begin(); it < erase_base_vect.end(); it++)
+		std::cout << *it << "---";
+	std::cout << std::endl;
+	std::cout << "Test vect : ";
+	erase_test_vect.erase(erase_test_vect.begin() + 2);
+	erase_test_vect.erase(erase_test_vect.end() - 1);
+	erase_test_vect.print();
 	header_test_section("END PROGRAM");
 }

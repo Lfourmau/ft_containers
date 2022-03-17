@@ -5,6 +5,7 @@
 #include <iostream>
 #include <iterator>
 #include <memory>
+#include <algorithm>
 #include "../iterators/iterator_traits.hpp"
 
 namespace ft
@@ -20,7 +21,7 @@ namespace ft
 			typedef typename allocator_type::pointer 			pointer;
 			typedef typename allocator_type::const_pointer 		const_pointer;
 			typedef typename allocator_type::size_type 			size_type;
-			typedef pointer 									iterator;
+			typedef pointer 								iterator;
 			typedef ft::reverse_iterator<iterator>	 			reverse_iterator;
 			typedef const_pointer								const_iterator;
 			typedef ft::reverse_iterator<const_iterator> 		const_reverse_iterator;
@@ -118,21 +119,7 @@ namespace ft
 			};
 			void push_back (const value_type& val)
 			{
-				T *data_tmp = this->_data;
-				if (this->_size == this->_capacity)
-				{
-					_data = this->_my_alloc.allocate(_size * 2);
-					std::copy(data_tmp, data_tmp + _size, _data);
-					_my_alloc.construct(_data + _size, val); //before increment size, because size is equal to the number of element, not the index
-					this->_size++;
-					this->_capacity *= 2;
-				}
-				else
-				{
-					std::copy(data_tmp, data_tmp + _size, _data);
-					this->_data[_size] = val; //before increment size, because size is equal to the number of element, not the index
-					this->_size++;
-				}
+				this->insert(this->end(), val);
 			};
 			void pop_back()
 			{
@@ -141,27 +128,25 @@ namespace ft
 			};
 			iterator insert (iterator position, const value_type& val)
 			{
-				Vector tmp(*this);
-				T* ret;
-				int i = 0;
-
+				int i = this->_size;
+				T* tmpo = _data;
+			
 				if (this->_size == this->_capacity)
-					this->reserve(this->_capacity * 2);
-				while (&_data[i] != position)
+					this->reserve(std::max(this->_capacity * 2, static_cast<size_t>(1)));
+				while (&tmpo[i] != position)
 				{
-					_data[i] = tmp._data[i];
-					i++;
+					_data[i] = tmpo[i - 1];
+					i--;
 				}
 				_data[i] = val;
-				ret = _data + i;
-				i++;
-				for (size_t j = i - 1; j < tmp._size; j++)
+				i--;
+				while (i > 0)
 				{
-					_data[i] = tmp._data[j];
-					i++;
+					_data[i] = tmpo[i];
+					i--;
 				}
 				this->_size++;
-				return (ret);
+				return (position);
 			};
 			//void insert (iterator position, size_type n, const value_type& val);
 			template <class InputIterator>
@@ -174,7 +159,25 @@ namespace ft
 					first++;
 				}
 			};
-			iterator erase (iterator position);
+			iterator erase (iterator position)
+			{
+				if (position == this->end())
+					return (this->end());
+
+				size_t i = 0;
+				Vector tmp(*this);
+
+				while (&_data[i] <= position)
+					i++;
+				this->resize(i);
+				this->pop_back();
+				while (i < tmp._size)
+				{
+					this->push_back(tmp._data[i]);
+					i++;
+				}
+				return (position);
+			};
 			iterator erase (iterator first, iterator last);
 			void swap (Vector& x)
 			{
@@ -195,12 +198,21 @@ namespace ft
 
 			//Reltionnal operators
 
-
 			private:
 				T 				*_data;
 				size_t 			_capacity;
 				size_t 			_size;
 				allocator_type 	_my_alloc;
+				void	copy(T *input_begin, T *input_end, T *output)
+				{
+					size_t i = 0;
+					while (input_begin != input_end)
+					{
+						output[i] = *input_begin;
+						input_begin++;
+						i++;
+					}
+				};
 	};
 }
 

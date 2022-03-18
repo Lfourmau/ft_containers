@@ -93,7 +93,7 @@ namespace ft
 				{
 					Vector tmp(*this);
 					this->_data = this->_my_alloc.allocate(n);
-					std::copy(tmp.begin(), tmp.begin() + tmp._size, this->_data);
+					copy(tmp.begin(), tmp.begin() + tmp._size, this->_data);
 					this->_capacity = n;
 				}
 			};
@@ -131,7 +131,7 @@ namespace ft
 			{
 				if (this->_size == this->_capacity)
 					this->reserve(std::max(this->_capacity * 2, static_cast<size_t>(1)));
-				for (iterator it = this->end(); it != position; --it)
+				for (iterator it = this->end(); it != position; --it) //why position is working ? I reallocate before.
 					*it = *(it - 1);
 				*position = val;
 				this->_size++;
@@ -246,7 +246,7 @@ namespace ft
 				size_t 			_capacity;
 				size_t 			_size;
 				allocator_type 	_my_alloc;
-				void	copy(T *input_begin, T *input_end, T *output)
+				void	copy(iterator input_begin, iterator input_end, T* output)
 				{
 					size_t i = 0;
 					while (input_begin != input_end)

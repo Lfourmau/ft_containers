@@ -152,22 +152,17 @@ namespace ft
 			{
 				if (position == this->end())
 					return (this->end());
-
-				size_t i = 0;
-				Vector tmp(*this);
-
-				while (&_data[i] <= position)
-					i++;
-				this->resize(i);
-				this->pop_back();
-				while (i < tmp._size)
-				{
-					this->push_back(tmp._data[i]);
-					i++;
-				}
+				for (iterator it = position; it != this->end(); it++)
+					*it = *(it + 1);
+				this->_size--;
 				return (position);
 			};
-			iterator erase (iterator first, iterator last);
+			iterator erase (iterator first, iterator last)
+			{
+				for (iterator it = first; it != last; it++)
+					this->erase(first);
+				return (last);
+			};
 			void swap (Vector& x)
 			{
 				T* tmp;

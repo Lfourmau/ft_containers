@@ -21,22 +21,23 @@ void test_vector_erase();
 
 int main()
 {
- 	test_vector_pushback();
-	testrev_it_operators();
-	test_vector_size();
-	test_vector_popback();
-	test_vector_swap();
-	test_vector_copy_constructor();
+ 	//test_vector_pushback();
+	//testrev_it_operators();
+	//test_vector_size();
+	//test_vector_popback();
+	//test_vector_swap();
+	//test_vector_copy_constructor();
 	test_vector_insert();
-	test_rev_it_comp_operators();
-	test_normal_iterator();
-	test_vector_empty();
-	test_vector_reserve();
-	test_vector_resize();
+	//test_rev_it_comp_operators();
+	//test_normal_iterator();
+	//test_vector_empty();
+	//test_vector_reserve();
+	//test_vector_resize();
 	//test_vector_at();
-	test_vector_assign();
-	test_vector_erase();
-	header_test_section("END PROGRAM");
+	//test_vector_assign();
+	//test_vector_erase();
+	//header_test_section("END PROGRAM");
+
 }
 
 
@@ -193,6 +194,14 @@ void test_vector_insert()
 	std::cout << std::endl;
 	insertTest.insert(insertTest.begin() + 2, insertion_vect.begin(), insertion_vect.begin() + 4);
 	insertTest.print();
+	std::cout << "Inserting..." << std::endl;
+	insertTest.insert(insertTest.begin() + 2, 4, 42);
+	insertTest.print();
+	BaseVect.insert(BaseVect.begin() + 2, 4, 42);
+	for (std::vector<int>::iterator it = BaseVect.begin(); it != BaseVect.end(); it++)
+		std::cout << *it << "---";
+	std::cout << std::endl;
+	
 }
 
 void test_rev_it_comp_operators()

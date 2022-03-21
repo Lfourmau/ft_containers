@@ -65,8 +65,7 @@ namespace ft
 	template <>
 	struct is_integral<unsigned long long> : public true_type{};
 
-	template <typename T, class Alloc = std::allocator<T> >
-	
+
 	template<bool B, class T = void>
     struct enable_if {};
 
@@ -75,6 +74,7 @@ namespace ft
     {
         typedef T type;
     };
+	template <typename T, class Alloc = std::allocator<T> >
 	class Vector
 	{
 		public :
@@ -211,7 +211,8 @@ namespace ft
 				}
 			};
 			template <class InputIterator>
-    		void insert (iterator position, InputIterator first, InputIterator last)
+    		void insert (iterator position, InputIterator first, InputIterator last, 
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
 			{
 				while (first != last)
 				{

@@ -173,8 +173,17 @@ namespace ft
 			const_reference back() const;
 
 			//Modifiers
-			//template <class InputIterator>
-  			//	void assign (InputIterator first, InputIterator last);
+			template <class InputIterator>
+  			void assign (InputIterator first, InputIterator last, 
+			  	typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
+			{
+				this->clear();
+				while (first != last)
+				{
+					this->push_back(*first);
+					first++;
+				}
+			};
 			void assign (size_type n, const value_type& val)
 			{
 				this->clear();
@@ -288,7 +297,7 @@ namespace ft
 					}
 					vec_it&	operator=(vec_it const& rhs)
 					{
-						this->p = rhs.p;
+						this->vp = rhs.vp;
 						this->index = rhs.index;
 						return (*this);
 					}

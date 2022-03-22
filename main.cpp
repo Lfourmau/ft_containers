@@ -18,6 +18,7 @@ void test_vector_resize();
 void test_vector_at();
 void test_vector_assign();
 void test_vector_erase();
+void test_range_constructor();
 
 int main()
 {
@@ -34,9 +35,10 @@ int main()
 	//test_vector_reserve();
 	//test_vector_resize();
 	//test_vector_at();
-	test_vector_assign();
+	//test_vector_assign();
 	//test_vector_erase();
 	//header_test_section("END PROGRAM");
+	test_range_constructor();
 
 }
 
@@ -385,4 +387,23 @@ void test_vector_erase()
 	std::cout << std::endl;
 	std::cout << "Test vect : ";
 	erase_test_vect.print();
+}
+
+void test_range_constructor()
+{
+	header_test_section("Range constructor");
+	ft::Vector<int> other_vec;
+	other_vec.push_back(56);
+	other_vec.push_back(5);
+	other_vec.push_back(6);
+	other_vec.push_back(596);
+	other_vec.push_back(426);
+	other_vec.push_back(4242);
+	std::cout << "Original vector :";
+	for (ft::Vector<int>::iterator it = other_vec.begin(); it < other_vec.end(); it++)
+			std::cout << *it << "---";
+	std::cout << std::endl;
+	std::cout << "Constructed vector :";
+	ft::Vector<int> my_vect(other_vec.begin(), other_vec.end());
+	my_vect.print();
 }

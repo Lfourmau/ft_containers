@@ -107,8 +107,19 @@ namespace ft
 					std::cout << _data[i] << "---";
 				std::cout << std::endl;
 			};
-			// template <class InputIterator>
-         	// 	Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
+			template <class InputIterator>
+         	Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
+			 	typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
+			{
+				_size = 0;
+				_capacity = 0;
+				_my_alloc = alloc;
+				while (first != last)
+				{
+					this->push_back(*first);
+					first++;
+				}
+			};
 			Vector (const Vector& x)
 			{
 				this->_capacity = x._capacity;

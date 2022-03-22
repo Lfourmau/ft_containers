@@ -124,11 +124,11 @@ namespace ft
 			iterator 				begin() { return iterator(this, 0); };
 			const_iterator 			begin() const { return const_iterator(this, 0); };
 			iterator 				end() { return iterator(this, _size); };
-			const_iterator end() const { return const_iterator(this, _size); };
-			reverse_iterator rbegin() { return end(); };
-			const_reverse_iterator rbegin() const { return end(); };
-			reverse_iterator rend() { return begin(); };
-			const_reverse_iterator rend() const { return begin(); };
+			const_iterator			end() const { return const_iterator(this, _size); };
+			reverse_iterator		rbegin() { return end(); };
+			const_reverse_iterator	rbegin() const { return end(); };
+			reverse_iterator		rend() { return begin(); };
+			const_reverse_iterator	rend() const { return begin(); };
 
 			//Capacity
 			size_type size() const { return (this->_size); };
@@ -162,13 +162,13 @@ namespace ft
 			};
 
 			//Elements access
-			reference operator[] (size_type n) { return (_data[n]); };
+			reference 		operator[] (size_type n) { return (_data[n]); };
 			const_reference operator[] (size_type n) const { return (_data[n]); };
-			reference at (size_type n) { return (this->_data[n]); };
+			reference 		at (size_type n) { return (this->_data[n]); };
 			const_reference at (size_type n) const { return (this->_data[n]); };
-			reference front() { return (this->data[0]); };
+			reference 		front() { return (this->data[0]); };
 			const_reference front() const { return (this->data[0]); };
-			reference back() { return (this->data[_size]); };
+			reference 		back() { return (this->data[_size]); };
 			const_reference back() const { return (this->data[_size]); };
 
 			//Modifiers
@@ -403,21 +403,59 @@ namespace ft
 		}
 		return (first1 == last1) && (first2 != last2);
 	}
+	template<class InputIt1, class InputIt2, class Compare>
+	bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2, Compare comp)
+	{
+    	for ( ; (first1 != last1) && (first2 != last2); ++first1, (void) ++first2 )
+		{
+    	    if (comp(*first1, *first2)) return true;
+    	    if (comp(*first2, *first1)) return false;
+    	}
+    	return (first1 == last1) && (first2 != last2);
+	}
+
+
 	template< class T, class Alloc >
 	bool operator==(const ft::Vector<T,Alloc>& lhs, const ft::Vector<T,Alloc>& rhs)
 	{
 		if (lhs.size() != rhs.size())
 			return (false);
-		typename Vector<T>::iterator lit = lhs.begin();
-		typename Vector<T>::iterator rit = rhs.begin();
+		typename ft::Vector<T>::const_iterator lit = lhs.begin();
+		typename ft::Vector<T>::const_iterator rit = rhs.begin();
+
 		while (lit != lhs.end() && rit != rhs.end())
 		{
 			if (*lit != *rit)
-				return(false);
+				return (false);
 			lit++;
 			rit++;
 		}
 		return (true);
+	};
+	template< class T, class Alloc >
+	bool operator!=(const ft::Vector<T,Alloc>& lhs, const ft::Vector<T,Alloc>& rhs)
+	{
+		return (!(lhs == rhs));
+	};
+	template< class T, class Alloc >
+	bool operator<( const ft::Vector<T,Alloc>& lhs, const ft::Vector<T,Alloc>& rhs )
+	{
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	};
+	template< class T, class Alloc >
+	bool operator<=( const ft::Vector<T,Alloc>& lhs, const ft::Vector<T,Alloc>& rhs )
+	{
+		return ((lhs == rhs) || (lhs < rhs));
+	};
+	template< class T, class Alloc >
+	bool operator>( const ft::Vector<T,Alloc>& lhs, const ft::Vector<T,Alloc>& rhs )
+	{
+		return (!(lhs <= rhs));
+	};
+	template< class T, class Alloc >
+	bool operator>=( const ft::Vector<T,Alloc>& lhs, const ft::Vector<T,Alloc>& rhs )
+	{
+		return (!(lhs < rhs));
 	};
 }
 

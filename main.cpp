@@ -427,11 +427,48 @@ int main()
 
 void test_relationnal_operators()
 {
+	std::cout << "~~~==~~~" << std::endl;
 	ft::Vector<int> first_vec (10, 52);
 	ft::Vector<int> scnd_vec (10, 42);
+	std::cout << (first_vec == scnd_vec) << std::endl;
+	scnd_vec.assign(10, 52);
+	std::cout << (first_vec == scnd_vec) << std::endl;
 
-	if (first_vec == scnd_vec)
-		std::cout << "1" << std::endl;
-	else
-		std::cout << "0";
+	std::cout << "~~~!=~~~" << std::endl;
+	std::cout << (first_vec != scnd_vec) << std::endl;
+	scnd_vec.assign(10, 552);
+	first_vec.print();
+	std::cout << std::endl;
+	scnd_vec.print();
+	std::cout << (first_vec != scnd_vec) << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "~~~<~~~" << std::endl;
+	first_vec.print();
+	std::cout << std::endl;
+	scnd_vec.print();
+	ft::Vector<int> third_vec(scnd_vec);
+	std::cout << (first_vec < scnd_vec) << std::endl;
+	std::cout << (third_vec < scnd_vec) << std::endl;
+
+	std::cout << "~~~<=~~~" << std::endl;
+	first_vec.print();
+	std::cout << std::endl;
+	scnd_vec.print();
+	std::cout << (first_vec <= scnd_vec) << std::endl;
+	std::cout << (third_vec <= scnd_vec) << std::endl;
+
+	std::cout << "~~~>~~~" << std::endl;
+	first_vec.print();
+	std::cout << std::endl;
+	scnd_vec.print();
+	std::cout << (first_vec > scnd_vec) << std::endl;
+	std::cout << (third_vec > scnd_vec) << std::endl;
+
+	std::cout << "~~~>=~~~" << std::endl;
+	first_vec.print();
+	std::cout << std::endl;
+	scnd_vec.print();
+	std::cout << (first_vec >= scnd_vec) << std::endl;
+	std::cout << (third_vec >= scnd_vec) << std::endl;
 }

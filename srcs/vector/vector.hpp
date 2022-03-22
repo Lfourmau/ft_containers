@@ -79,6 +79,7 @@ namespace ft
 	{
 		public :
 			class vec_it;
+			class const_vec_it;
 			typedef T value_type;
 			typedef Alloc allocator_type;
 			typedef typename allocator_type::reference 			reference;
@@ -88,7 +89,7 @@ namespace ft
 			typedef typename allocator_type::size_type 			size_type;
 			typedef vec_it 										iterator;
 			typedef ft::reverse_iterator<iterator>	 			reverse_iterator;
-			typedef const_pointer								const_iterator;
+			typedef const_vec_it								const_iterator;
 			typedef ft::reverse_iterator<const_iterator> 		const_reverse_iterator;
 			Vector () : _data(nullptr), _capacity(0), _size(0) {};
 			Vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
@@ -134,13 +135,13 @@ namespace ft
 			//Iterators
 			Vector& 				operator=(Vector const& rhs);
 			iterator 				begin() { return iterator(this, 0); };
-			const_iterator 			begin() const;
+			const_iterator 			begin() const { return const_iterator(this, 0); };
 			iterator 				end() { return iterator(this, _size); };
-			const_iterator end() const;
+			const_iterator end() const { return const_iterator(this, _size); };
 			reverse_iterator rbegin() { return end(); };
-			const_reverse_iterator rbegin() const;
+			const_reverse_iterator rbegin() const { return end(); };
 			reverse_iterator rend() { return begin(); };
-			const_reverse_iterator rend() const;
+			const_reverse_iterator rend() const { return begin(); };
 
 			//Capacity
 			size_type size() const { return (this->_size); };
@@ -175,13 +176,13 @@ namespace ft
 
 			//Elements access
 			reference operator[] (size_type n) { return (_data[n]); };
-			const_reference operator[] (size_type n) const;
+			const_reference operator[] (size_type n) const { return (_data[n]); };
 			reference at (size_type n) { return (this->_data[n]); };
-			const_reference at (size_type n) const;
+			const_reference at (size_type n) const { return (this->_data[n]); };
 			reference front() { return (this->data[0]); };
-			const_reference front() const;
+			const_reference front() const { return (this->data[0]); };
 			reference back() { return (this->data[_size]); };
-			const_reference back() const;
+			const_reference back() const { return (this->data[_size]); };
 
 			//Modifiers
 			template <class InputIterator>
@@ -332,6 +333,63 @@ namespace ft
 					value_type & operator*() { return vp->_data[index]; };
 					value_type *operator->() { return &vp->_data[index]; };
 					value_type & operator[](int k) { return vp->_data[index + k]; };
+			};
+
+			class const_vec_it : public std::iterator<std::random_access_iterator_tag, value_type> 
+			{
+				private:
+					const Vector *vp;
+					int index;
+
+				public:
+
+					const_vec_it() { this->vp = NULL; };
+					const_vec_it(const const_vec_it & it) { this->vp = it.vp; this->index = it.index; };
+					const_vec_it(const Vector *vp, int index) { this->vp = vp; this->index = index; };
+					const_vec_it & operator++() {
+						index++;
+						return *this;
+					}
+					const_vec_it operator++(int) {
+						const_vec_it copy(*this);
+						operator++();
+						return copy;
+					}
+					const_vec_it & operator--() {
+						index--;
+						return *this;
+					}
+					const_vec_it operator--(int) {
+						const_vec_it copy(*this);
+						operator--();
+						return copy;
+					}
+					const_vec_it&	operator=(const_vec_it const& rhs)
+					{
+						this->vp = rhs.vp;
+						this->index = rhs.index;
+						return (*this);
+					}
+					bool operator==(const const_vec_it & rhs) { return vp == rhs.vp && index == rhs.index; };
+					bool operator!=(const const_vec_it & rhs) { return !(*this == rhs); };
+					bool operator<(const const_vec_it & rhs) { return index < rhs.index; };
+					bool operator<=(const const_vec_it & rhs) { return index <= rhs.index; };
+					bool operator>(const const_vec_it & rhs) { return index > rhs.index; };
+					bool operator>=(const const_vec_it & rhs) { return index >= rhs.index; };
+					const_vec_it operator+(const int & rhs) { return const_vec_it(vp, index + rhs); };
+					const_vec_it operator-(const int & rhs) { return const_vec_it(vp, index - rhs); };
+					const_vec_it operator+=(const int & rhs) {
+						index += rhs;
+						return *this;
+					}
+					const_vec_it operator-=(const int & rhs) {
+						index -= rhs;
+						return *this;
+					}
+					int operator-(const const_vec_it & rhs) { return index - rhs.index; };
+					value_type const & operator*() { return vp->_data[index]; };
+					value_type const *operator->() { return &vp->_data[index]; };
+					value_type const & operator[](int k) { return vp->_data[index + k]; };
 			};
 
 			private:

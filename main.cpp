@@ -20,6 +20,7 @@ void test_vector_assign();
 void test_vector_erase();
 void test_range_constructor();
 void test_const_iterators();
+void test_relationnal_operators();
 
 int main()
 {
@@ -40,7 +41,8 @@ int main()
 	//test_vector_erase();
 	//header_test_section("END PROGRAM");
 	//test_range_constructor();
-	test_const_iterators();
+	//test_const_iterators();
+	test_relationnal_operators();
 
 }
 
@@ -410,14 +412,26 @@ int main()
 //	my_vect.print();
 //}
 
-void test_const_iterators()
-{
-	const ft::Vector<int> myvect(10, 20);
+//void test_const_iterators()
+//{
+//	header_test_section("Const iterator");
+//	const ft::Vector<int> myvect(10, 20);
 
-	for (ft::Vector<int>::const_iterator const_it = myvect.begin(); const_it != myvect.end(); const_it++)
-	{
-		//*const_it = 5;
-		std::cout << *const_it << "---";
-	}
-	std::cout << std::endl;
+//	for (ft::Vector<int>::const_iterator const_it = myvect.begin(); const_it != myvect.end(); const_it++)
+//	{
+//		//*const_it = 5;
+//		std::cout << *const_it << "---";
+//	}
+//	std::cout << std::endl;
+//}
+
+void test_relationnal_operators()
+{
+	ft::Vector<int> first_vec (10, 52);
+	ft::Vector<int> scnd_vec (10, 42);
+
+	if (first_vec == scnd_vec)
+		std::cout << "1" << std::endl;
+	else
+		std::cout << "0";
 }

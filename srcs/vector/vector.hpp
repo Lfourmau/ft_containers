@@ -25,55 +25,42 @@ namespace ft
 
 	template <class T>
 	struct is_integral : public false_type{};
-
 	template <>
 	struct is_integral<bool> : public true_type{};
-
 	template <>
 	struct is_integral<char> : public true_type{};
-
 	template <>
 	struct is_integral<signed char> : public true_type{};
-
 	template <>
 	struct is_integral<unsigned char> : public true_type{};
-
 	template <>
 	struct is_integral<wchar_t> : public true_type{};
-
 	template <>
 	struct is_integral<short> : public true_type{};
-
 	template <>
 	struct is_integral<int> : public true_type{};
-
 	template <>
 	struct is_integral<long> : public true_type{};
-
 	template <>
 	struct is_integral<long long> : public true_type{};
-
 	template <>
 	struct is_integral<unsigned short> : public true_type{};
-
 	template <>
 	struct is_integral<unsigned int> : public true_type{};
-
 	template <>
 	struct is_integral<unsigned long> : public true_type{};
-
 	template <>
 	struct is_integral<unsigned long long> : public true_type{};
 
 
 	template<bool B, class T = void>
     struct enable_if {};
-
     template<class T>
     struct enable_if<true, T>
     {
         typedef T type;
     };
+
 	template <typename T, class Alloc = std::allocator<T> >
 	class Vector
 	{
@@ -224,7 +211,6 @@ namespace ft
 			};
 			void insert (iterator position, size_type n, const value_type& val)
 			{
-				std::cout << "NEW INSERT CALLED" << std::endl;
 				for (size_t i = 0; i < n; i++)
 				{
 					this->insert(position, val);
@@ -407,6 +393,31 @@ namespace ft
 						i++;
 					}
 				};
+	};
+	template<class InputIt1, class InputIt2>
+	bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)
+	{
+		for ( ; (first1 != last1) && (first2 != last2); ++first1, (void) ++first2 ) {
+			if (*first1 < *first2) return true;
+			if (*first2 < *first1) return false;
+		}
+		return (first1 == last1) && (first2 != last2);
+	}
+	template< class T, class Alloc >
+	bool operator==(const ft::Vector<T,Alloc>& lhs, const ft::Vector<T,Alloc>& rhs)
+	{
+		if (lhs.size() != rhs.size())
+			return (false);
+		typename Vector<T>::iterator lit = lhs.begin();
+		typename Vector<T>::iterator rit = rhs.begin();
+		while (lit != lhs.end() && rit != rhs.end())
+		{
+			if (*lit != *rit)
+				return(false);
+			lit++;
+			rit++;
+		}
+		return (true);
 	};
 }
 

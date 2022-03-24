@@ -56,7 +56,7 @@ namespace ft
 				return (*this);
 			};
 			iterator_type base() const { return (iter); }; //offset of 1 need to be implement
-			const value_type operator*() const
+			reference operator*() const
 			{
 				Iter cpy(iter);
 

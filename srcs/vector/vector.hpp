@@ -328,7 +328,7 @@ namespace ft
 					int index;
 
 				public:
-
+					typedef const value_type& reference;
 					const_vec_it() { this->vp = NULL; };
 					const_vec_it(const const_vec_it & it) { this->vp = it.vp; this->index = it.index; };
 					const_vec_it(const Vector *vp, int index) { this->vp = vp; this->index = index; };

@@ -373,9 +373,9 @@ namespace ft
 						return *this;
 					}
 					int operator-(const const_vec_it & rhs) { return index - rhs.index; };
-					value_type const & operator*() { return vp->_data[index]; };
-					value_type const *operator->() { return &vp->_data[index]; };
-					value_type const & operator[](int k) { return vp->_data[index + k]; };
+					value_type const & operator*() const { return vp->_data[index]; };
+					value_type const *operator->() const { return &vp->_data[index]; };
+					value_type const & operator[](int k) const { return vp->_data[index + k]; };
 			};
 
 			private:

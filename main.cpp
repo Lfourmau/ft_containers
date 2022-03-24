@@ -478,17 +478,17 @@ void test_relationnal_operators()
 void test_const_rev_it()
 {
 	header_test_section("Const rev iterators");
-	ft::Vector<int> myvect(10, 42);
-	ft::Vector<int>::iterator it = myvect.end();
-	ft::Vector<int>::iterator it2 = myvect.begin();
-	ft::const_reverse_iterator<ft::Vector<int>::iterator> rev_it(it);
-	ft::const_reverse_iterator<ft::Vector<int>::iterator> rev_it2(it2);
-	// std::const_iterator<ft::Vector<int>::iterator> rev_it(it);
-	// std::const_iterator<ft::Vector<int>::iterator> rev_it2(it2);
+	const ft::Vector<int> myvect(10, 42);
+	ft::Vector<int>::const_iterator it = myvect.end();
+	ft::Vector<int>::const_iterator it2 = myvect.begin();
+	ft::reverse_iterator<ft::Vector<int>::const_iterator> rev_it(it);
+	ft::reverse_iterator<ft::Vector<int>::const_iterator> rev_it2(it2);
+	//std::reverse_iterator<ft::Vector<int>::const_iterator> rev_it(it);
+	//std::reverse_iterator<ft::Vector<int>::const_iterator> rev_it2(it2);
 
 	while (rev_it != rev_it2)
 	{
-		*rev_it = 8;
+		//*rev_it = 8;
 		std::cout << *rev_it << "---";
 		rev_it++;
 	}

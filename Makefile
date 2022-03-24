@@ -1,10 +1,13 @@
 NAME = containers
 
 INC = 	srcs/vector/vector.hpp \
+		srcs/stack/stack.hpp \
 		srcs/iterators/iterator_traits.hpp \
 		debug_test.hpp \
 
-SRCS = 	main.cpp \
+#SRCS = vector_main.cpp
+SRCS = 	stack_main.cpp
+#SRCS = map_main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

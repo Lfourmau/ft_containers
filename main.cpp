@@ -42,7 +42,7 @@ int main()
 	//test_vector_erase();
 	//header_test_section("END PROGRAM");
 	//test_range_constructor();
-	//test_const_iterators();
+	test_const_iterators();
 	//test_relationnal_operators();
 	test_const_rev_it();
 }

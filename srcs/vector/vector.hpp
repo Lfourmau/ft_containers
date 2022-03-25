@@ -117,7 +117,13 @@ namespace ft
 				for (size_t i = 0; i < _size; i++)
 					_my_alloc.construct(_data + i, *(x._data + i));
 			};
-			~Vector() {};
+			~Vector() 
+			{
+				for (size_t i = 0; i < this->_size; i++)
+					_my_alloc.destroy(_data + i);
+				
+				_my_alloc.deallocate(this->_data, this->size());
+			};
 
 			//Iterators
 			Vector& 				operator=(Vector const& rhs);
@@ -155,6 +161,7 @@ namespace ft
 				if (n > this->_capacity)
 				{
 					Vector tmp(*this);
+					_my_alloc.deallocate(this->_data, this->_size); //Need to free memory before reallocation to prevent leaks
 					this->_data = this->_my_alloc.allocate(n);
 					copy(tmp.begin(), tmp.begin() + tmp._size, this->_data);
 					this->_capacity = n;

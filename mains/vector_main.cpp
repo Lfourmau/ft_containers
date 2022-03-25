@@ -1,5 +1,5 @@
-#include "srcs/vector/vector.hpp"
-#include "debug_test.hpp"
+#include "../srcs/vector/vector.hpp"
+#include "../debug_test.hpp"
 #include <vector>
 
 void header_test_section(std::string title);

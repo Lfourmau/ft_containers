@@ -28,7 +28,6 @@ namespace ft
 			typedef size_t size_type;
 			Stack() : _data() {};
 			~Stack() {};
-			Vector<T> get_data() const {return (_data); };
 			bool empty() const { return (_data.empty()); };
 			size_type size() const {return (_data.size()); };
 			value_type& top() { return (_data.back()); };

@@ -173,10 +173,10 @@ namespace ft
 			const_reference operator[] (size_type n) const { return (_data[n]); };
 			reference 		at (size_type n) { return (this->_data[n]); };
 			const_reference at (size_type n) const { return (this->_data[n]); };
-			reference 		front() { return (this->data[0]); };
+			reference 		front() { return (this->_data[0]); };
 			const_reference front() const { return (this->data[0]); };
-			reference 		back() { return (this->data[_size]); };
-			const_reference back() const { return (this->data[_size]); };
+			reference 		back() { return (this->_data[_size]); };
+			const_reference back() const { return (this->_data[_size]); };
 
 			//Modifiers
 			template <class InputIterator>

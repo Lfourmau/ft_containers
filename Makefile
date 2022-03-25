@@ -5,9 +5,9 @@ INC = 	srcs/vector/vector.hpp \
 		srcs/iterators/iterator_traits.hpp \
 		debug_test.hpp \
 
-# SRCS = vector_main.cpp
-SRCS = 	stack_main.cpp
-#SRCS = map_main.cpp
+#SRCS = mains/vector_main.cpp
+SRCS = mains/stack_main.cpp
+#SRCS = mains/map_main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

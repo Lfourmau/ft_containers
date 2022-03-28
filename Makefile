@@ -6,8 +6,8 @@ INC = 	srcs/vector/vector.hpp \
 		debug_test.hpp \
 
 #SRCS = mains/vector_main.cpp
-SRCS = mains/stack_main.cpp
-#SRCS = mains/map_main.cpp
+#SRCS = mains/stack_main.cpp
+SRCS = mains/map_main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

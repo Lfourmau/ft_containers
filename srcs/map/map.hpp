@@ -23,8 +23,14 @@ class Map
 		typedef ptrdiff_t 									difference_type;
 		typedef size_t 										size_type;
 
+		//Constructor
 		Map() {};
+		Map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
+		template <class InputIterator>
+  		Map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
+		Map (const Map& x);
 		~Map() {};
+
 };
 
 #endif

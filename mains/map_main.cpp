@@ -4,6 +4,6 @@
 
 int main()
 {
-	Map <int, char>test;
+	ft::Map<int, char> test;
 	
 }

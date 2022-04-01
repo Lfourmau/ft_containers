@@ -65,10 +65,10 @@ namespace ft
 			};
 			reverse_iterator operator+(difference_type n) const
 			{
-			this->iter -= n;
+				reverse_iterator<Iter> cpy(*this);
+				cpy.iter -= n;
 
-			reverse_iterator<Iter> cpy(*this);
-			return (cpy);
+				return (cpy);
 			};
 			reverse_iterator& operator++()
 			{
@@ -83,6 +83,11 @@ namespace ft
 				return (tmp);
 
 			};
+			reverse_iterator& operator-=(difference_type n)
+			{
+				this->iter += n;
+				return (*this);
+			};
 			reverse_iterator& operator+=(difference_type n)
 			{
 				this->iter -= n;
@@ -90,9 +95,9 @@ namespace ft
 			};
 			reverse_iterator operator-(difference_type n) const
 			{
-				this->iter += n;
-
 			 	reverse_iterator<Iter> cpy(*this);
+				cpy.iter += n;
+
 			 	return (cpy);
 			};
 			reverse_iterator& operator--()
@@ -107,11 +112,6 @@ namespace ft
 				this->iter++;
 				return (tmp);
 
-			};
-			reverse_iterator& operator-=(difference_type n)
-			{
-				this->iter += n;
-				return (*this);
 			};
 			pointer operator->() const
 			{

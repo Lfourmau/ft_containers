@@ -25,25 +25,25 @@ void test_const_rev_it();
 
 int main()
 {
- 	test_vector_pushback();
-	testrev_it_operators();
-	test_vector_size();
-	test_vector_popback();
-	test_vector_swap();
-	test_vector_copy_constructor();
-	test_vector_insert();
-	test_rev_it_comp_operators();
-	test_normal_iterator();
-	test_vector_empty();
-	test_vector_reserve();
-	test_vector_resize();
-	test_vector_at();
-	test_vector_assign();
-	test_vector_erase();
+ 	//test_vector_pushback();
+	//testrev_it_operators();
+	//test_vector_size();
+	//test_vector_popback();
+	//test_vector_swap();
+	//test_vector_copy_constructor();
+	//test_vector_insert();
+	//test_rev_it_comp_operators();
+	//test_normal_iterator();
+	//test_vector_empty();
+	//test_vector_reserve();
+	//test_vector_resize();
+	//test_vector_at();
+	//test_vector_assign();
+	//test_vector_erase();
 	//test_range_constructor(); (free after modified problem)
 	test_const_iterators();
-	test_relationnal_operators();
-	test_const_rev_it();
+	//test_relationnal_operators();
+	//test_const_rev_it();
 	header_test_section("END PROGRAM");
 }
 

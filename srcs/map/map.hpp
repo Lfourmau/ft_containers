@@ -3,6 +3,7 @@
 
 #include <functional>
 #include "../iterators/iterator_traits.hpp"
+#include "red_black_tree.hpp"
 
 namespace ft
 {

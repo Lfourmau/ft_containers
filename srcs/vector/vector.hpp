@@ -306,22 +306,22 @@ namespace ft
 						this->index = rhs.index;
 						return (*this);
 					}
-					bool operator==(const vec_it & rhs) { return vp == rhs.vp && index == rhs.index; };
-					bool operator!=(const vec_it & rhs) { return !(*this == rhs); };
-					bool operator<(const vec_it & rhs) { return index < rhs.index; };
-					bool operator<=(const vec_it & rhs) { return index <= rhs.index; };
-					bool operator>(const vec_it & rhs) { return index > rhs.index; };
-					bool operator>=(const vec_it & rhs) { return index >= rhs.index; };
-					vec_it operator+(const int & rhs) { return vec_it(vp, index + rhs); };
-					vec_it operator-(const int & rhs) { return vec_it(vp, index - rhs); };
+					bool operator==(const vec_it & rhs) const { return vp == rhs.vp && index == rhs.index; };
+					bool operator!=(const vec_it & rhs) const { return !(*this == rhs); };
+					bool operator<(const vec_it & rhs) const{ return index < rhs.index; };
+					bool operator<=(const vec_it & rhs) const { return index <= rhs.index; };
+					bool operator>(const vec_it & rhs) const{ return index > rhs.index; };
+					bool operator>=(const vec_it & rhs) const { return index >= rhs.index; };
+					vec_it operator+(const int & rhs) const { return vec_it(vp, index + rhs); };
+					vec_it operator-(const int & rhs) const { return vec_it(vp, index - rhs); };
 					vec_it operator+=(const int & rhs) {
 						index += rhs;
 						return *this;
-					}
+					};
 					vec_it operator-=(const int & rhs) {
 						index -= rhs;
 						return *this;
-					}
+					};
 					int operator-(const vec_it & rhs) { return index - rhs.index; };
 					value_type & operator*() { return vp->_data[index]; };
 					value_type *operator->() { return &vp->_data[index]; };
@@ -363,14 +363,14 @@ namespace ft
 						this->index = rhs.index;
 						return (*this);
 					}
-					bool operator==(const const_vec_it & rhs) { return vp == rhs.vp && index == rhs.index; };
-					bool operator!=(const const_vec_it & rhs) { return !(*this == rhs); };
-					bool operator<(const const_vec_it & rhs) { return index < rhs.index; };
-					bool operator<=(const const_vec_it & rhs) { return index <= rhs.index; };
-					bool operator>(const const_vec_it & rhs) { return index > rhs.index; };
-					bool operator>=(const const_vec_it & rhs) { return index >= rhs.index; };
-					const_vec_it operator+(const int & rhs) { return const_vec_it(vp, index + rhs); };
-					const_vec_it operator-(const int & rhs) { return const_vec_it(vp, index - rhs); };
+					bool operator==(const const_vec_it & rhs) const { return vp == rhs.vp && index == rhs.index; };
+					bool operator!=(const const_vec_it & rhs)  const { return !(*this == rhs); };
+					bool operator<(const const_vec_it & rhs) const{ return index < rhs.index; };
+					bool operator<=(const const_vec_it & rhs)const { return index <= rhs.index; };
+					bool operator>(const const_vec_it & rhs) const{ return index > rhs.index; };
+					bool operator>=(const const_vec_it & rhs) const { return index >= rhs.index; };
+					const_vec_it operator+(const int & rhs) const { return const_vec_it(vp, index + rhs); };
+					const_vec_it operator-(const int & rhs) const { return const_vec_it(vp, index - rhs); };
 					const_vec_it operator+=(const int & rhs) {
 						index += rhs;
 						return *this;
@@ -379,7 +379,7 @@ namespace ft
 						index -= rhs;
 						return *this;
 					}
-					int operator-(const const_vec_it & rhs) { return index - rhs.index; };
+					int operator-(const const_vec_it & rhs) const { return index - rhs.index; };
 					value_type const & operator*() const { return vp->_data[index]; };
 					value_type const *operator->() const { return &vp->_data[index]; };
 					value_type const & operator[](int k) const { return vp->_data[index + k]; };

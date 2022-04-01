@@ -288,7 +288,7 @@ namespace ft
 					}
 					vec_it operator++(int) {
 						vec_it copy(*this);
-						operator++();
+						this->operator++();
 						return copy;
 					}
 					vec_it & operator--() {

@@ -129,8 +129,8 @@ namespace ft
 			Vector& 				operator=(Vector const& rhs);
 			iterator 				begin() { return iterator(this, 0); };
 			const_iterator 			begin() const { return const_iterator(this, 0); };
-			iterator 				end() { return iterator(this, _size); };
-			const_iterator			end() const { return const_iterator(this, _size); };
+			iterator 				end() { return iterator(this, this->_size); };
+			const_iterator			end() const { return const_iterator(this, this->_size); };
 			reverse_iterator		rbegin() { return end(); };
 			const_reverse_iterator	rbegin() const { return end(); };
 			reverse_iterator		rend() { return begin(); };
@@ -138,7 +138,7 @@ namespace ft
 
 			//Capacity
 			size_type size() const { return (this->_size); };
-			size_type max_size() const;
+			size_type max_size() const;//todo
 			void resize (size_type n, value_type val = value_type())
 			{
 				if (n < this->_size)
@@ -323,7 +323,7 @@ namespace ft
 						return *this;
 					};
 					int operator-(const vec_it & rhs) { return index - rhs.index; };
-					value_type & operator*() { return vp->_data[index]; };
+					value_type & operator*() { return (vp->_data[index]); };
 					value_type *operator->() { return &vp->_data[index]; };
 					value_type & operator[](int k) { return vp->_data[index + k]; };
 			};

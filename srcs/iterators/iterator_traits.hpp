@@ -72,7 +72,7 @@ namespace ft
 			};
 			reverse_iterator& operator++()
 			{
-				iter--;
+				this->iter--;
 				return (*this);
 			};
 			reverse_iterator  operator++(int)
@@ -119,7 +119,7 @@ namespace ft
 			};
 			reference operator[](difference_type n) const
 			{
-				return (*(this->iter - (n + 1)));
+				return (*(this->iter - (n)));
 			};
 	};
 	//Reverse iterator comparison op.

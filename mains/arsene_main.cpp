@@ -633,24 +633,24 @@ void vectorCapacityTests( void ) {
 	std::cout << "VECTOR CAPACITY TESTS:" << std::endl << std::endl;
 
 	{
-		//ft::Vector<int> a;
-		//displayVect( a, "Size'n'capacity test 1" );
-		//a.push_back( 5 );
-		//displayVect( a, "Size'n'capacity test 2" );
-		//a.push_back( 15 );
-		//displayVect( a, "Size'n'capacity test 3" );
-		//a.push_back( 25 );
-		//displayVect( a, "Size'n'capacity test 4" );
-		//a.push_back( 35 );
-		//displayVect( a, "Size'n'capacity test 5" );
-		//ft::Vector<int> b( 3 );
-		//displayVect( b, "Size'n'capacity test 6" );
-		//ft::Vector<int> c( 5, 42 );
-		//displayVect( c, "Size'n'capacity test 7" );
-		//std::cout << a.max_size() << std::endl;
-		//std::cout << b.max_size() << std::endl;
-		//std::cout << c.max_size() << std::endl;
-		//displayVect( c, "Max_size test" );
+		ft::Vector<int> a;
+		displayVect( a, "Size'n'capacity test 1" );
+		a.push_back( 5 );
+		displayVect( a, "Size'n'capacity test 2" );
+		a.push_back( 15 );
+		displayVect( a, "Size'n'capacity test 3" );
+		a.push_back( 25 );
+		displayVect( a, "Size'n'capacity test 4" );
+		a.push_back( 35 );
+		displayVect( a, "Size'n'capacity test 5" );
+		ft::Vector<int> b( 3 );
+		displayVect( b, "Size'n'capacity test 6" );
+		ft::Vector<int> c( 5, 42 );
+		displayVect( c, "Size'n'capacity test 7" );
+		std::cout << a.max_size() << std::endl;
+		std::cout << b.max_size() << std::endl;
+		std::cout << c.max_size() << std::endl;
+		displayVect( c, "Max_size test" );
 	}
 	{
 		ft::Vector<int> a( 5, 42 );
@@ -1014,7 +1014,15 @@ void vectorModifiersTests( void ) {
 		b.push_back( 35 );
 		a.swap( b );
 		displayVect( a, "Swap test 3" );
-		displayVect( b, "Swap test 4" );
+		//displayVect( b, "Swap test 4" );
+		std::cout << "=======================================================" << std::endl;
+		std::cout << "Swap test 4" << std::endl;
+		std::cout << std::endl << "size = " << b.size() << std::endl;
+		std::cout << "capacity = " << b.capacity() << std::endl << std::endl;
+		for ( size_t i = 0; i < b.size(); i++ ) {
+			std::cout << b[i] << ' ';
+		}
+	
 	}
 	{
 		ft::Vector<int> a( 7, 77 );

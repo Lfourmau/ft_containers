@@ -119,7 +119,7 @@ namespace ft
 			};
 			reference operator[](difference_type n) const
 			{
-				return (*(this->iter - (n)));
+				return (*(this->iter - (n + 1)));
 			};
 	};
 	//Reverse iterator comparison op.

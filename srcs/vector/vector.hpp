@@ -126,19 +126,24 @@ namespace ft
 			};
 
 			//Iterators
-			Vector& 				operator=(Vector const& rhs);
+			Vector& operator=(Vector const& rhs)
+			{
+				this->_capacity = rhs.capacity;
+				this->_size = rhs.size();
+				this->_data = 
+			};
 			iterator 				begin() { return iterator(this, 0); };
 			const_iterator 			begin() const { return const_iterator(this, 0); };
 			iterator 				end() { return iterator(this, this->_size); };
 			const_iterator			end() const { return const_iterator(this, this->_size); };
-			reverse_iterator		rbegin() { return end(); };
-			const_reverse_iterator	rbegin() const { return end(); };
-			reverse_iterator		rend() { return begin(); };
-			const_reverse_iterator	rend() const { return begin(); };
+			reverse_iterator		rbegin() { return (end()); };
+			const_reverse_iterator	rbegin() const { return (end()); };
+			reverse_iterator		rend() { return (begin()); };
+			const_reverse_iterator	rend() const { return (begin()); };
 
 			//Capacity
 			size_type size() const { return (this->_size); };
-			size_type max_size() const;//todo
+			size_type max_size() const { return (std::numeric_limits<size_type>::max() / sizeof(value_type)); };
 			void resize (size_type n, value_type val = value_type())
 			{
 				if (n < this->_size)
@@ -161,7 +166,7 @@ namespace ft
 				if (n > this->_capacity)
 				{
 					Vector tmp(*this);
-					_my_alloc.deallocate(this->_data, this->_size); //Need to free memory before reallocation to prevent leaks
+					//_my_alloc.deallocate(this->_data, this->_size); //Need to free memory before reallocation to prevent leaks
 					this->_data = this->_my_alloc.allocate(n);
 					copy(tmp.begin(), tmp.begin() + tmp._size, this->_data);
 					this->_capacity = n;
@@ -250,13 +255,13 @@ namespace ft
 					this->erase(first);
 				return (last);
 			};
-			void swap (Vector& x)
+			void swap (Vector<T>& x)
 			{
-				T* tmp;
+				Vector<T> tmp;
 	
-				tmp = x._data;
-				x._data = this->_data;
-				this->_data = tmp;
+				tmp = *this;
+				*this = x;
+				x = tmp;
 			};
 			void clear()
 			{

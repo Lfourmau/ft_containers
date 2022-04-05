@@ -128,9 +128,11 @@ namespace ft
 			//Iterators
 			Vector& operator=(Vector const& rhs)
 			{
-				this->_capacity = rhs.capacity;
-				this->_size = rhs.size();
-				this->_data = 
+				if (rhs == *this)
+					return (*this);
+				this->clear();
+				this->insert(this->end(), rhs.begin(), rhs.end());
+				return (*this);
 			};
 			iterator 				begin() { return iterator(this, 0); };
 			const_iterator 			begin() const { return const_iterator(this, 0); };
@@ -166,7 +168,8 @@ namespace ft
 				if (n > this->_capacity)
 				{
 					Vector tmp(*this);
-					//_my_alloc.deallocate(this->_data, this->_size); //Need to free memory before reallocation to prevent leaks
+					if (this->_size > 0)
+						_my_alloc.deallocate(this->_data, this->_size); //Need to free memory before reallocation to prevent leaks
 					this->_data = this->_my_alloc.allocate(n);
 					copy(tmp.begin(), tmp.begin() + tmp._size, this->_data);
 					this->_capacity = n;

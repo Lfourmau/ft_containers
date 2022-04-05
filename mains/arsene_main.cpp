@@ -104,21 +104,21 @@ void iteratorTests( void ) {
 		std::cout << "=======================================================" << std::endl;
 	}
 	{
-		//std::cout << "Arithmetic operators:" << std::endl;
-		//ft::Vector<int> vec;
-		//vec.push_back( 5 );
-		//vec.push_back( 15 );
-		//vec.push_back( 25 );
-		//vec.push_back( 35 );
-		//ft::Vector<int>::iterator a = vec.begin();
-		//std::cout << *(a + 2) << std::endl;
-		//std::cout << *(1 + a) << std::endl;
-		//a += 3;
-		//std::cout << *(a - 2) << std::endl;
-		//std::cout << *a << std::endl;
-		//a -= 3;
-		//std::cout << *a << std::endl;
-		//std::cout << "=======================================================" << std::endl;
+		std::cout << "Arithmetic operators:" << std::endl;
+		ft::Vector<int> vec;
+		vec.push_back( 5 );
+		vec.push_back( 15 );
+		vec.push_back( 25 );
+		vec.push_back( 35 );
+		ft::Vector<int>::iterator a = vec.begin();
+		std::cout << *(a + 2) << std::endl;
+		std::cout << *(a + 1) << std::endl;
+		a += 3;
+		std::cout << *(a - 2) << std::endl;
+		std::cout << *a << std::endl;
+		a -= 3;
+		std::cout << *a << std::endl;
+		std::cout << "=======================================================" << std::endl;
 	}
 	{
 		std::cout << "Comparison operators:" << std::endl;
@@ -247,22 +247,22 @@ void constIteratorTests( void ) {
 		std::cout << "=======================================================" << std::endl;
 	}
 	{
-		//std::cout << "Arithmetic operators:" << std::endl;
-		//ft::Vector<int> vec;
-		//vec.push_back( 5 );
-		//vec.push_back( 15 );
-		//vec.push_back( 25 );
-		//vec.push_back( 35 );
-		//const ft::Vector<int> cvec( vec );
-		//ft::Vector<int>::const_iterator a = cvec.begin();
-		//std::cout << *(a + 2) << std::endl;
-		//std::cout << *(1 + a) << std::endl;
-		//a += 3;
-		//std::cout << *(a - 2) << std::endl;
-		//std::cout << *a << std::endl;
-		//a -= 3;
-		//std::cout << *a << std::endl;
-		//std::cout << "=======================================================" << std::endl;
+		std::cout << "Arithmetic operators:" << std::endl;
+		ft::Vector<int> vec;
+		vec.push_back( 5 );
+		vec.push_back( 15 );
+		vec.push_back( 25 );
+		vec.push_back( 35 );
+		const ft::Vector<int> cvec( vec );
+		ft::Vector<int>::const_iterator a = cvec.begin();
+		std::cout << *(a + 2) << std::endl;
+		std::cout << *(a + 1) << std::endl;
+		a += 3;
+		std::cout << *(a - 2) << std::endl;
+		std::cout << *a << std::endl;
+		a -= 3;
+		std::cout << *a << std::endl;
+		std::cout << "=======================================================" << std::endl;
 	}
 	{
 		std::cout << "Comparison operators:" << std::endl;
@@ -378,21 +378,21 @@ void reverseIteratorTests( void ) {
 		std::cout << "=======================================================" << std::endl;
 	}
 	{
-		//std::cout << "Arithmetic operators:" << std::endl;
-		//ft::Vector<int> vec;
-		//vec.push_back( 5 );
-		//vec.push_back( 15 );
-		//vec.push_back( 25 );
-		//vec.push_back( 35 );
-		//ft::Vector<int>::reverse_iterator a = vec.rbegin();
-		//std::cout << *(a + 2) << std::endl;
-		//std::cout << *(1 + a) << std::endl;
-		//a += 3;
-		//std::cout << *(a - 2) << std::endl;
-		//std::cout << *a << std::endl;
-		//a -= 3;
-		//std::cout << *a << std::endl;
-		//std::cout << "=======================================================" << std::endl;
+		std::cout << "Arithmetic operators:" << std::endl;
+		ft::Vector<int> vec;
+		vec.push_back( 5 );
+		vec.push_back( 15 );
+		vec.push_back( 25 );
+		vec.push_back( 35 );
+		ft::Vector<int>::reverse_iterator a = vec.rbegin();
+		std::cout << *(a + 2) << std::endl;
+		std::cout << *(a + 1) << std::endl;
+		a += 3;
+		std::cout << *(a - 2) << std::endl;
+		std::cout << *a << std::endl;
+		a -= 3;
+		std::cout << *a << std::endl;
+		std::cout << "=======================================================" << std::endl;
 	}
 	{
 		std::cout << "Comparison operators:" << std::endl;
@@ -521,22 +521,22 @@ void constReverseIteratorTests( void ) {
 		std::cout << "=======================================================" << std::endl;
 	}
 	{
-		//std::cout << "Arithmetic operators:" << std::endl;
-		//ft::Vector<int> vec;
-		//vec.push_back( 5 );
-		//vec.push_back( 15 );
-		//vec.push_back( 25 );
-		//vec.push_back( 35 );
-		//const ft::Vector<int> cvec( vec );
-		//ft::Vector<int>::const_reverse_iterator a = cvec.rbegin();
-		//std::cout << *(a + 2) << std::endl;
-		//std::cout << *(1 + a) << std::endl;
-		//a += 3;
-		//std::cout << *(a - 2) << std::endl;
-		//std::cout << *a << std::endl;
-		//a -= 3;
-		//std::cout << *a << std::endl;
-		//std::cout << "=======================================================" << std::endl;
+		std::cout << "Arithmetic operators:" << std::endl;
+		ft::Vector<int> vec;
+		vec.push_back( 5 );
+		vec.push_back( 15 );
+		vec.push_back( 25 );
+		vec.push_back( 35 );
+		const ft::Vector<int> cvec( vec );
+		ft::Vector<int>::const_reverse_iterator a = cvec.rbegin();
+		std::cout << *(a + 2) << std::endl;
+		std::cout << *(a + 1) << std::endl;
+		a += 3;
+		std::cout << *(a - 2) << std::endl;
+		std::cout << *a << std::endl;
+		a -= 3;
+		std::cout << *a << std::endl;
+		std::cout << "=======================================================" << std::endl;
 	}
 	{
 		std::cout << "Comparison operators:" << std::endl;

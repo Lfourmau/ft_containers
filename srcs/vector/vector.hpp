@@ -121,7 +121,6 @@ namespace ft
 			{
 				for (size_t i = 0; i < this->_size; i++)
 					_my_alloc.destroy(_data + i);
-				
 				_my_alloc.deallocate(this->_data, this->size());
 			};
 
@@ -211,7 +210,7 @@ namespace ft
 			};
 			void pop_back()
 			{
-				_my_alloc.destroy(_data + _size);
+				_my_alloc.destroy(this->_data + this->_size);
 				this->_size--;
 			};
 			iterator insert (iterator position, const value_type& val)
@@ -275,7 +274,7 @@ namespace ft
 			//Allocator
 			allocator_type get_allocator() const { return (this->_my_alloc); };
 
-			//Reltionnal operators
+			//Relationnal operators
 
 
 

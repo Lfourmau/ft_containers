@@ -167,8 +167,8 @@ namespace ft
 				if (n > this->_capacity)
 				{
 					Vector tmp(*this);
-					if (this->_size > 0)
-						_my_alloc.deallocate(this->_data, this->_size); //Need to free memory before reallocation to prevent leaks
+					if (this->_capacity > 0)
+						_my_alloc.deallocate(this->_data, this->_size);
 					this->_data = this->_my_alloc.allocate(n);
 					copy(tmp.begin(), tmp.begin() + tmp._size, this->_data);
 					this->_capacity = n;
@@ -178,12 +178,22 @@ namespace ft
 			//Elements access
 			reference 		operator[] (size_type n) { return (_data[n]); };
 			const_reference operator[] (size_type n) const { return (_data[n]); };
-			reference 		at (size_type n) { return (this->_data[n]); };
-			const_reference at (size_type n) const { return (this->_data[n]); };
+			reference 		at (size_type n)
+			{ 
+				if (n < 0 || n >= this->size())
+					throw(std::out_of_range("vector"));
+				return (this->_data[n]); 
+			};
+			const_reference at (size_type n) const
+			{ 
+				if (n < 0 || n >= this->size())
+					throw(std::out_of_range("vector"));
+				return (this->_data[n]); 
+			};
 			reference 		front() { return (this->_data[0]); };
 			const_reference front() const { return (this->data[0]); };
-			reference 		back() { return (this->_data[_size]); };
-			const_reference back() const { return (this->_data[_size]); };
+			reference 		back() { return (this->_data[_size - 1]); };
+			const_reference back() const { return (this->_data[_size - 1]); };
 
 			//Modifiers
 			template <class InputIterator>
@@ -199,6 +209,7 @@ namespace ft
 			};
 			void assign (size_type n, const value_type& val)
 			{
+				//_my_alloc.deallocate(this->_data, this->_size);
 				this->clear();
 				reserve(n);
 				while (this->_size < n)
@@ -402,7 +413,7 @@ namespace ft
 					size_t i = 0;
 					while (input_begin != input_end)
 					{
-						output[i] = *input_begin;
+						_my_alloc.construct(&output[i], *input_begin);
 						input_begin++;
 						i++;
 					}

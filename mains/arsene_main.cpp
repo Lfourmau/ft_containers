@@ -765,6 +765,7 @@ void vectorModifiersTests( void ) {
 	}
 	{
 		ft::Vector<int> a( 10, 42 );
+		displayVect( a, "Assign test 2" );
 		a.assign( 21, 111 );
 		displayVect( a, "Assign test 2" );
 	}

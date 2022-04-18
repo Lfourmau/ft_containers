@@ -214,6 +214,44 @@ class red_black_tree
 			node.parent = tmp;
 		}
 	}
+	void leftRightRotate(Node<K, V> node)
+	{
+		leftRotate(node.left);
+		rightRotate(node);
+	}
+	void rightLeftRotate(Node<K, V> node)
+	{
+		riightRotate(node.right);
+		leftRotate(node);
+	}
+	int height()
+	{
+		if (root == nullptr)
+			return (0);
+		return (height(root) - 1);
+	}
+	int height(Node<K, V> node)
+	{
+		if (node == nullptr)
+			return (0);
+		int leftHeight = height(node.left) + 1;
+		int rightHeight = height(node.right) + 1;
+		if (leftHeight > rightHeight)
+			return (leftHeight);
+		return (rightHeight);
+	}
+	int blackNodes(Node<K, V> node)
+	{
+		if (node == null)
+			return (1);
+		int rightBlackNodes = blackNodes(node.right);
+		int leftBlackNodes = blackNodes(node.left);
+		if (rightBlackNodes != leftBlackNodes)
+			//throw error or fix the tree
+		if (node.color = BLACK)
+			leftBlackNodes++;
+		return (leftBlackNodes);
+	}
 };
 
 

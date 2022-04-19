@@ -79,30 +79,30 @@ namespace ft
 			typedef size_t 										size_type;
 
 			//Constructor
-			Map() {};
-			//Map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
+			Map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : cmp(comp), _my_alloc(alloc), rbt(cmp, node_allocator) {};
 			//template <class InputIterator>
 			//Map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			//Map (const Map& x);
 			~Map() {};
-
-		private:
-			template <class K, class Type, class Comp, class Allocator>
 			class value_compare
 			{
 				friend class Map;
 				protected:
-				Comp comp;
-				value_compare (Comp c) : comp(c) {};
+				Compare comp;
+				value_compare (Compare c) : comp(c) {};
 				public:
 				typedef bool result_type;
 				typedef value_type first_argument_type;
 				typedef value_type second_argument_type;
 				bool operator() (const value_type& x, const value_type& y) const { return comp(x.first, y.first); };
 			};
-			allocator_type _my_alloc;
+
+		private:
 			typedef typename Alloc::template rebind<Node<value_type> >::other _Alty;
-			red_black_tree<value_type, _Alty> rbt;
+			_Alty node_allocator;
+			value_compare cmp;
+			allocator_type _my_alloc;
+			red_black_tree<value_type, _Alty, value_compare> rbt;
 	};
 }
 

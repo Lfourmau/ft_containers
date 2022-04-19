@@ -13,6 +13,6 @@ int main()
 	std::cout << "bar: " << bar.first << ", " << bar.second << '\n';
 	
 	header_test_section("RBT tests");
-	red_black_tree<std::string> rbt;
+	red_black_tree<std::string, std::allocator<int> > rbt;
 
 }

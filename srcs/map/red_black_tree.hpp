@@ -26,12 +26,12 @@ template<class Pair, class Alloc>
 class red_black_tree
 {
 	private:
-		Node *root;
+		Node<Pair> *root;
 		Alloc _my_alloc;
-		Node *new_node(Pair value)
+		Node<Pair> *new_node(Pair value)
 		{
-			Node *node = _my_alloc.allocate(sizeof(Node));
-			_struct(&node->data, value);
+			Node<Pair> *node = _my_alloc.allocate();
+			_my_alloc.construct(&node->data, value);
 			return (node);
 		};
 };

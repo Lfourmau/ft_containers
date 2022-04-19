@@ -87,13 +87,13 @@ namespace ft
 			~Map() {};
 
 		private:
-			template <class Key, class T, class Compare, class Alloc>
-			class value_compre
+			template <class K, class Type, class Comp, class Allocator>
+			class value_compare
 			{
 				friend class Map;
 				protected:
-				Compare comp;
-				value_compare (Compare c) : comp(c) {};
+				Comp comp;
+				value_compare (Comp c) : comp(c) {};
 				public:
 				typedef bool result_type;
 				typedef value_type first_argument_type;
@@ -101,7 +101,8 @@ namespace ft
 				bool operator() (const value_type& x, const value_type& y) const { return comp(x.first, y.first); };
 			};
 			allocator_type _my_alloc;
-			red_black_tree<value_type, allocator_type> rbt;
+			typedef typename Alloc::template rebind<Node<value_type> >::other _Alty;
+			red_black_tree<value_type, _Alty> rbt;
 	};
 }
 

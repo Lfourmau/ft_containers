@@ -30,21 +30,27 @@ namespace ft
 	class red_black_tree
 	{
 		public:
-			red_black_tree(Compare cmp, Alloc alloc) : comp(cmp), _my_alloc(alloc) {};
+			red_black_tree(Compare cmp, Alloc alloc) : comp(cmp), _my_alloc(alloc), root(nullptr) {};
 			void insert(const Pair& value)
 			{
-				new_node(value);
-				std::cout << "test" << std::endl;
+				if (this->root == nullptr)
+				{
+					this->root = new_node(value);
+					std::cout << this->root->value.first << std::endl;
+				}
+				else
+				{
+					std::cout << "test" << std::endl;
+				}
 			};
 		private:
-			Node<Pair> *root;
 			Compare comp;
 			Alloc _my_alloc;
+			Node<Pair> *root;
 			Node<Pair> *new_node(Pair value)
 			{
 				Node<Pair> *node = _my_alloc.allocate(1);
 				_my_alloc.construct(&node->value, value);
-				std::cout << node->value.first << std::endl;
 				return (node);
 			};
 	};

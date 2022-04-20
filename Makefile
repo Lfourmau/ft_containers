@@ -2,6 +2,8 @@ NAME = containers
 
 INC = 	srcs/vector/vector.hpp \
 		srcs/stack/stack.hpp \
+		srcs/map/map.hpp \
+		srcs/map/red_black_tree.hpp \
 		srcs/iterators/iterator_traits.hpp \
 		debug_test.hpp \
 

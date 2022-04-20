@@ -33,20 +33,47 @@ namespace ft
 			red_black_tree(Compare cmp, Alloc alloc) : comp(cmp), _my_alloc(alloc), root(nullptr) {};
 			void insert(const Pair& value)
 			{
+				Node<Pair> *n = this->root;
 				if (this->root == nullptr)
 				{
 					this->root = new_node(value);
-					std::cout << this->root->value.first << std::endl;
+					this->root->color = BLACK;
+					std::cout << "[" << this->root->value.first << " -- ";
+					std::cout << this->root->value.second << "]" << std::endl;
+					this->current = this->root;
 				}
-				else
+				else if (cmp < 0)
 				{
-					std::cout << "test" << std::endl;
+					//left
+					//insert as leaf
+					if (n->left == nullptr)
+					{
+						n->value = value;
+						return;
+					}
+					else
+						n = n->left;
+					//check parent color
+					std::cout << "[" << this->current->value.first << " -- ";
+					std::cout << this->current->value.second << "]" << std::endl;
 				}
+				else if (cmp > 0)
+				{
+					//right
+					if (n->right == nullptr)
+					{
+						n->value = value;
+						return;
+					}
+					else
+						n = n->right;
+				};
 			};
 		private:
 			Compare comp;
 			Alloc _my_alloc;
 			Node<Pair> *root;
+			Node<Pair> *current;
 			Node<Pair> *new_node(Pair value)
 			{
 				Node<Pair> *node = _my_alloc.allocate(1);

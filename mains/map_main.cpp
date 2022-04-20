@@ -14,7 +14,8 @@ int main()
 	
 	header_test_section("RBT tests");
 	std::pair <std::string,std::string> insertPair = std::make_pair ("100", "42");
+	std::pair <std::string,std::string> insertPair2 = std::make_pair ("140", "442");
 	ft::Map<std::string, std::string> maptest;
 	maptest.insert(insertPair);
-	maptest.insert(insertPair);
+	maptest.insert(insertPair2);
 }

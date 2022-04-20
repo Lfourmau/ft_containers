@@ -96,6 +96,8 @@ namespace ft
 				typedef value_type second_argument_type;
 				bool operator() (const value_type& x, const value_type& y) const { return comp(x.first, y.first); };
 			};
+			//pair<iterator,bool> insert (const value_type& val);
+			void insert (const value_type& val) { rbt.insert(val); };
 
 		private:
 			typedef typename Alloc::template rebind<Node<value_type> >::other _Alty;

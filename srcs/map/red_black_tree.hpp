@@ -4,9 +4,10 @@
 #include "map.hpp"
 namespace ft
 {
-	enum node_color {
-	RED,
-	BLACK
+	enum node_color
+	{
+		RED,
+		BLACK
 	};
 
 	template<class T>
@@ -30,12 +31,11 @@ namespace ft
 	{
 		public:
 			red_black_tree(Compare cmp, Alloc alloc) : comp(cmp), _my_alloc(alloc) {};
-			//void insert(const Pair& value)
-			//{
-			//	//root = new_node(value);
-			//	//std::cout << root->value.first;
-			//	//std::cout << root->value.second;
-			//};
+			void insert(const Pair& value)
+			{
+				new_node(value);
+				std::cout << "test" << std::endl;
+			};
 		private:
 			Node<Pair> *root;
 			Compare comp;
@@ -43,7 +43,8 @@ namespace ft
 			Node<Pair> *new_node(Pair value)
 			{
 				Node<Pair> *node = _my_alloc.allocate(1);
-				_my_alloc.construct(&node->data, value);
+				_my_alloc.construct(&node->value, value);
+				std::cout << node->value.first << std::endl;
 				return (node);
 			};
 	};

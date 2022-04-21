@@ -30,11 +30,11 @@ namespace ft
 		};
 	};
 	template< class T1, class T2 >
-	bool operator==(const std::pair<T1,T2>& lhs, const std::pair<T1,T2>& rhs) { return (lhs.first == rhs.first && lhs.second == rhs.second); };
+	bool operator==(const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs) { return (lhs.first == rhs.first && lhs.second == rhs.second); };
 	template< class T1, class T2 >
-	bool operator!=(const std::pair<T1,T2>& lhs, const std::pair<T1,T2>& rhs) { return !(lhs == rhs); };
+	bool operator!=(const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs) { return !(lhs == rhs); };
 	template< class T1, class T2 >
-	bool operator<(const std::pair<T1,T2>& lhs, const std::pair<T1,T2>& rhs)
+	bool operator<(const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
 	{
 		if (lhs.first < rhs.first)
 			return (true);
@@ -45,11 +45,11 @@ namespace ft
 		return (false);
 	};
 	template< class T1, class T2 >
-	bool operator<=( const std::pair<T1,T2>& lhs, const std::pair<T1,T2>& rhs ) { return (!(rhs < lhs)); };
+	bool operator<=( const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs ) { return (!(rhs < lhs)); };
 	template< class T1, class T2 >
-	bool operator>( const std::pair<T1,T2>& lhs, const std::pair<T1,T2>& rhs ) { return (rhs < lhs); };
+	bool operator>( const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs ) { return (rhs < lhs); };
 	template< class T1, class T2 >
-	bool operator>=( const std::pair<T1,T2>& lhs, const std::pair<T1,T2>& rhs ) { return (!(lhs < rhs)); };
+	bool operator>=( const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs ) { return (!(lhs < rhs)); };
 	//MAKE PAIR
 	template< class T1, class T2 >
 	ft::pair<T1,T2> make_pair(T1 t, T2 u)
@@ -65,7 +65,7 @@ namespace ft
 		public:
 			typedef Key 										key_type;
 			typedef T 											mapped_type;
-			typedef std::pair<const key_type, mapped_type> 		value_type;
+			typedef ft::pair<const key_type, mapped_type> 		value_type;
 			typedef Compare 									key_compare;
 			//value_compare
 			typedef Alloc 										allocator_type;

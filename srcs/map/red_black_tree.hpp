@@ -13,12 +13,20 @@ namespace ft
 	template<class T>
 	struct Node
 	{
-		Node(T &data)
+		Node(const T &data)
 		{
 			parent = left = right = nullptr;
 			value = data;
 			color = RED;
 		};
+		Node(const Node& other)
+		{
+			this->parent = other.parent;
+			this->left = other.left;
+			this->right = other.right;
+			this->value = other.value;
+			this->color = other.color;
+		}
 		Node 		*parent;
 		Node 		*left;
 		Node 		*right;
@@ -33,51 +41,23 @@ namespace ft
 			red_black_tree(Compare cmp, Alloc alloc) : comp(cmp), _my_alloc(alloc), root(nullptr) {};
 			void insert(const Pair& value)
 			{
-				Node<Pair> *n = this->root;
+				//Node<Pair> *n = this->root;
 				if (this->root == nullptr)
 				{
 					this->root = new_node(value);
 					this->root->color = BLACK;
 					std::cout << "[" << this->root->value.first << " -- ";
 					std::cout << this->root->value.second << "]" << std::endl;
-					this->current = this->root;
 				}
-				else if (cmp < 0)
-				{
-					//left
-					//insert as leaf
-					if (n->left == nullptr)
-					{
-						n->value = value;
-						return;
-					}
-					else
-						n = n->left;
-					//check parent color
-					std::cout << "[" << this->current->value.first << " -- ";
-					std::cout << this->current->value.second << "]" << std::endl;
-				}
-				else if (cmp > 0)
-				{
-					//right
-					if (n->right == nullptr)
-					{
-						n->value = value;
-						return;
-					}
-					else
-						n = n->right;
-				};
 			};
 		private:
 			Compare comp;
 			Alloc _my_alloc;
 			Node<Pair> *root;
-			Node<Pair> *current;
-			Node<Pair> *new_node(Pair value)
+			Node<Pair> *new_node(const Pair& value)
 			{
 				Node<Pair> *node = _my_alloc.allocate(1);
-				_my_alloc.construct(&node->value, value);
+				_my_alloc.construct(node, value);
 				return (node);
 			};
 	};

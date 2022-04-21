@@ -98,6 +98,10 @@ namespace ft
 			};
 			//pair<iterator,bool> insert (const value_type& val);
 			void insert (const value_type& val) { rbt.insert(val); };
+			void printBT()
+			{
+				rbt.printBT();
+			}
 
 		private:
 			typedef typename Alloc::template rebind<Node<value_type> >::other _Alty;

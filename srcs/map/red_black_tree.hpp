@@ -33,17 +33,34 @@ namespace ft
 	class red_black_tree
 	{
 		public:
+			void printBT()
+			{
+				Node<Pair> *node = root;
+				printBT("", node, false);
+			}
 			red_black_tree(Compare cmp, Alloc alloc) : comp(cmp), _my_alloc(alloc), root(nullptr) {};
 			void insert(const Pair& value)
 			{
-				//Node<Pair> *n = this->root;
+				Node<Pair> *n = this->root;
 				if (this->root == nullptr)
 				{
 					this->root = new_node(value);
 					this->root->color = BLACK;
-					std::cout << "[" << this->root->value.first << " -- ";
-					std::cout << this->root->value.second << "]" << std::endl;
+					return ;
 				}
+				while(n !=  nullptr)
+				{
+					if (comp(n->value, value) <= 0)
+					{
+						n = n->left;
+					}
+					else
+					{
+						n = n->right;
+					}
+				}
+				n = new_node(value);
+				std::cout << n->value.first;
 			};
 		private:
 			Compare comp;
@@ -55,6 +72,26 @@ namespace ft
 				_my_alloc.construct(node, value);
 				return (node);
 			};
+
+
+
+		void printBT(const std::string& prefix, const Node<Pair>* node, bool isLeft)
+		{
+			if( node != nullptr )
+			{
+				std::cout << prefix;
+
+				std::cout << (isLeft ? "├──L:" : "└──R:" );
+
+				// print the value of the node
+				std::cout << node->value.first << " -- ";
+				std::cout << node->value.second << "]" << std::endl;
+
+				// enter the next tree level - left and right branch
+				printBT( prefix + (isLeft ? "│   " : "    "), node->left, true);
+				printBT( prefix + (isLeft ? "│   " : "    "), node->right, false);
+			}
+		}
 	};
 }
 

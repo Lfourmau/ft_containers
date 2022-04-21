@@ -16,9 +16,12 @@ int main()
 	std::cout << "bar: " << bar.first << ", " << bar.second << '\n';
 	
 	header_test_section("RBT tests");
-	ft::pair <std::string,std::string> insertPair = ft::make_pair ("100", "42");
-	ft::pair <std::string,std::string> insertPair2 = ft::make_pair ("140", "442");
-	ft::Map<std::string, std::string> maptest;
+	ft::pair <int,int> insertPair = ft::make_pair (40, 40);
+	ft::pair <int,int> insertPair2 = ft::make_pair (32, 32);
+	ft::pair <int,int> insertPair3 = ft::make_pair (52, 52);
+	ft::Map<int, int> maptest;
 	maptest.insert(insertPair);
+	maptest.insert(insertPair3);
 	maptest.insert(insertPair2);
+	maptest.printBT();
 }

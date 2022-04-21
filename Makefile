@@ -14,7 +14,7 @@ SRCS = mains/map_main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g #-fsanitize=address
 CXX = clang++
 
 all : $(NAME) 

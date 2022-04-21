@@ -42,25 +42,40 @@ namespace ft
 			void insert(const Pair& value)
 			{
 				Node<Pair> *n = this->root;
+				Node<Pair> *inserted = new_node(value);
 				if (this->root == nullptr)
 				{
-					this->root = new_node(value);
+					this->root = inserted;
 					this->root->color = BLACK;
+					inserted->parent = n;
 					return ;
 				}
-				while(n !=  nullptr)
+				while(n != nullptr)
 				{
 					if (comp(n->value, value) <= 0)
 					{
-						n = n->left;
+						if (n->left == nullptr)
+						{
+							n->left = inserted;
+							break;
+						}
+						else
+							n = n->left;
 					}
 					else
 					{
-						n = n->right;
+						if (n->right == nullptr)
+						{
+							n->right = inserted;
+							break;
+						}
+						else
+							n = n->right;
 					}
 				}
-				n = new_node(value);
-				std::cout << n->value.first;
+				inserted->parent = n;
+				std::cout << inserted->value.first << std::endl;
+				fix_tree(inserted);
 			};
 		private:
 			Compare comp;
@@ -72,7 +87,93 @@ namespace ft
 				_my_alloc.construct(node, value);
 				return (node);
 			};
-
+			void left_rotate(Node<Pair> *node)
+			{
+				Node<Pair> *n = node->right;
+				node->right = n->left;
+				if (n->left != nullptr)
+					n->left->parent = node;
+				n->parent = node->parent;
+				if (node->parent == nullptr)
+					this->root = n;
+				else if (node == node->parent->left)
+					node->parent->left = n;
+				else
+					node->parent->right = n;
+				n->left = node;
+				node->parent = n;
+			}
+			void right_rotate(Node<Pair> *node)
+			{
+				Node<Pair> *n = node->left;
+				node->left = n->right;
+				if (n->right != nullptr)
+					n->right->parent = node;
+				n->parent = node->parent;
+				if (node->parent == nullptr)
+					this->root = n;
+				else if (node == node->parent->right)
+					node->parent->right = n;
+				else
+					node->parent->left = n;
+				n->right = node;
+				node->parent = n;
+			}
+			void fix_tree(Node<Pair> *node)
+			{
+				if (node->parent)
+					std::cout << &node->parent << std::endl;
+				else
+					std::cout << "no adress" << std::endl;
+				while (node->parent->color == RED)
+				{
+					if (node->parent == node->parent->parent->left)
+					{
+						Node<Pair> *n = node->parent->parent->right;
+						if (n->color == RED)
+						{
+							node->parent->color = BLACK;
+							n->color = BLACK;
+							node->parent->parent->color = RED;
+							node = node->parent->parent;
+						}
+						else
+						{
+							if (node == node->parent->right)
+							{
+								node = node->parent;
+								left_rotate(node);
+							}
+							node->parent->color = BLACK;
+							node->parent->parent->color = RED;
+							right_rotate(node->parent->parent);
+						}
+					}
+					else
+					{
+						Node<Pair> *n = node->parent->parent->left;
+						if (n->color == RED)
+						{
+							node->parent->color = BLACK;
+							n->color = BLACK;
+							node->parent->parent->color = RED;
+							node = node->parent->parent;
+						}
+						else
+						{
+							if (node == node->parent->left)
+							{
+								node = node->parent;
+								right_rotate(node);
+							}
+							node->parent->color = BLACK;
+							node->parent->parent->color = RED;
+							left_rotate(node->parent->parent);
+						}
+					}
+				}
+				this->root->color = BLACK;
+			};
 
 
 		void printBT(const std::string& prefix, const Node<Pair>* node, bool isLeft)
@@ -84,8 +185,16 @@ namespace ft
 				std::cout << (isLeft ? "├──L:" : "└──R:" );
 
 				// print the value of the node
-				std::cout << node->value.first << " -- ";
-				std::cout << node->value.second << "]" << std::endl;
+				if (node->color == RED)
+				{
+					std::cout << "\033[31m[" << node->value.first << " -- ";
+					std::cout << node->value.second << "]\033[0m" << std::endl;
+				}
+				else
+				{
+					std::cout << "[" << node->value.first << " -- ";
+					std::cout << node->value.second << "]" << std::endl;
+				}
 
 				// enter the next tree level - left and right branch
 				printBT( prefix + (isLeft ? "│   " : "    "), node->left, true);

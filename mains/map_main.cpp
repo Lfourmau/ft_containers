@@ -20,12 +20,16 @@ int main()
 	ft::pair <int,int> insertPair2 = ft::make_pair (5, 5);
 	ft::pair <int,int> insertPair3 = ft::make_pair (0, 0);
 	ft::pair <int,int> insertPair4 = ft::make_pair (8, 8);
-	//ft::pair <int,int> insertPair5 = ft::make_pair (62, 62);
+	ft::pair <int,int> insertPair5 = ft::make_pair (62, 62);
+	ft::pair <int,int> insertPair6 = ft::make_pair (4, 4);
+	ft::pair <int,int> insertPair7 = ft::make_pair (2, 2);
 	ft::Map<int, int> maptest;
 	maptest.insert(insertPair);
 	maptest.insert(insertPair2);
 	maptest.insert(insertPair3);
 	maptest.insert(insertPair4);
-	//maptest.insert(insertPair5);
+	maptest.insert(insertPair5);
+	maptest.insert(insertPair6);
+	maptest.insert(insertPair7);
 	maptest.printBT();
 }

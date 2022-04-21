@@ -121,16 +121,12 @@ namespace ft
 			}
 			void fix_tree(Node<Pair> *node)
 			{
-				if (node->parent)
-					std::cout << &node->parent << std::endl;
-				else
-					std::cout << "no adress" << std::endl;
-				while (node->parent->color == RED)
+				while (node != root && node->parent->color == RED)
 				{
 					if (node->parent == node->parent->parent->left)
 					{
 						Node<Pair> *n = node->parent->parent->right;
-						if (n->color == RED)
+						if (n && n->color == RED)
 						{
 							node->parent->color = BLACK;
 							n->color = BLACK;
@@ -152,7 +148,7 @@ namespace ft
 					else
 					{
 						Node<Pair> *n = node->parent->parent->left;
-						if (n->color == RED)
+						if (n && n->color == RED)
 						{
 							node->parent->color = BLACK;
 							n->color = BLACK;

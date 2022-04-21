@@ -13,12 +13,7 @@ namespace ft
 	template<class T>
 	struct Node
 	{
-		Node(const T &data)
-		{
-			parent = left = right = nullptr;
-			value = data;
-			color = RED;
-		};
+		Node(const T &data) : parent(nullptr), left(nullptr), right(nullptr), value(data), color(RED) {};
 		Node(const Node& other)
 		{
 			this->parent = other.parent;

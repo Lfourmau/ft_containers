@@ -79,6 +79,22 @@ namespace ft
 				inserted->parent = n;
 				fix_tree(inserted);
 			};
+			Node<Pair> *maxleft()
+			{
+				Node<Pair> *tmp = this->root;
+
+				while (tmp->left != nullptr)
+					tmp = tmp->left;
+				return (tmp->left);
+			}
+			Node<Pair> *maxright()
+			{
+				Node<Pair> *tmp = this->root;
+
+				while (tmp->right != nullptr)
+					tmp = tmp->right;
+				return (tmp->right);
+			}
 		private:
 			Compare comp;
 			Alloc _my_alloc;

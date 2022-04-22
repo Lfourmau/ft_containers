@@ -59,7 +59,7 @@ namespace ft
 
 
 	//MAP CONTAINER
-	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<std::pair<const Key,T> > > 
+	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key,T> > > 
 	class Map
 	{
 		public:
@@ -73,6 +73,7 @@ namespace ft
 			typedef typename allocator_type::const_reference 	const_reference;
 			typedef typename allocator_type::pointer 			pointer;
 			typedef typename allocator_type::const_pointer 		const_pointer;
+			typedef rbt_iterator <value_type>					iterator;
 			//typedef ft::reverse_iterator<iterator>	 			reverse_iterator;
 			//typedef ft::reverse_iterator<const_iterator> 		const_reverse_iterator;
 			typedef ptrdiff_t 									difference_type;
@@ -96,13 +97,21 @@ namespace ft
 				typedef value_type second_argument_type;
 				bool operator() (const value_type& x, const value_type& y) const { return comp(x.first, y.first); };
 			};
+			iterator begin()
+			{
+				Node<value_type> *maxleft = rbt.maxleft();
+				iterator ret(maxleft);
+				return (iterator(ret));
+			};
+			//const_iterator begin() const;
+			iterator end();
+			//const_iterator end() const;
 			//pair<iterator,bool> insert (const value_type& val);
 			void insert (const value_type& val) { rbt.insert(val); };
 			void printBT()
 			{
 				rbt.printBT();
 			}
-
 		private:
 			typedef typename Alloc::template rebind<Node<value_type> >::other _Alty;
 			_Alty node_allocator;

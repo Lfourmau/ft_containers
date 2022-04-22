@@ -38,4 +38,5 @@ int main()
 	maptest.insert(insertPair9);
 	maptest.insert(insertPair10);
 	maptest.printBT();
+	maptest.begin();
 }

@@ -19,9 +19,15 @@ namespace ft
 	class rbt_iterator
 	{
 		public:
-			rbt_iterator(Node<T> *n = nullptr) : node(n) {};
+			rbt_iterator();
+			rbt_iterator(Node<T> *n) : node(n) {};
 			T& operator *() { return (node->value); };
 			T* operator->() { return (&(node->value)); };
+			rbt_iterator<T> &operator=(const rbt_iterator<T> &rhs)
+			{
+				this->node = rhs.node;
+				return (*this);
+			};
 			bool operator==(const rbt_iterator<T> &rhs) { return (node == rhs.node); };
 			bool operator!=(const rbt_iterator<T> &rhs) { return (node != rhs.node); };
 			rbt_iterator<T> &operator++()

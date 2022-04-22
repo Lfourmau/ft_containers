@@ -2,6 +2,8 @@
 # define RED_BLACK_TREE_HPP
 
 #include "map.hpp"
+#include "../iterators/rbt_iterator.hpp"
+
 namespace ft
 {
 	enum node_color
@@ -11,22 +13,23 @@ namespace ft
 	};
 
 	template<class T>
-	struct Node
+	class Node
 	{
-		Node(const T &data) : parent(nullptr), left(nullptr), right(nullptr), value(data), color(RED) {};
-		Node(const Node& other)
-		{
-			this->parent = other.parent;
-			this->left = other.left;
-			this->right = other.right;
-			this->value = other.value;
-			this->color = other.color;
-		}
-		Node 		*parent;
-		Node 		*left;
-		Node 		*right;
-		T 			value;
-		node_color	color;
+		public:
+			Node(const T &data) : parent(nullptr), left(nullptr), right(nullptr), value(data), color(RED) {};
+			Node(const Node& other)
+			{
+				this->parent = other.parent;
+				this->left = other.left;
+				this->right = other.right;
+				this->value = other.value;
+				this->color = other.color;
+			}
+			Node 		*parent;
+			Node 		*left;
+			Node 		*right;
+			T 			value;
+			node_color	color;
 	};
 
 	template<class Pair, class Alloc, class Compare>
@@ -74,7 +77,6 @@ namespace ft
 					}
 				}
 				inserted->parent = n;
-				std::cout << inserted->value.first << std::endl;
 				fix_tree(inserted);
 			};
 		private:
@@ -199,6 +201,5 @@ namespace ft
 		}
 	};
 }
-
 
 #endif

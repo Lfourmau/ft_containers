@@ -23,6 +23,9 @@ int main()
 	ft::pair <int,int> insertPair5 = ft::make_pair (62, 62);
 	ft::pair <int,int> insertPair6 = ft::make_pair (4, 4);
 	ft::pair <int,int> insertPair7 = ft::make_pair (2, 2);
+	ft::pair <int,int> insertPair8 = ft::make_pair (28, 28);
+	ft::pair <int,int> insertPair9 = ft::make_pair (3, 3);
+	ft::pair <int,int> insertPair10 = ft::make_pair (99, 99);
 	ft::Map<int, int> maptest;
 	maptest.insert(insertPair);
 	maptest.insert(insertPair2);
@@ -31,5 +34,8 @@ int main()
 	maptest.insert(insertPair5);
 	maptest.insert(insertPair6);
 	maptest.insert(insertPair7);
+	maptest.insert(insertPair8);
+	maptest.insert(insertPair9);
+	maptest.insert(insertPair10);
 	maptest.printBT();
 }

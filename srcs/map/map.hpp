@@ -73,8 +73,7 @@ namespace ft
 			typedef typename allocator_type::const_reference 	const_reference;
 			typedef typename allocator_type::pointer 			pointer;
 			typedef typename allocator_type::const_pointer 		const_pointer;
-			typedef rbt_iterator <value_type>					iterator;
-			//typedef ft::reverse_iterator<iterator>	 			reverse_iterator;
+			//typedef ft::reverse_iterator<iterator>	 		reverse_iterator;
 			//typedef ft::reverse_iterator<const_iterator> 		const_reverse_iterator;
 			typedef ptrdiff_t 									difference_type;
 			typedef size_t 										size_type;
@@ -97,11 +96,13 @@ namespace ft
 				typedef value_type second_argument_type;
 				bool operator() (const value_type& x, const value_type& y) const { return comp(x.first, y.first); };
 			};
+
+			typedef typename red_black_tree<value_type, typename Alloc::template rebind<Node<value_type> >::other, value_compare>::template rbt_iterator<value_type>				iterator;
 			iterator begin()
 			{
 				Node<value_type> *maxleft = rbt.maxleft();
-				iterator ret(maxleft);
-				return (iterator(ret));
+				//std::cout << maxleft->value.first << std::endl;
+				return (iterator(maxleft));
 			};
 			//const_iterator begin() const;
 			iterator end();

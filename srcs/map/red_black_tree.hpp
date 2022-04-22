@@ -2,7 +2,6 @@
 # define RED_BLACK_TREE_HPP
 
 #include "map.hpp"
-#include "../iterators/rbt_iterator.hpp"
 
 namespace ft
 {
@@ -85,7 +84,7 @@ namespace ft
 
 				while (tmp->left != nullptr)
 					tmp = tmp->left;
-				return (tmp->left);
+				return (tmp);
 			}
 			Node<Pair> *maxright()
 			{
@@ -93,8 +92,94 @@ namespace ft
 
 				while (tmp->right != nullptr)
 					tmp = tmp->right;
-				return (tmp->right);
+				return (tmp);
 			}
+			//ITERATOR
+			template<class T>
+			class rbt_iterator
+			{
+				public:
+					rbt_iterator();
+					rbt_iterator(Node<T> *n) : node(n) {};
+					T& operator *() { return (node->value); };
+					T* operator->() { return (&(node->value)); };
+					rbt_iterator<T> &operator=(const rbt_iterator<T> &rhs)
+					{
+						this->node = rhs.node;
+						return (*this);
+					};
+					bool operator==(const rbt_iterator<T> &rhs) { return (node == rhs.node); };
+					bool operator!=(const rbt_iterator<T> &rhs) { return (node != rhs.node); };
+					rbt_iterator<T> &operator++()
+					{
+						incrementation();
+						return (*this);
+					}
+					rbt_iterator<T> &operator++(int)
+					{
+						rbt_iterator tmp = this;
+						incrementation();
+						return (*this);
+					}
+					rbt_iterator<T> &operator--()
+					{
+						decrementation();
+						return (*this);
+					}
+					rbt_iterator<T> &operator--(int)
+					{
+						rbt_iterator tmp = this;
+						decrementation();
+						return (*this);
+					}
+
+				private:
+					void incrementation()
+					{
+						if (node->right)
+						{
+							Node<T> *tmp = node->right;
+							while (tmp->left)
+								tmp = tmp->left;
+							node = tmp;
+						}
+						else
+						{
+							Node<T> *tmp = node->parent;
+							if (tmp->right == node)
+							{
+								while (node == tmp->right)
+								{
+									node = tmp;
+									tmp = tmp->parent;
+								}
+							}
+							if (node->right != tmp)
+								node = tmp;
+						}
+					}
+					void decrementation()
+					{
+						if (node->parent->parent == node && node->color == RED)
+							node = node->left;
+						else if (node->left)
+						{
+							while (node->right)
+								node->right;
+						}
+						else
+						{
+							Node<T> *parent = node->parent;
+							while (parent->left == node)
+							{
+								node = parent;
+								parent = parent->parent;
+							}
+							node = parent;
+						}
+					}
+					Node<T> *node;
+			};
 		private:
 			Compare comp;
 			Alloc _my_alloc;
@@ -216,6 +301,7 @@ namespace ft
 			}
 		}
 	};
+
 }
 
 #endif

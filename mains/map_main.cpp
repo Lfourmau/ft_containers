@@ -18,7 +18,7 @@ int main()
 	header_test_section("RBT tests");
 	ft::pair <int,int> insertPair = ft::make_pair (1, 1);
 	ft::pair <int,int> insertPair2 = ft::make_pair (5, 5);
-	ft::pair <int,int> insertPair3 = ft::make_pair (0, 0);
+	//ft::pair <int,int> insertPair3 = ft::make_pair (0, 0);
 	ft::pair <int,int> insertPair4 = ft::make_pair (8, 8);
 	ft::pair <int,int> insertPair5 = ft::make_pair (62, 62);
 	ft::pair <int,int> insertPair6 = ft::make_pair (4, 4);
@@ -29,7 +29,7 @@ int main()
 	ft::Map<int, int> maptest;
 	maptest.insert(insertPair);
 	maptest.insert(insertPair2);
-	maptest.insert(insertPair3);
+	//maptest.insert(insertPair3);
 	maptest.insert(insertPair4);
 	maptest.insert(insertPair5);
 	maptest.insert(insertPair6);
@@ -38,5 +38,7 @@ int main()
 	maptest.insert(insertPair9);
 	maptest.insert(insertPair10);
 	maptest.printBT();
-	maptest.begin();
+	ft::Map<int, int>::iterator testIt = maptest.begin();
+	std::cout << (*testIt).first << std::endl;
+	std::cout << (*testIt).second << std::endl;
 }

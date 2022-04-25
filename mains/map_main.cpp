@@ -36,14 +36,13 @@ int main()
 	maptest.insert(insertPair6);
 	maptest.insert(insertPair7);
 	maptest.insert(insertPair8);
-	maptest.insert(insertPair9);
 	retPair = maptest.insert(insertPair9);
 	maptest.insert(insertPair10);
 	maptest.printBT();
 	std::cout << retPair.second << std::endl;
-	//ft::Map<int, int>::iterator testIt = maptest.end();
-	//std::cout << "[" << (*testIt).first << "--";
-	//std::cout << (*testIt).second << "]" << std::endl;
+	ft::Map<int, int>::reverse_iterator testIt = maptest.rend();
+	std::cout << "[" << (*testIt).first << "--";
+	std::cout << (*testIt).second << "]" << std::endl;
 	//testIt--;
 	//std::cout << "[" << (*testIt).first << "--";
 	//std::cout << (*testIt).second << "]" << std::endl;

@@ -72,8 +72,6 @@ namespace ft
 			typedef typename allocator_type::const_reference 	const_reference;
 			typedef typename allocator_type::pointer 			pointer;
 			typedef typename allocator_type::const_pointer 		const_pointer;
-			//typedef ft::reverse_iterator<iterator>	 		reverse_iterator;
-			//typedef ft::reverse_iterator<const_iterator> 		const_reverse_iterator;
 			typedef ptrdiff_t 									difference_type;
 			typedef size_t 										size_type;
 
@@ -98,6 +96,8 @@ namespace ft
 
 			typedef typename red_black_tree<value_type, typename Alloc::template rebind<Node<value_type> >::other, value_compare>::template rbt_iterator<value_type>	iterator;
 			typedef typename red_black_tree<value_type, typename Alloc::template rebind<Node<value_type> >::other, value_compare>::template const_rbt_iterator<value_type>	const_iterator;
+			typedef ft::reverse_iterator<iterator>	 			reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator> 		const_reverse_iterator;
 			iterator begin()
 			{
 				Node<value_type> *maxleft = rbt.maxleft();
@@ -118,6 +118,10 @@ namespace ft
 				Node<value_type> *maxright = rbt.maxright();
 				return (iterator(maxright));
 			};
+			reverse_iterator rbegin() { return end(); };
+			const_reverse_iterator rbegin() const { return end(); };
+			reverse_iterator rend() { return begin(); };
+			const_reverse_iterator rend() const { return begin(); };
 			ft::pair<iterator, bool> insert (const value_type& val)
 			{
 				bool flag;

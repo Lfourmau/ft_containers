@@ -16,6 +16,7 @@ int main()
 	std::cout << "bar: " << bar.first << ", " << bar.second << '\n';
 	
 	header_test_section("RBT tests");
+	ft::pair <ft::Map<int,int>::iterator, bool > retPair;
 	ft::pair <int,int> insertPair = ft::make_pair (1, 1);
 	ft::pair <int,int> insertPair2 = ft::make_pair (5, 5);
 	//ft::pair <int,int> insertPair3 = ft::make_pair (0, 0);
@@ -36,9 +37,46 @@ int main()
 	maptest.insert(insertPair7);
 	maptest.insert(insertPair8);
 	maptest.insert(insertPair9);
+	retPair = maptest.insert(insertPair9);
 	maptest.insert(insertPair10);
 	maptest.printBT();
-	ft::Map<int, int>::iterator testIt = maptest.begin();
-	std::cout << (*testIt).first << std::endl;
-	std::cout << (*testIt).second << std::endl;
+	std::cout << retPair.second << std::endl;
+	//ft::Map<int, int>::iterator testIt = maptest.end();
+	//std::cout << "[" << (*testIt).first << "--";
+	//std::cout << (*testIt).second << "]" << std::endl;
+	//testIt--;
+	//std::cout << "[" << (*testIt).first << "--";
+	//std::cout << (*testIt).second << "]" << std::endl;
+	//testIt++;
+	//std::cout << "[" << (*testIt).first << "--";
+	//std::cout << (*testIt).second << "]" << std::endl;
+	//testIt++;
+	//std::cout << "[" << (*testIt).first << "--";
+	//std::cout << (*testIt).second << "]" << std::endl;
+	//testIt++;
+	//std::cout << "[" << (*testIt).first << "--";
+	//std::cout << (*testIt).second << "]" << std::endl;
+	//testIt++;
+	//std::cout << "[" << (*testIt).first << "--";
+	//std::cout << (*testIt).second << "]" << std::endl;
+	//testIt++;
+	//std::cout << "[" << (*testIt).first << "--";
+	//std::cout << (*testIt).second << "]" << std::endl;
+	//testIt++;
+	//std::cout << "[" << (*testIt).first << "--";
+	//std::cout << (*testIt).second << "]" << std::endl;
+	//testIt++;
+	//std::cout << "[" << (*testIt).first << "--";
+	//std::cout << (*testIt).second << "]" << std::endl;
+	//testIt--;
+	//testIt--;
+	//std::cout << "[" << (*testIt).first << "--";
+	//std::cout << (*testIt).second << "]" << std::endl;
+	//++testIt;
+	//std::cout << "[" << (*testIt).first << "--";
+	//std::cout << (*testIt).second << "]" << std::endl;
+	//--testIt;
+	//std::cout << "[" << (*testIt).first << "--";
+	//std::cout << (*testIt).second << "]" << std::endl;
+	
 }

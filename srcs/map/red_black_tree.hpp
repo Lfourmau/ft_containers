@@ -31,106 +31,48 @@ namespace ft
 			node_color	color;
 	};
 
-	template<class Pair, class Alloc, class Compare>
+	
+	template<class T, class Alloc, class Compare>
 	class red_black_tree
 	{
 		public:
-			void printBT()
-			{
-				Node<Pair> *node = root;
-				printBT("", node, false);
-			}
-			red_black_tree(Compare cmp, Alloc alloc) : comp(cmp), _my_alloc(alloc), root(nullptr) {};
-			void insert(const Pair& value)
-			{
-				Node<Pair> *n = this->root;
-				Node<Pair> *inserted = new_node(value);
-				if (this->root == nullptr)
-				{
-					this->root = inserted;
-					this->root->color = BLACK;
-					inserted->parent = n;
-					return ;
-				}
-				while(n != nullptr)
-				{
-					if (comp(n->value, value) <= 0)
-					{
-						if (n->left == nullptr)
-						{
-							n->left = inserted;
-							break;
-						}
-						else
-							n = n->left;
-					}
-					else
-					{
-						if (n->right == nullptr)
-						{
-							n->right = inserted;
-							break;
-						}
-						else
-							n = n->right;
-					}
-				}
-				inserted->parent = n;
-				fix_tree(inserted);
-			};
-			Node<Pair> *maxleft()
-			{
-				Node<Pair> *tmp = this->root;
-
-				while (tmp->left != nullptr)
-					tmp = tmp->left;
-				return (tmp);
-			}
-			Node<Pair> *maxright()
-			{
-				Node<Pair> *tmp = this->root;
-
-				while (tmp->right != nullptr)
-					tmp = tmp->right;
-				return (tmp);
-			}
 			//ITERATOR
-			template<class T>
+			template<class U>
 			class rbt_iterator
 			{
 				public:
 					rbt_iterator();
-					rbt_iterator(Node<T> *n) : node(n) {};
-					T& operator *() { return (node->value); };
-					T* operator->() { return (&(node->value)); };
-					rbt_iterator<T> &operator=(const rbt_iterator<T> &rhs)
+					rbt_iterator(Node<U> *n) : node(n) {};
+					U& operator *() { return (node->value); };
+					U* operator->() { return (&(node->value)); };
+					rbt_iterator<U> &operator=(const rbt_iterator<U> &rhs)
 					{
 						this->node = rhs.node;
 						return (*this);
 					};
-					bool operator==(const rbt_iterator<T> &rhs) { return (node == rhs.node); };
-					bool operator!=(const rbt_iterator<T> &rhs) { return (node != rhs.node); };
-					rbt_iterator<T> &operator++()
+					bool operator==(const rbt_iterator<U> &rhs) { return (node == rhs.node); };
+					bool operator!=(const rbt_iterator<U> &rhs) { return (node != rhs.node); };
+					rbt_iterator<U> &operator++()
 					{
 						incrementation();
 						return (*this);
 					}
-					rbt_iterator<T> &operator++(int)
+					rbt_iterator<U> &operator++(int)
 					{
-						rbt_iterator tmp = this;
+						rbt_iterator<U> *tmp = this;
 						incrementation();
-						return (*this);
+						return (*tmp);
 					}
-					rbt_iterator<T> &operator--()
+					rbt_iterator<U> &operator--()
 					{
 						decrementation();
 						return (*this);
 					}
-					rbt_iterator<T> &operator--(int)
+					rbt_iterator<U> &operator--(int)
 					{
-						rbt_iterator tmp = this;
+						rbt_iterator<U> *tmp = this;
 						decrementation();
-						return (*this);
+						return (*tmp);
 					}
 
 				private:
@@ -138,14 +80,14 @@ namespace ft
 					{
 						if (node->right)
 						{
-							Node<T> *tmp = node->right;
+							Node<U> *tmp = node->right;
 							while (tmp->left)
 								tmp = tmp->left;
 							node = tmp;
 						}
 						else
 						{
-							Node<T> *tmp = node->parent;
+							Node<U> *tmp = node->parent;
 							if (tmp->right == node)
 							{
 								while (node == tmp->right)
@@ -165,11 +107,11 @@ namespace ft
 						else if (node->left)
 						{
 							while (node->right)
-								node->right;
+								node = node->right;
 						}
 						else
 						{
-							Node<T> *parent = node->parent;
+							Node<U> *parent = node->parent;
 							while (parent->left == node)
 							{
 								node = parent;
@@ -178,21 +120,179 @@ namespace ft
 							node = parent;
 						}
 					}
-					Node<T> *node;
+					Node<U> *node;
 			};
+			template<class U>
+			class const_rbt_iterator
+			{
+				public:
+					const_rbt_iterator();
+					const_rbt_iterator(Node<U> *n) : node(n) {};
+					U const & operator *() { return (node->value); };
+					U const * operator->() { return (&(node->value)); };
+					const_rbt_iterator<U> &operator=(const const_rbt_iterator<U> &rhs)
+					{
+						this->node = rhs.node;
+						return (*this);
+					};
+					bool operator==(const const_rbt_iterator<U> &rhs) { return (node == rhs.node); };
+					bool operator!=(const const_rbt_iterator<U> &rhs) { return (node != rhs.node); };
+					const_rbt_iterator<U> &operator++()
+					{
+						incrementation();
+						return (*this);
+					}
+					const_rbt_iterator<U> &operator++(int)
+					{
+						const_rbt_iterator<U> *tmp = this;
+						incrementation();
+						return (*tmp);
+					}
+					const_rbt_iterator<U> &operator--()
+					{
+						decrementation();
+						return (*this);
+					}
+					const_rbt_iterator<U> &operator--(int)
+					{
+						const_rbt_iterator<U> *tmp = this;
+						decrementation();
+						return (*tmp);
+					}
+
+				private:
+					void incrementation()
+					{
+						if (node->right)
+						{
+							Node<U> *tmp = node->right;
+							while (tmp->left)
+								tmp = tmp->left;
+							node = tmp;
+						}
+						else
+						{
+							Node<U> *tmp = node->parent;
+							if (tmp->right == node)
+							{
+								while (node == tmp->right)
+								{
+									node = tmp;
+									tmp = tmp->parent;
+								}
+							}
+							if (node->right != tmp)
+								node = tmp;
+						}
+					}
+					void decrementation()
+					{
+						if (node->parent->parent == node && node->color == RED)
+							node = node->left;
+						else if (node->left)
+						{
+							while (node->right)
+								node = node->right;
+						}
+						else
+						{
+							Node<U> *parent = node->parent;
+							while (parent->left == node)
+							{
+								node = parent;
+								parent = parent->parent;
+							}
+							node = parent;
+						}
+					}
+					Node<U> *node;
+			};
+			void printBT()
+			{
+				Node<T> *node = root;
+				printBT("", node, false);
+			}
+			red_black_tree(Compare cmp, Alloc alloc) : comp(cmp), _my_alloc(alloc), root(nullptr) {};
+			rbt_iterator<T> insert(const T& value, bool *flag)
+			{
+				Node<T> *n = this->root;
+				Node<T> *ret = nullptr;
+				Node<T> *inserted = new_node(value);
+				if (this->root == nullptr)
+				{
+					this->root = inserted;
+					this->root->color = BLACK;
+					inserted->parent = n;
+					ret = this->root;
+					*flag = true;
+					return ret;
+				}
+				while(n != nullptr)
+				{
+					if (comp(value, n->value))
+					{
+						if (n->left == nullptr)
+						{
+							n->left = inserted;
+							ret = n->left;
+							*flag = true;
+							break;
+						}
+						else
+							n = n->left;
+					}
+					else if (comp(n->value, value))
+					{
+						if (n->right == nullptr)
+						{
+							n->right = inserted;
+							ret = n->right;
+							*flag = true;
+							break;
+						}
+						else
+							n = n->right;
+					}
+					else
+					{
+						std::cout << n->value.first << std::endl;
+						*flag = false;
+						return n;
+					}
+				}
+				inserted->parent = n;
+				fix_tree(inserted);
+				return (ret);
+			};
+			Node<T> *maxleft()
+			{
+				Node<T> *tmp = this->root;
+
+				while (tmp->left != nullptr)
+					tmp = tmp->left;
+				return (tmp);
+			}
+			Node<T> *maxright()
+			{
+				Node<T> *tmp = this->root;
+
+				while (tmp->right != nullptr)
+					tmp = tmp->right;
+				return (tmp);
+			}
 		private:
 			Compare comp;
 			Alloc _my_alloc;
-			Node<Pair> *root;
-			Node<Pair> *new_node(const Pair& value)
+			Node<T> *root;
+			Node<T> *new_node(const T& value)
 			{
-				Node<Pair> *node = _my_alloc.allocate(1);
+				Node<T> *node = _my_alloc.allocate(1);
 				_my_alloc.construct(node, value);
 				return (node);
 			};
-			void left_rotate(Node<Pair> *node)
+			void left_rotate(Node<T> *node)
 			{
-				Node<Pair> *n = node->right;
+				Node<T> *n = node->right;
 				node->right = n->left;
 				if (n->left != nullptr)
 					n->left->parent = node;
@@ -206,9 +306,9 @@ namespace ft
 				n->left = node;
 				node->parent = n;
 			}
-			void right_rotate(Node<Pair> *node)
+			void right_rotate(Node<T> *node)
 			{
-				Node<Pair> *n = node->left;
+				Node<T> *n = node->left;
 				node->left = n->right;
 				if (n->right != nullptr)
 					n->right->parent = node;
@@ -222,13 +322,13 @@ namespace ft
 				n->right = node;
 				node->parent = n;
 			}
-			void fix_tree(Node<Pair> *node)
+			void fix_tree(Node<T> *node)
 			{
 				while (node != root && node->parent->color == RED)
 				{
 					if (node->parent == node->parent->parent->left)
 					{
-						Node<Pair> *n = node->parent->parent->right;
+						Node<T> *n = node->parent->parent->right;
 						if (n && n->color == RED)
 						{
 							node->parent->color = BLACK;
@@ -250,7 +350,7 @@ namespace ft
 					}
 					else
 					{
-						Node<Pair> *n = node->parent->parent->left;
+						Node<T> *n = node->parent->parent->left;
 						if (n && n->color == RED)
 						{
 							node->parent->color = BLACK;
@@ -275,7 +375,7 @@ namespace ft
 			};
 
 
-		void printBT(const std::string& prefix, const Node<Pair>* node, bool isLeft)
+		void printBT(const std::string& prefix, const Node<T>* node, bool isLeft)
 		{
 			if( node != nullptr )
 			{

@@ -57,7 +57,6 @@ namespace ft
 		return ( ft::pair<T1,T2>(t,u) );
 	};
 
-
 	//MAP CONTAINER
 	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key,T> > > 
 	class Map
@@ -97,18 +96,35 @@ namespace ft
 				bool operator() (const value_type& x, const value_type& y) const { return comp(x.first, y.first); };
 			};
 
-			typedef typename red_black_tree<value_type, typename Alloc::template rebind<Node<value_type> >::other, value_compare>::template rbt_iterator<value_type>				iterator;
+			typedef typename red_black_tree<value_type, typename Alloc::template rebind<Node<value_type> >::other, value_compare>::template rbt_iterator<value_type>	iterator;
+			typedef typename red_black_tree<value_type, typename Alloc::template rebind<Node<value_type> >::other, value_compare>::template const_rbt_iterator<value_type>	const_iterator;
 			iterator begin()
 			{
 				Node<value_type> *maxleft = rbt.maxleft();
-				//std::cout << maxleft->value.first << std::endl;
 				return (iterator(maxleft));
 			};
-			//const_iterator begin() const;
-			iterator end();
-			//const_iterator end() const;
-			//pair<iterator,bool> insert (const value_type& val);
-			void insert (const value_type& val) { rbt.insert(val); };
+			const_iterator begin() const
+			{
+				Node<value_type> *maxleft = rbt.maxleft();
+				return (iterator(maxleft));
+			};
+			iterator end()
+			{
+				Node<value_type> *maxright = rbt.maxright();
+				return (iterator(maxright));
+			};
+			const_iterator end() const
+			{
+				Node<value_type> *maxright = rbt.maxright();
+				return (iterator(maxright));
+			};
+			ft::pair<iterator, bool> insert (const value_type& val)
+			{
+				bool flag;
+				iterator it = rbt.insert(val, &flag); 
+				ft::pair<iterator, bool> ret_pair = make_pair(it, flag);
+				return (ret_pair);
+			};
 			void printBT()
 			{
 				rbt.printBT();

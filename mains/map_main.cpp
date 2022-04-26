@@ -45,6 +45,10 @@ int main()
 	{
 		std::cout << "[" << (*it).first << "---" << (*it).second << std::endl;
 	}
+	for (ft::Map<int, int>::iterator it = maptest.begin(); it != maptest.end(); it++)
+	{
+		std::cout << "[]" << (*it).first << "---" << (*it).second << std::endl;
+	}
 	//ft::Map<int, int>::reverse_iterator it = maptest.rbegin();
 	//std::cout << "[" << (*it).first << "---" << (*it).second << std::endl;
 	//testIt++;

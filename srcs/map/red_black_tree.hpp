@@ -90,7 +90,7 @@ namespace ft
 							Node<U> *tmp = node->parent;
 							if (tmp->right == node)
 							{
-								while (node == tmp->right)
+								while (tmp && node == tmp->right)
 								{
 									node = tmp;
 									tmp = tmp->parent;

@@ -96,8 +96,8 @@ namespace ft
 
 			typedef typename red_black_tree<value_type, typename Alloc::template rebind<Node<value_type> >::other, value_compare>::template rbt_iterator<value_type>	iterator;
 			typedef typename red_black_tree<value_type, typename Alloc::template rebind<Node<value_type> >::other, value_compare>::template const_rbt_iterator<value_type>	const_iterator;
-			typedef ft::reverse_iterator<iterator>	 			reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator> 		const_reverse_iterator;
+			typedef ft::rbt_reverse_iterator<iterator>	 			reverse_iterator;
+			typedef ft::rbt_reverse_iterator<const_iterator> 		const_reverse_iterator;
 			iterator begin()
 			{
 				Node<value_type> *maxleft = rbt.maxleft();
@@ -126,7 +126,7 @@ namespace ft
 			{
 				bool flag;
 				iterator it = rbt.insert(val, &flag); 
-				ft::pair<iterator, bool> ret_pair = make_pair(it, flag);
+				ft::pair<iterator, bool> ret_pair = ft::make_pair(it, flag);
 				return (ret_pair);
 			};
 			void printBT()

@@ -1,6 +1,7 @@
 #include "../debug_test.hpp"
 #include "../srcs/map/map.hpp"
 #include <vector>
+#include <map>
 
 int main()
 {

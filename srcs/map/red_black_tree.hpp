@@ -38,7 +38,7 @@ namespace ft
 		public:
 			//ITERATOR
 			template<class U>
-			class rbt_iterator
+			class rbt_iterator : public std::iterator<std::bidirectional_iterator_tag, U>
 			{
 				public:
 					rbt_iterator();

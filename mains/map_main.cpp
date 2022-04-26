@@ -41,21 +41,12 @@ int main()
 	maptest.insert(insertPair10);
 	maptest.printBT();
 	std::cout << retPair.second << std::endl;
-	ft::Map<int, int>::reverse_iterator testIt = maptest.rend();
-	std::cout << "[" << (*testIt).first << "--";
-	std::cout << (*testIt).second << "]" << std::endl;
-	//testIt--;
-	//std::cout << "[" << (*testIt).first << "--";
-	//std::cout << (*testIt).second << "]" << std::endl;
-	//testIt++;
-	//std::cout << "[" << (*testIt).first << "--";
-	//std::cout << (*testIt).second << "]" << std::endl;
-	//testIt++;
-	//std::cout << "[" << (*testIt).first << "--";
-	//std::cout << (*testIt).second << "]" << std::endl;
-	//testIt++;
-	//std::cout << "[" << (*testIt).first << "--";
-	//std::cout << (*testIt).second << "]" << std::endl;
+	for (ft::Map<int, int>::reverse_iterator it = maptest.rbegin(); it != maptest.rend(); it++)
+	{
+		std::cout << "[" << (*it).first << "---" << (*it).second << std::endl;
+	}
+	//ft::Map<int, int>::reverse_iterator it = maptest.rbegin();
+	//std::cout << "[" << (*it).first << "---" << (*it).second << std::endl;
 	//testIt++;
 	//std::cout << "[" << (*testIt).first << "--";
 	//std::cout << (*testIt).second << "]" << std::endl;

@@ -100,28 +100,24 @@ namespace ft
 			typedef ft::rbt_reverse_iterator<const_iterator> 		const_reverse_iterator;
 			iterator begin()
 			{
-				Node<value_type> *maxleft = rbt.maxleft();
-				return (iterator(maxleft));
+				return (iterator(rbt.maxleft()));
 			};
 			const_iterator begin() const
 			{
-				Node<value_type> *maxleft = rbt.maxleft();
-				return (iterator(maxleft));
+				return (iterator(rbt.maxleft()));
 			};
 			iterator end()
 			{
-				Node<value_type> *maxright = rbt.maxright();
-				return (iterator(maxright));
+				return (iterator(NULL));
 			};
 			const_iterator end() const
 			{
-				Node<value_type> *maxright = rbt.maxright();
-				return (iterator(maxright));
+				return (iterator(NULL));
 			};
-			reverse_iterator rbegin() { return end(); };
+			reverse_iterator rbegin() { return iterator(rbt.maxright()); };
 			const_reverse_iterator rbegin() const { return end(); };
-			reverse_iterator rend() { return begin(); };
-			const_reverse_iterator rend() const { return begin(); };
+			reverse_iterator rend() { return iterator(NULL); };
+			const_reverse_iterator rend() const { return iterator(NULL); };
 			ft::pair<iterator, bool> insert (const value_type& val)
 			{
 				bool flag;
@@ -139,6 +135,14 @@ namespace ft
 			value_compare cmp;
 			allocator_type _my_alloc;
 			red_black_tree<value_type, _Alty, value_compare> rbt;
+			Node<value_type> *new_nil()
+			{
+				Node<value_type> *node = node_allocator.allocate(1);
+				value_type value;
+				ft::make_pair(42, 42);
+				node_allocator.construct(node, value);
+				return (node);
+			};
 	};
 }
 

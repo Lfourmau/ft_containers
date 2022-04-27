@@ -125,6 +125,24 @@ namespace ft
 				ft::pair<iterator, bool> ret_pair = ft::make_pair(it, flag);
 				return (ret_pair);
 			};
+			iterator insert (iterator position, const value_type& val)
+			{
+				if (cmp(*position, val))
+				{
+					
+				}
+				else
+					insert(val);
+			};
+			template <class InputIterator>
+  			void insert (InputIterator first, InputIterator last)
+			{
+				while (first != last)
+				{
+					this->insert(*first);
+					first++;
+				}
+			};
 			void printBT()
 			{
 				rbt.printBT();

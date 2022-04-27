@@ -29,6 +29,7 @@ int main()
 	ft::pair <int,int> insertPair9 = ft::make_pair (3, 3);
 	ft::pair <int,int> insertPair10 = ft::make_pair (99, 99);
 	ft::Map<int, int> maptest;
+	ft::Map<int, int> map_scnd_test;
 	maptest.insert(insertPair);
 	maptest.insert(insertPair2);
 	//maptest.insert(insertPair3);
@@ -49,6 +50,8 @@ int main()
 	{
 		std::cout << "[]" << (*it).first << "---" << (*it).second << std::endl;
 	}
+	map_scnd_test.insert(maptest.begin(), maptest.end());
+	map_scnd_test.printBT();
 	//ft::Map<int, int>::reverse_iterator it = maptest.rbegin();
 	//std::cout << "[" << (*it).first << "---" << (*it).second << std::endl;
 	//testIt++;

@@ -44,6 +44,7 @@ namespace ft
 					rbt_iterator();
 					rbt_iterator(Node<U> *n) : node(n) {};
 					U& operator *() { return (node->value); };
+					Node<U> *base() { return (node); };
 					U* operator->() { return (&(node->value)); };
 					rbt_iterator<U> &operator=(const rbt_iterator<U> &rhs)
 					{
@@ -130,6 +131,7 @@ namespace ft
 				public:
 					const_rbt_iterator();
 					const_rbt_iterator(Node<U> *n) : node(n) {};
+					Node<U> *base() { return (node); };
 					U const & operator *() { return (node->value); };
 					U const * operator->() { return (&(node->value)); };
 					const_rbt_iterator<U> &operator=(const const_rbt_iterator<U> &rhs)
@@ -161,7 +163,7 @@ namespace ft
 						decrementation();
 						return (*tmp);
 					}
-
+	
 				private:
 					void incrementation()
 					{
@@ -265,6 +267,57 @@ namespace ft
 				inserted->parent = n;
 				fix_tree(inserted);
 				return (ret);
+			};
+			rbt_iterator<T> insert_from_position(rbt_iterator<T> position, const T& value)
+			{
+				std::cout << "insert from pos" << std::endl;
+				Node<T> *n = position.base();
+				Node<T> *ret = nullptr;
+				Node<T> *inserted = new_node(value);
+				if (n == nullptr)
+				{
+					n = inserted;
+					n->color = BLACK;
+					inserted->parent = n;
+					ret = n;
+					return rbt_iterator<T>(ret);
+				}
+				while(n != nullptr)
+				{
+					std::cout << "comp [" << value.first << "---" << n->value.first << std::endl;
+					if (comp(value, n->value))
+					{
+						std::cout << "go left" << std::endl;
+						if (n->left == nullptr)
+						{
+							n->left = inserted;
+							ret = n->left;
+							break;
+						}
+						else
+							n = n->left;
+					}
+					else if (comp(n->value, value))
+					{
+						std::cout << "right" << std::endl;
+						if (n->right == nullptr)
+						{
+							n->right = inserted;
+							ret = n->right;
+							break;
+						}
+						else
+							n = n->right;
+					}
+					else
+					{
+						std::cout << n->value.first << std::endl;
+						return n;
+					}
+				}
+				inserted->parent = n;
+				fix_tree(inserted);
+				return (rbt_iterator<T>(inserted));
 			};
 			Node<T> *maxleft()
 			{

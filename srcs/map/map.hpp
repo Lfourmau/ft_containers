@@ -127,12 +127,17 @@ namespace ft
 			};
 			iterator insert (iterator position, const value_type& val)
 			{
-				if (cmp(*position, val))
+				ft::pair<iterator, bool> ret;
+
+				if (cmp(val, *position))
 				{
-					
+					ret = insert(val);
+					return (ret.first);
 				}
 				else
-					insert(val);
+				{
+					return rbt.insert_from_position(position, val);
+				}
 			};
 			template <class InputIterator>
   			void insert (InputIterator first, InputIterator last)
@@ -153,14 +158,6 @@ namespace ft
 			value_compare cmp;
 			allocator_type _my_alloc;
 			red_black_tree<value_type, _Alty, value_compare> rbt;
-			Node<value_type> *new_nil()
-			{
-				Node<value_type> *node = node_allocator.allocate(1);
-				value_type value;
-				ft::make_pair(42, 42);
-				node_allocator.construct(node, value);
-				return (node);
-			};
 	};
 }
 

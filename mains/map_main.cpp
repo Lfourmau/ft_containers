@@ -20,19 +20,18 @@ int main()
 	ft::pair <ft::Map<int,int>::iterator, bool > retPair;
 	ft::pair <int,int> insertPair = ft::make_pair (1, 1);
 	ft::pair <int,int> insertPair2 = ft::make_pair (5, 5);
-	//ft::pair <int,int> insertPair3 = ft::make_pair (0, 0);
+	ft::pair <int,int> insertPair3 = ft::make_pair (15, 15);
 	ft::pair <int,int> insertPair4 = ft::make_pair (8, 8);
 	ft::pair <int,int> insertPair5 = ft::make_pair (62, 62);
 	ft::pair <int,int> insertPair6 = ft::make_pair (4, 4);
 	ft::pair <int,int> insertPair7 = ft::make_pair (2, 2);
 	ft::pair <int,int> insertPair8 = ft::make_pair (28, 28);
-	ft::pair <int,int> insertPair9 = ft::make_pair (3, 3);
+	ft::pair <int,int> insertPair9 = ft::make_pair (9, 9);
 	ft::pair <int,int> insertPair10 = ft::make_pair (99, 99);
 	ft::Map<int, int> maptest;
 	ft::Map<int, int> map_scnd_test;
 	maptest.insert(insertPair);
 	maptest.insert(insertPair2);
-	//maptest.insert(insertPair3);
 	maptest.insert(insertPair4);
 	maptest.insert(insertPair5);
 	maptest.insert(insertPair6);
@@ -40,6 +39,7 @@ int main()
 	maptest.insert(insertPair8);
 	retPair = maptest.insert(insertPair9);
 	maptest.insert(insertPair10);
+	//maptest.insert(insertPair3);
 	maptest.printBT();
 	std::cout << retPair.second << std::endl;
 	for (ft::Map<int, int>::reverse_iterator it = maptest.rbegin(); it != maptest.rend(); it++)
@@ -51,6 +51,12 @@ int main()
 		std::cout << "[]" << (*it).first << "---" << (*it).second << std::endl;
 	}
 	map_scnd_test.insert(maptest.begin(), maptest.end());
+	ft::Map<int, int>::iterator insertIt = map_scnd_test.begin();
+	insertIt++;
+	insertIt++;
+	std::cout << "{{"  << (*insertIt).first<< std::endl;
+	map_scnd_test.printBT();
+	map_scnd_test.insert(insertIt, insertPair3);
 	map_scnd_test.printBT();
 	//ft::Map<int, int>::reverse_iterator it = maptest.rbegin();
 	//std::cout << "[" << (*it).first << "---" << (*it).second << std::endl;

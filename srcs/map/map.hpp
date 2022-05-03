@@ -116,6 +116,7 @@ namespace ft
 			};
 			bool empty() const { return (rbt.get_root() == nullptr); };
 			size_t size() const { return (rbt.size()); }
+			size_type max_size() const { return (std::numeric_limits<size_type>::max() / sizeof(value_type)); };
 			void swap(Map& other)
 			{
 				Map<T, key_type> tmp;
@@ -155,7 +156,7 @@ namespace ft
 			};
 			iterator insert (iterator position, const value_type& val)
 			{
-				Node<value_type> *n = position.base();
+				Node<value_type> *n = rbt.get_root();
 				Node<value_type> *cursor;
 
 				if (n == nullptr || n->parent == nullptr)
@@ -187,6 +188,9 @@ namespace ft
 					first++;
 				}
 			};
+			void erase(iterator pos) { rbt.delete(pos); };
+			void erase(iterator first, iterator last);
+			size_type erase( const Key& key );
 			void printBT()
 			{
 				rbt.printBT();

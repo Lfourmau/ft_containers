@@ -326,6 +326,10 @@ namespace ft
 			}
 			Node<T> *get_root() const { return (root); };
 			size_t	size() const { return (this->_size); };
+			void delete(rbt_iterator<T> pos)
+			{
+				
+			}
 		private:
 			Compare comp;
 			Alloc _my_alloc;

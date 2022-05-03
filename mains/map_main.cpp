@@ -29,11 +29,16 @@ int main()
 	ft::pair <int,int> insertPair9 = ft::make_pair (9, 9);
 	ft::pair <int,int> insertPair10 = ft::make_pair (99, 99);
 	ft::Map<int, int> maptest;
+	std::cout << "Map.empty() before insertions-> " << maptest.empty() << std::endl;
+	std::cout << "Map.size() before insertions-> " << maptest.size() << std::endl;
 	ft::Map<int, int> map_scnd_test;
 	maptest.insert(insertPair);
+	std::cout << "Map.empty() after 1 insertion-> " << maptest.empty() << std::endl;
+	std::cout << "Map.size() after 1 insertion-> " << maptest.size() << std::endl;
 	maptest.insert(insertPair2);
 	maptest.insert(insertPair4);
 	maptest.insert(insertPair5);
+	std::cout << "Map.size() after 4 insertion-> " << maptest.size() << std::endl;
 	maptest.insert(insertPair6);
 	maptest.insert(insertPair7);
 	maptest.insert(insertPair8);

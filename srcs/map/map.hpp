@@ -114,6 +114,34 @@ namespace ft
 			{
 				return (iterator(NULL));
 			};
+			bool empty() const { return (rbt.get_root() == nullptr); };
+			size_t size() const { return (rbt.size()); }
+			void swap(Map& other)
+			{
+				Map<T, key_type> tmp;
+
+				tmp = this;
+				this = other;
+				other = tmp;
+			};
+			iterator find( const Key& key )
+			{
+				for (iterator it = this->begin(); it != this->end(); it++)
+				{
+					if (*it.first == key)
+						return (it);
+				}
+				return (this->end());
+			};
+			const_iterator find( const Key& key ) const
+			{
+				for (const_iterator it = this->begin(); it != this->end(); it++)
+				{
+					if (*it.first == key)
+						return (it);
+				}
+				return (this->end());
+			}
 			reverse_iterator rbegin() { return iterator(rbt.maxright()); };
 			const_reverse_iterator rbegin() const { return end(); };
 			reverse_iterator rend() { return iterator(NULL); };
@@ -127,17 +155,28 @@ namespace ft
 			};
 			iterator insert (iterator position, const value_type& val)
 			{
-				ft::pair<iterator, bool> ret;
+				Node<value_type> *n = position.base();
+				Node<value_type> *cursor;
 
-				if (cmp(val, *position))
+				if (n == nullptr || n->parent == nullptr)
+					return (insert(val).first);
+				cursor = n->parent;
+				if (cmp(val, n->value))
 				{
-					ret = insert(val);
-					return (ret.first);
-				}
-				else
+                    if (n != n->parent->left && cmp(val, cursor->value))
+                        return insert(val).first;
+                    else if (n == n->parent->left)
+                        return (rbt.insert_from_position(position, val));
+                }
+                else
 				{
-					return rbt.insert_from_position(position, val);
-				}
+                    if (n == n->parent->left && cmp(cursor->value, val))
+                        return insert(val).first;
+                    else if (n != n->parent->left)
+                        return (rbt.insert_from_position(position, val));
+                }
+                return (rbt.insert_from_position(position, val));
+				
 			};
 			template <class InputIterator>
   			void insert (InputIterator first, InputIterator last)

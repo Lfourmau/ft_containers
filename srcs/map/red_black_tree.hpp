@@ -216,7 +216,7 @@ namespace ft
 				Node<T> *node = root;
 				printBT("", node, false);
 			}
-			red_black_tree(Compare cmp, Alloc alloc) : comp(cmp), _my_alloc(alloc), root(nullptr) {};
+			red_black_tree(Compare cmp, Alloc alloc) : comp(cmp), _my_alloc(alloc), root(nullptr), _size(0) {};
 			rbt_iterator<T> insert(const T& value, bool *flag)
 			{
 				Node<T> *n = this->root;
@@ -229,6 +229,7 @@ namespace ft
 					inserted->parent = n;
 					ret = this->root;
 					*flag = true;
+					this->_size++;
 					return ret;
 				}
 				while(n != nullptr)
@@ -266,32 +267,21 @@ namespace ft
 				}
 				inserted->parent = n;
 				fix_tree(inserted);
+				this->_size++;
 				return (ret);
 			};
 			rbt_iterator<T> insert_from_position(rbt_iterator<T> position, const T& value)
 			{
-				std::cout << "insert from pos" << std::endl;
 				Node<T> *n = position.base();
-				Node<T> *ret = nullptr;
 				Node<T> *inserted = new_node(value);
-				if (n == nullptr)
-				{
-					n = inserted;
-					n->color = BLACK;
-					inserted->parent = n;
-					ret = n;
-					return rbt_iterator<T>(ret);
-				}
+
 				while(n != nullptr)
 				{
-					std::cout << "comp [" << value.first << "---" << n->value.first << std::endl;
 					if (comp(value, n->value))
 					{
-						std::cout << "go left" << std::endl;
 						if (n->left == nullptr)
 						{
 							n->left = inserted;
-							ret = n->left;
 							break;
 						}
 						else
@@ -299,11 +289,9 @@ namespace ft
 					}
 					else if (comp(n->value, value))
 					{
-						std::cout << "right" << std::endl;
 						if (n->right == nullptr)
 						{
 							n->right = inserted;
-							ret = n->right;
 							break;
 						}
 						else
@@ -317,6 +305,7 @@ namespace ft
 				}
 				inserted->parent = n;
 				fix_tree(inserted);
+				this->_size++;
 				return (rbt_iterator<T>(inserted));
 			};
 			Node<T> *maxleft()
@@ -335,10 +324,13 @@ namespace ft
 					tmp = tmp->right;
 				return (tmp);
 			}
+			Node<T> *get_root() const { return (root); };
+			size_t	size() const { return (this->_size); };
 		private:
 			Compare comp;
 			Alloc _my_alloc;
 			Node<T> *root;
+			size_t _size;
 			Node<T> *new_node(const T& value)
 			{
 				Node<T> *node = _my_alloc.allocate(1);
@@ -460,3 +452,9 @@ namespace ft
 }
 
 #endif
+
+
+
+
+
+

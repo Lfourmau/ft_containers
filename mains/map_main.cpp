@@ -57,11 +57,16 @@ int main()
 	}
 	map_scnd_test.insert(maptest.begin(), maptest.end());
 	ft::Map<int, int>::iterator insertIt = map_scnd_test.begin();
+	ft::Map<int, int>::iterator findIt = maptest.find(4);
+	std::cout << "Find iterator : Lookup for a 4key-> "  << (*findIt).first<< std::endl;
 	insertIt++;
 	insertIt++;
 	std::cout << "{{"  << (*insertIt).first<< std::endl;
 	map_scnd_test.printBT();
 	map_scnd_test.insert(insertIt, insertPair3);
+	map_scnd_test.printBT();
+	ft::Map<int, int>::iterator eraseIt = map_scnd_test.find(15);
+	map_scnd_test.erase(eraseIt);
 	map_scnd_test.printBT();
 	//ft::Map<int, int>::reverse_iterator it = maptest.rbegin();
 	//std::cout << "[" << (*it).first << "---" << (*it).second << std::endl;

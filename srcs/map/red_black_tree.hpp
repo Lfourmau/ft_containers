@@ -326,10 +326,43 @@ namespace ft
 			}
 			Node<T> *get_root() const { return (root); };
 			size_t	size() const { return (this->_size); };
-			void delete(rbt_iterator<T> pos)
+			void erase(rbt_iterator<T> pos)
 			{
-				
-			}
+				Node<T> *z = pos.base();
+				Node<T> *y = z;
+				Node<T> *x;
+				node_color y_orignal_color = y->color;
+				if(z->left == nullptr)
+				{
+					x = z->right;
+					rb_transplant(z, z->right);
+				}
+				else if(z->right == nullptr)
+				{
+					x = z->left;
+					rb_transplant(z, z->left);
+				}
+				else
+				{
+					y = maxleft_from_node(z->right);
+					y_orignal_color = y->color;
+					x = y->right;
+					if(y->parent == z)
+						x->parent = z;
+					else
+					{
+						rb_transplant(y, y->right);
+						y->right = z->right;
+						y->right->parent = y;
+					}
+					rb_transplant(z, y);
+					y->left = z->left;
+					y->left->parent = y;
+					y->color = z->color;
+				}
+				if(y_orignal_color == BLACK)
+  					rb_delete_fixup(x);
+			};
 		private:
 			Compare comp;
 			Alloc _my_alloc;
@@ -341,6 +374,114 @@ namespace ft
 				_my_alloc.construct(node, value);
 				return (node);
 			};
+			void rb_transplant(Node<T> *u, Node<T> *v)
+			{
+				if(u->parent == nullptr)
+					this->root = v;
+				else if(u == u->parent->left)
+					u->parent->left = v;
+				else
+				{
+					u->parent->right = v;
+					if (v != nullptr)
+						v->parent = u->parent;
+				}
+			}
+			Node<T>* maxleft_from_node(Node<T> *x)
+			{
+				while(x->left != nullptr)
+					x = x->left;
+				return x;
+			}
+			Node<T> *successor(Node<T> *temp_node)  
+			{  
+				Node<T> *y=NULL;  
+				if(temp_node->left != NULL)  
+				{  
+					y = temp_node->left;  
+					while(y->right != NULL)  
+						y = y->right;  
+				}  
+				else  
+				{  
+					y = temp_node->right;  
+					while(y->left != NULL)  
+						y = y->left;  
+				}  
+				return y;  
+			}
+			void rb_delete_fixup(Node<T> *x)
+			{
+				if (x)
+				{
+					while(x != this->root && x->color == BLACK)
+					{
+						if(x == x->parent->left)
+						{
+							Node<T> *w = x->parent->right;
+							if(w->color == RED)
+							{
+								w->color = BLACK;
+								x->parent->color = RED;
+								left_rotate(x->parent);
+								w = x->parent->right;
+							}
+							if(w->left->color == BLACK && w->right->color == BLACK)
+							{
+								w->color = RED;
+								x = x->parent;
+							}
+							else 
+							{
+								if(w->right->color == BLACK)
+								{
+									w->left->color = BLACK;
+									w->color = RED;
+									right_rotate(w);
+									w = x->parent->right;
+								}
+								w->color = x->parent->color;
+								x->parent->color = BLACK;
+								w->right->color = BLACK;
+								left_rotate(x->parent);
+								x = this->root;
+							}
+						}
+						else
+						{
+							Node<T> *w = x->parent->left;
+							if(w->color == RED)
+							{
+								w->color = BLACK;
+								x->parent->color = RED;
+								right_rotate(x->parent);
+								w = x->parent->left;
+							}
+							if(w->right->color == BLACK && w->left->color == BLACK)
+							{
+								w->color = RED;
+								x = x->parent;
+							}
+							else
+							{
+								if(w->left->color == BLACK)
+								{
+									w->right->color = BLACK;
+									w->color = RED;
+									left_rotate(w);
+									w = x->parent->left;
+								}
+								w->color = x->parent->color;
+								x->parent->color = BLACK;
+								w->left->color = BLACK;
+								right_rotate(x->parent);
+								x = this->root;
+							}
+						}
+					}
+					x->color = BLACK;
+				}
+			}
 			void left_rotate(Node<T> *node)
 			{
 				Node<T> *n = node->right;

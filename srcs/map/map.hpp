@@ -125,20 +125,20 @@ namespace ft
 				this = other;
 				other = tmp;
 			};
-			iterator find( const Key& key )
+			iterator find(const Key& key)
 			{
 				for (iterator it = this->begin(); it != this->end(); it++)
 				{
-					if (*it.first == key)
+					if ((*it).first == key)
 						return (it);
 				}
 				return (this->end());
 			};
-			const_iterator find( const Key& key ) const
+			const_iterator find(const Key& key) const
 			{
 				for (const_iterator it = this->begin(); it != this->end(); it++)
 				{
-					if (*it.first == key)
+					if ((*it).first == key)
 						return (it);
 				}
 				return (this->end());
@@ -188,7 +188,7 @@ namespace ft
 					first++;
 				}
 			};
-			void erase(iterator pos) { rbt.delete(pos); };
+			void erase(iterator pos) { rbt.erase(pos); };
 			void erase(iterator first, iterator last);
 			size_type erase( const Key& key );
 			void printBT()

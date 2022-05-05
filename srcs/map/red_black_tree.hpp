@@ -347,13 +347,14 @@ namespace ft
 					y = maxleft_from_node(z->right);
 					y_orignal_color = y->color;
 					x = y->right;
-					if(y->parent == z)
+					if(x && y->parent == z)
 						x->parent = z;
 					else
 					{
 						rb_transplant(y, y->right);
 						y->right = z->right;
-						y->right->parent = y;
+						if (y->right)
+							y->right->parent = y;
 					}
 					rb_transplant(z, y);
 					y->left = z->left;
@@ -457,7 +458,7 @@ namespace ft
 								right_rotate(x->parent);
 								w = x->parent->left;
 							}
-							if(w->right->color == BLACK && w->left->color == BLACK)
+							if(w->right && w->right->color == BLACK && w->left->color == BLACK)
 							{
 								w->color = RED;
 								x = x->parent;
@@ -466,7 +467,8 @@ namespace ft
 							{
 								if(w->left->color == BLACK)
 								{
-									w->right->color = BLACK;
+									if (w->right)
+										w->right->color = BLACK;
 									w->color = RED;
 									left_rotate(w);
 									w = x->parent->left;

@@ -177,7 +177,6 @@ namespace ft
                         return (rbt.insert_from_position(position, val));
                 }
                 return (rbt.insert_from_position(position, val));
-				
 			};
 			template <class InputIterator>
   			void insert (InputIterator first, InputIterator last)

@@ -194,6 +194,7 @@ namespace ft
 					}
 					Node<U> *node;
 			};
+
 			void printBT()
 			{
 				Node<T> *node = root;
@@ -213,6 +214,7 @@ namespace ft
 					ret = this->root;
 					*flag = true;
 					this->_size++;
+					//_my_alloc.deallocate(inserted, 1);
 					return ret;
 				}
 				while(n != nullptr)
@@ -346,6 +348,8 @@ namespace ft
 				}
 				if(y_orignal_color == BLACK)
   					rb_delete_fixup(x);
+				_my_alloc.deallocate(pos.base(), 1);
+				this->_size--;
 			};
 		private:
 			Compare comp;

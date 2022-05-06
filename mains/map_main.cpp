@@ -5,17 +5,6 @@
 
 int main()
 {
-	header_test_section("Pair/Make_pair doc test");
-	ft::pair <int,int> foo;
-  	ft::pair <int,int> bar;
-	foo = ft::make_pair (10,20);
-	bar = ft::make_pair (10.5,'A'); // ok: implicit conversion from pair<double,char>
-	std::cout << "foo: " << foo.first << ", " << foo.second << '\n';
-	std::cout << "bar: " << bar.first << ", " << bar.second << '\n';
-	foo = bar;
-	std::cout << "foo: " << foo.first << ", " << foo.second << '\n';
-	std::cout << "bar: " << bar.first << ", " << bar.second << '\n';
-	
 	header_test_section("RBT tests");
 	ft::pair <ft::Map<int,int>::iterator, bool > retPair;
 	ft::pair <int,int> insertPair = ft::make_pair (1, 1);
@@ -44,7 +33,7 @@ int main()
 	maptest.insert(insertPair8);
 	retPair = maptest.insert(insertPair9);
 	maptest.insert(insertPair10);
-	//maptest.insert(insertPair3);
+	maptest.insert(insertPair3);
 	maptest.printBT();
 	std::cout << retPair.second << std::endl;
 	for (ft::Map<int, int>::reverse_iterator it = maptest.rbegin(); it != maptest.rend(); it++)
@@ -67,6 +56,9 @@ int main()
 	map_scnd_test.printBT();
 	map_scnd_test.erase(4);
 	map_scnd_test.printBT();
+	std::cout << map_scnd_test.size() << std::endl;
+	map_scnd_test.clear();
+	std::cout << map_scnd_test.size() << std::endl;
 	// std::cout << "DELETING 15" << std::endl;
 	// ft::Map<int, int>::iterator eraseIt = map_scnd_test.find(15);
 	// map_scnd_test.erase(eraseIt);

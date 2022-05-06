@@ -197,7 +197,17 @@ namespace ft
 					this->erase(tmp);
 				}
 			};
-			size_type erase(const Key& key);
+			size_type erase(const Key& key)
+			{
+				iterator it = this->find(key);
+				if (it == this->end())
+					return (0);
+				else
+				{
+					this->erase(it);
+					return (1);
+				}
+			};
 			void printBT()
 			{
 				rbt.printBT();

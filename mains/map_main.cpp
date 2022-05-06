@@ -65,8 +65,7 @@ int main()
 	map_scnd_test.printBT();
 	map_scnd_test.insert(insertIt, insertPair3);
 	map_scnd_test.printBT();
-	map_scnd_test.erase(map_scnd_test.begin(), map_scnd_test.end());
-	map_scnd_test.insert(insertIt, insertPair3);
+	map_scnd_test.erase(4);
 	map_scnd_test.printBT();
 	// std::cout << "DELETING 15" << std::endl;
 	// ft::Map<int, int>::iterator eraseIt = map_scnd_test.find(15);

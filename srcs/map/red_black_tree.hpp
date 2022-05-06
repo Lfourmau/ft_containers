@@ -201,6 +201,7 @@ namespace ft
 				printBT("", node, false);
 			}
 			red_black_tree(Compare cmp, Alloc alloc) : comp(cmp), _my_alloc(alloc), root(nullptr), _size(0) {};
+			~red_black_tree() { this->clear(); };
 			rbt_iterator<T> insert(const T& value, bool *flag)
 			{
 				Node<T> *n = this->root;
@@ -348,9 +349,23 @@ namespace ft
 				}
 				if(y_orignal_color == BLACK)
   					rb_delete_fixup(x);
+				_my_alloc.destroy(pos.base());
 				_my_alloc.deallocate(pos.base(), 1);
 				this->_size--;
 			};
+			void clear()
+			{
+				if (!this->root)
+					return ;
+				rbt_iterator<T> it = this->maxleft();
+				while (it != this->maxright())
+				{
+					rbt_iterator<T> tmp = it;
+					it++;
+					this->erase(tmp);
+				}
+				this->erase(this->maxright());
+			}
 		private:
 			Compare comp;
 			Alloc _my_alloc;

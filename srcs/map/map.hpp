@@ -80,7 +80,7 @@ namespace ft
 			//template <class InputIterator>
 			//Map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			//Map (const Map& x);
-			~Map() { this->clear(); };
+			~Map() {};
 			class value_compare
 			{
 				friend class Map;
@@ -143,7 +143,7 @@ namespace ft
 				}
 				return (this->end());
 			}
-			void clear() { this->erase(this->begin(), this->end()); };
+			void clear() { rbt.clear(); };
 			reverse_iterator rbegin() { return iterator(rbt.maxright()); };
 			const_reverse_iterator rbegin() const { return end(); };
 			reverse_iterator rend() { return iterator(NULL); };

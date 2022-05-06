@@ -81,24 +81,15 @@ namespace ft
 					{
 						if (node->right)
 						{
-							Node<U> *tmp = node->right;
-							while (tmp->left)
-								tmp = tmp->left;
-							node = tmp;
-						}
+							node = node->right;
+							while (node->left)
+								node = node->left;
+						} 
 						else
 						{
-							Node<U> *tmp = node->parent;
-							if (tmp->right == node)
-							{
-								while (tmp && node == tmp->right)
-								{
-									node = tmp;
-									tmp = tmp->parent;
-								}
-							}
-							if (node->right != tmp)
-								node = tmp;
+							while (node->parent && node->parent->right == node)
+								node = node->parent;
+							node = node->parent;
 						}
 					}
 					void decrementation()
@@ -123,6 +114,7 @@ namespace ft
 								node = NULL;
 						}
 					}
+
 					Node<U> *node;
 			};
 			template<class U>
@@ -169,24 +161,15 @@ namespace ft
 					{
 						if (node->right)
 						{
-							Node<U> *tmp = node->right;
-							while (tmp->left)
-								tmp = tmp->left;
-							node = tmp;
-						}
+							node = node->right;
+							while (node->left)
+								node = node->left;
+						} 
 						else
 						{
-							Node<U> *tmp = node->parent;
-							if (tmp->right == node)
-							{
-								while (node == tmp->right)
-								{
-									node = tmp;
-									tmp = tmp->parent;
-								}
-							}
-							if (node->right != tmp)
-								node = tmp;
+							while (node->parent && node->parent->right == node)
+								node = node->parent;
+							node = node->parent;
 						}
 					}
 					void decrementation()
@@ -332,12 +315,12 @@ namespace ft
 				Node<T> *y = z;
 				Node<T> *x;
 				node_color y_orignal_color = y->color;
-				if(z->left == nullptr)
+				if(z->left == NULL)
 				{
 					x = z->right;
 					rb_transplant(z, z->right);
 				}
-				else if(z->right == nullptr)
+				else if(z->right == NULL)
 				{
 					x = z->left;
 					rb_transplant(z, z->left);
@@ -377,40 +360,22 @@ namespace ft
 			};
 			void rb_transplant(Node<T> *u, Node<T> *v)
 			{
-				if(u->parent == nullptr)
+				if(u->parent == NULL)
 					this->root = v;
 				else if(u == u->parent->left)
 					u->parent->left = v;
 				else
-				{
 					u->parent->right = v;
-					if (v != nullptr)
-						v->parent = u->parent;
-				}
+				if (v)
+					v->parent = u->parent;
 			}
 			Node<T>* maxleft_from_node(Node<T> *x)
 			{
-				while(x->left != nullptr)
+				while(x->left != NULL)
 					x = x->left;
 				return x;
 			}
-			Node<T> *successor(Node<T> *temp_node)  
-			{  
-				Node<T> *y=NULL;  
-				if(temp_node->left != NULL)  
-				{  
-					y = temp_node->left;  
-					while(y->right != NULL)  
-						y = y->right;  
-				}  
-				else  
-				{  
-					y = temp_node->right;  
-					while(y->left != NULL)  
-						y = y->left;  
-				}  
-				return y;  
-			}
+
 			void rb_delete_fixup(Node<T> *x)
 			{
 				if (x)
@@ -427,14 +392,14 @@ namespace ft
 								left_rotate(x->parent);
 								w = x->parent->right;
 							}
-							if(w->left->color == BLACK && w->right->color == BLACK)
+							if((w->left == NULL || w->left->color == BLACK) && (w->right == NULL || w->right->color == BLACK))
 							{
 								w->color = RED;
 								x = x->parent;
 							}
 							else 
 							{
-								if(w->right->color == BLACK)
+								if(w->right == NULL || w->right->color == BLACK)
 								{
 									w->left->color = BLACK;
 									w->color = RED;
@@ -458,17 +423,17 @@ namespace ft
 								right_rotate(x->parent);
 								w = x->parent->left;
 							}
-							if(w->right && w->right->color == BLACK && w->left->color == BLACK)
+							if((w->right == NULL || w->right->color == BLACK) && (w->left == NULL || w->left->color == BLACK))
 							{
 								w->color = RED;
 								x = x->parent;
 							}
 							else
 							{
-								if(w->left->color == BLACK)
+								if(w->left == NULL || w->left->color == BLACK)
 								{
-									if (w->right)
-										w->right->color = BLACK;
+									
+									w->right->color = BLACK;
 									w->color = RED;
 									left_rotate(w);
 									w = x->parent->left;

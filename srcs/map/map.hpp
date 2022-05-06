@@ -188,8 +188,16 @@ namespace ft
 				}
 			};
 			void erase(iterator pos) { rbt.erase(pos); };
-			void erase(iterator first, iterator last);
-			size_type erase( const Key& key );
+			void erase(iterator first, iterator last)
+			{
+				while (first != last)
+				{
+					iterator tmp = first;
+					first++;
+					this->erase(tmp);
+				}
+			};
+			size_type erase(const Key& key);
 			void printBT()
 			{
 				rbt.printBT();

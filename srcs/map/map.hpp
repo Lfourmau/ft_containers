@@ -75,11 +75,19 @@ namespace ft
 			typedef ptrdiff_t 									difference_type;
 			typedef size_t 										size_type;
 
-			//Constructor
+			//Constructors
 			Map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : cmp(comp), _my_alloc(alloc), rbt(cmp, node_allocator) {};
-			//template <class InputIterator>
-			//Map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
-			//Map (const Map& x);
+			template <class InputIterator>
+			Map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : cmp(comp), _my_alloc(alloc), rbt(cmp, node_allocator)
+			{
+				while (first != last)
+					this->insert(*first++);
+			};
+			Map (const Map& x) : cmp(x.cmp), _my_alloc(x._my_alloc), rbt(x.cmp, x.node_allocator)
+			{
+				for(const_iterator it = x.begin(); it != NULL; it++)
+					this->insert(*it);
+			};
 			~Map() {};
 			class value_compare
 			{
@@ -104,7 +112,7 @@ namespace ft
 			};
 			const_iterator begin() const
 			{
-				return (iterator(rbt.maxleft()));
+				return (const_iterator(rbt.maxleft()));
 			};
 			iterator end()
 			{
@@ -112,7 +120,7 @@ namespace ft
 			};
 			const_iterator end() const
 			{
-				return (iterator(NULL));
+				return (const_iterator(NULL));
 			};
 			bool empty() const { return (rbt.get_root() == nullptr); };
 			size_t size() const { return (rbt.size()); }

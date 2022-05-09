@@ -46,6 +46,8 @@ int main()
 	}
 	maptest[69] = 896;
 	std::cout << maptest[69] << std::endl;
+	ft::Map<int, int> copyTest(maptest);
+	copyTest.printBT();
 	//map_scnd_test.insert(maptest.begin(), maptest.end());
 	//ft::Map<int, int>::iterator insertIt = map_scnd_test.begin();
 	//ft::Map<int, int>::iterator findIt = maptest.find(4);

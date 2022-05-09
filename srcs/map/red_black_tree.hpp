@@ -293,7 +293,7 @@ namespace ft
 				this->_size++;
 				return (rbt_iterator<T>(inserted));
 			};
-			Node<T> *maxleft()
+			Node<T> *maxleft() const
 			{
 				Node<T> *tmp = this->root;
 
@@ -301,7 +301,7 @@ namespace ft
 					tmp = tmp->left;
 				return (tmp);
 			}
-			Node<T> *maxright()
+			Node<T> *maxright() const
 			{
 				Node<T> *tmp = this->root;
 

@@ -153,9 +153,9 @@ namespace ft
 			}
 			void clear() { rbt.clear(); };
 			reverse_iterator rbegin() { return iterator(rbt.maxright()); };
-			const_reverse_iterator rbegin() const { return end(); };
+			const_reverse_iterator rbegin() const { return const_iterator(rbt.maxright()); };
 			reverse_iterator rend() { return iterator(NULL); };
-			const_reverse_iterator rend() const { return iterator(NULL); };
+			const_reverse_iterator rend() const { return const_iterator(NULL); };
 			allocator_type get_allocator() const { return (_my_alloc); };
 			mapped_type& operator[] (const key_type& k)
 			{

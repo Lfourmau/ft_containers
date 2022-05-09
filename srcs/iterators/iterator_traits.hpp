@@ -108,7 +108,6 @@ namespace ft
 			reverse_iterator  operator--(int)
 			{
 				reverse_iterator<Iter> tmp(*this);
-
 				this->iter++;
 				return (tmp);
 

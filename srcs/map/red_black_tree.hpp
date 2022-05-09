@@ -118,9 +118,10 @@ namespace ft
 					Node<U> *node;
 			};
 			template<class U>
-			class const_rbt_iterator
+			class const_rbt_iterator : public std::iterator<std::bidirectional_iterator_tag, U>
 			{
 				public:
+					typedef const U& reference; 
 					const_rbt_iterator();
 					const_rbt_iterator(Node<U> *n) : node(n) {};
 					Node<U> *base() { return (node); };
@@ -174,22 +175,24 @@ namespace ft
 					}
 					void decrementation()
 					{
-						if (node->parent->parent == node && node->color == RED)
-							node = node->left;
-						else if (node->left)
+						if (node->left)
 						{
+							node = node->left;
 							while (node->right)
 								node = node->right;
 						}
 						else
 						{
 							Node<U> *parent = node->parent;
-							while (parent->left == node)
+							while (parent && parent->left == node)
 							{
 								node = parent;
 								parent = parent->parent;
 							}
-							node = parent;
+							if (parent)
+								node = parent;
+							else
+								node = NULL;
 						}
 					}
 					Node<U> *node;

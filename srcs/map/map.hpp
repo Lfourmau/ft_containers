@@ -148,6 +148,25 @@ namespace ft
 			const_reverse_iterator rbegin() const { return end(); };
 			reverse_iterator rend() { return iterator(NULL); };
 			const_reverse_iterator rend() const { return iterator(NULL); };
+			allocator_type get_allocator() const { return (_my_alloc); };
+			mapped_type& operator[] (const key_type& k)
+			{
+				return (*((this->insert(make_pair(k,mapped_type()))).first)).second;
+			};
+			//iterator lower_bound (const key_type& k)
+			//{
+			//	//first element who is not less = k or after k
+			//	Node<value_type> *tmp = rbt.get_root();
+
+				
+			// };
+			const_iterator lower_bound (const key_type& k) const;
+			size_type count( const Key& key ) const
+			{
+				if (find(key) != this->end())
+					return (1);
+				return (0);
+			};
 			ft::pair<iterator, bool> insert (const value_type& val)
 			{
 				bool flag;

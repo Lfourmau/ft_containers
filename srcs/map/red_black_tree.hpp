@@ -246,7 +246,6 @@ namespace ft
 					}
 					else
 					{
-						std::cout << n->value.first << std::endl;
 						*flag = false;
 						return n;
 					}

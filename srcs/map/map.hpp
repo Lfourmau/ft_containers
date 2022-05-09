@@ -161,14 +161,37 @@ namespace ft
 			{
 				return (*((this->insert(make_pair(k,mapped_type()))).first)).second;
 			};
-			//iterator lower_bound (const key_type& k)
-			//{
-			//	//first element who is not less = k or after k
-			//	Node<value_type> *tmp = rbt.get_root();
+			iterator lower_bound (const key_type& k)
+			{
+				iterator current = this->begin();
+				iterator end = this->end();
 
-				
-			// };
-			const_iterator lower_bound (const key_type& k) const;
+				while (current != end)
+				{
+					if (_comp((*current).first, k) == false)
+						break;
+					current++;
+				}
+				return (current);
+	
+			};
+			const_iterator lower_bound (const key_type& k) const { return const_iterator(this->lower_bound(k)); };
+			iterator upper_bound(const key_type& k)
+			{
+				iterator current = this->begin();
+				iterator end = this->end();
+
+				while (current != end)
+				{
+					if (_comp(k, (*current).first))
+						break;
+					current++;
+				}
+				return (current);
+			}
+			const_iterator upper_bound (const key_type& k) const { return const_iterator(this->upper_bound(k)); };
+			ft::pair<iterator,iterator> equal_range( const Key& key ) { return (ft::make_pair(this->lower_bound(key), this->upper_bound(key))); };
+			ft::pair<const_iterator,const_iterator> equal_range( const Key& key ) const { return (ft::make_pair(this->lower_bound(key), this->upper_bound(key))); };
 			size_type count( const Key& key ) const
 			{
 				if (find(key) != this->end())

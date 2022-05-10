@@ -16,13 +16,15 @@ namespace ft
 	{
 		public:
 			Node(const T &data) : parent(nullptr), left(nullptr), right(nullptr), value(data), color(RED) {};
-			Node(const Node& other)
+			Node(const Node& other) : parent(other.parent), left(other.left), right(other.right), value(other.value), color(other.color) {};
+			Node& operator=(const Node& rhs)
 			{
-				this->parent = other.parent;
-				this->left = other.left;
-				this->right = other.right;
-				this->value = other.value;
-				this->color = other.color;
+				this->parent = rhs.parent;
+				this->left = rhs.left;
+				this->right = rhs.right;
+				this->value = rhs.value;
+				this->color = rhs.color;
+				return (*this);
 			}
 			Node 		*parent;
 			Node 		*left;
@@ -337,15 +339,17 @@ namespace ft
 					y = maxleft_from_node(z->right);
 					y_orignal_color = y->color;
 					x = y->right;
-					if(x && y->parent == z)
-						x->parent = z;
-					else
-					{
-						rb_transplant(y, y->right);
-						y->right = z->right;
-						if (y->right)
-							y->right->parent = y;
-					}
+					//if(x && y->parent == z)
+					//{
+					//	x->parent = z;
+					//	std::cout << "]]" << x->value.first << "[[" << std::endl;
+					//	std::cout << "]]" << z->parent->value.first << "[[" << std::endl;
+					//}
+					//4 lines under this was in the else after the above if
+					rb_transplant(y, y->right);
+					y->right = z->right;
+					if (y->right)
+						y->right->parent = y;
 					rb_transplant(z, y);
 					y->left = z->left;
 					y->left->parent = y;
@@ -403,6 +407,7 @@ namespace ft
 			{
 				if (x)
 				{
+					std::cout << "[[" << x->value.first << std::endl;
 					while(x != this->root && x->color == BLACK)
 					{
 						if(x == x->parent->left)

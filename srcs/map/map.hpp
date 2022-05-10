@@ -2,6 +2,7 @@
 # define MAP_HPP
 
 #include <functional>
+#include <utility>
 #include "../iterators/iterator_traits.hpp"
 #include "red_black_tree.hpp"
 
@@ -130,11 +131,7 @@ namespace ft
 			size_type max_size() const { return (std::numeric_limits<size_type>::max() / sizeof(value_type)); };
 			void swap(Map& other)
 			{
-				Map<T, key_type> tmp;
-
-				tmp = *this;
-				*this = other;
-				other = tmp;
+				std::swap(*this, other);
 			};
 			iterator find(const Key& key)
 			{

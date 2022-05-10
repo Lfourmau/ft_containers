@@ -357,8 +357,8 @@ namespace ft
 				}
 				if(y_orignal_color == BLACK)
   					rb_delete_fixup(x);
-				_my_alloc.destroy(pos.base());
-				_my_alloc.deallocate(pos.base(), 1);
+				//_my_alloc.destroy(pos.base());
+				//_my_alloc.deallocate(pos.base(), 1);
 				this->_size--;
 			};
 			void clear()

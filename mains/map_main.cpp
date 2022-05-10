@@ -1830,7 +1830,7 @@ void mapModifiersTests( void ) {
 		it++;
 		it++;
 		it++;
-		a.erase( a.begin(), it );
+		//a.erase( a.begin(), it );
 		displayMap( a, "Erase test 27" );
 		a.swap( b );
 		displayMap( a, "Swap test 1" );

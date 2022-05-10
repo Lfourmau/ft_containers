@@ -324,6 +324,7 @@ namespace ft
 				Node<T> *y = z;
 				Node<T> *x;
 				node_color y_orignal_color = y->color;
+				this->_size--;
 				if(z->left == NULL)
 				{
 					x = z->right;
@@ -359,7 +360,6 @@ namespace ft
   					rb_delete_fixup(x);
 				//_my_alloc.destroy(pos.base());
 				//_my_alloc.deallocate(pos.base(), 1);
-				this->_size--;
 			};
 			void clear()
 			{
@@ -407,7 +407,6 @@ namespace ft
 			{
 				if (x)
 				{
-					std::cout << "[[" << x->value.first << std::endl;
 					while(x != this->root && x->color == BLACK)
 					{
 						if(x == x->parent->left)

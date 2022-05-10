@@ -41,7 +41,7 @@ namespace ft
 			class rbt_iterator : public std::iterator<std::bidirectional_iterator_tag, U>
 			{
 				public:
-					rbt_iterator();
+					rbt_iterator() {};
 					rbt_iterator(Node<U> *n) : node(n) {};
 					U& operator *() { return (node->value); };
 					Node<U> *base() { return (node); };
@@ -122,7 +122,7 @@ namespace ft
 			{
 				public:
 					typedef const U& reference; 
-					const_rbt_iterator();
+					const_rbt_iterator() {};
 					const_rbt_iterator(Node<U> *n) : node(n) {};
 					Node<U> *base() { return (node); };
 					U const & operator *() { return (node->value); };
@@ -299,7 +299,8 @@ namespace ft
 			Node<T> *maxleft() const
 			{
 				Node<T> *tmp = this->root;
-
+				if (!tmp)
+					return (NULL);
 				while (tmp->left != nullptr)
 					tmp = tmp->left;
 				return (tmp);
@@ -307,7 +308,8 @@ namespace ft
 			Node<T> *maxright() const
 			{
 				Node<T> *tmp = this->root;
-
+				if (!tmp)
+					return (NULL);
 				while (tmp->right != nullptr)
 					tmp = tmp->right;
 				return (tmp);

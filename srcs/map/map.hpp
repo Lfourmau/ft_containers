@@ -81,7 +81,10 @@ namespace ft
 			Map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : cmp(comp), _my_alloc(alloc), rbt(cmp, node_allocator)
 			{
 				while (first != last)
-					this->insert(*first++);
+				{
+					this->insert(*first);
+					first++;
+				}
 			};
 			Map (const Map& x) : cmp(x.cmp), _my_alloc(x._my_alloc), rbt(x.cmp, x.node_allocator)
 			{
@@ -129,27 +132,41 @@ namespace ft
 			{
 				Map<T, key_type> tmp;
 
-				tmp = this;
-				this = other;
+				tmp = *this;
+				*this = other;
 				other = tmp;
 			};
 			iterator find(const Key& key)
 			{
-				for (iterator it = this->begin(); it != this->end(); it++)
+				Node<value_type> *current = rbt.get_root();
+				value_type k = ft::make_pair(key, 0);
+
+				while (current)
 				{
-					if ((*it).first == key)
-						return (it);
+					if (cmp(current->value, k))
+						current = current->right;
+					else if (cmp(k, current->value))
+						current = current->left;
+					else
+						return (iterator(current));
 				}
-				return (this->end());
+				return(this->end());
 			};
 			const_iterator find(const Key& key) const
 			{
-				for (const_iterator it = this->begin(); it != this->end(); it++)
+				Node<value_type> *current = rbt.get_root();
+				value_type k = ft::make_pair(key, 0);
+
+				while (current)
 				{
-					if ((*it).first == key)
-						return (it);
+					if (cmp(current->value, k))
+						current = current->right;
+					else if (cmp(k, current->value))
+						current = current->left;
+					else
+						return (const_iterator(current));
 				}
-				return (this->end());
+				return(this->end());
 			}
 			void clear() { rbt.clear(); };
 			reverse_iterator rbegin() { return iterator(rbt.maxright()); };
@@ -159,35 +176,56 @@ namespace ft
 			allocator_type get_allocator() const { return (_my_alloc); };
 			mapped_type& operator[] (const key_type& k)
 			{
-				return (*((this->insert(make_pair(k,mapped_type()))).first)).second;
+				return (*((this->insert(ft::make_pair(k,mapped_type()))).first)).second;
 			};
-			iterator lower_bound (const key_type& k)
+			iterator lower_bound (const key_type& key)
 			{
-				iterator current = this->begin();
-				iterator end = this->end();
+				Node<value_type> *current = rbt.get_root();
+				value_type k = ft::make_pair(key, 0);
 
-				while (current != end)
+				while (current)
 				{
-					if (_comp((*current).first, k) == false)
-						break;
-					current++;
+					if (cmp(k, current->value))
+					{
+						if (current->left)
+							current = current->left;
+						else
+							return iterator(current);
+					}
+					else if (cmp(current->value, k))
+					{
+						if (current->right)
+							return iterator(current->right);
+						return ++iterator(current);
+					}
+					else
+						return (iterator(current));
 				}
-				return (current);
-	
+				return this->end();
 			};
 			const_iterator lower_bound (const key_type& k) const { return const_iterator(this->lower_bound(k)); };
-			iterator upper_bound(const key_type& k)
+			iterator upper_bound(const key_type& key)
 			{
-				iterator current = this->begin();
-				iterator end = this->end();
+				Node<value_type> *current = rbt.get_root();
+				value_type k = ft::make_pair(key, 0);
 
-				while (current != end)
+				while (current)
 				{
-					if (_comp(k, (*current).first))
-						break;
-					current++;
+					if (cmp(k, current->value))
+					{
+						if (current->left)
+							current = current->left;
+						else
+							return iterator(current);
+					}
+					else
+					{
+						if (current->right)
+							return iterator(current->right);
+						return ++iterator(current);
+					}
 				}
-				return (current);
+				return this->end();
 			}
 			const_iterator upper_bound (const key_type& k) const { return const_iterator(this->upper_bound(k)); };
 			ft::pair<iterator,iterator> equal_range( const Key& key ) { return (ft::make_pair(this->lower_bound(key), this->upper_bound(key))); };

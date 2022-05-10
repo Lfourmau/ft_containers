@@ -78,7 +78,6 @@ namespace ft
 			reverse_iterator  operator++(int)
 			{
 				reverse_iterator<Iter> tmp(*this);
-
 				this->iter--;
 				return (tmp);
 
@@ -155,6 +154,10 @@ namespace ft
 			{
 				Iter cpy(this->iter);
 				return (*cpy);
+			};
+			pointer operator->() const
+			{
+				return &(this->operator*());
 			};
 	};
 	template< class Iterator1, class Iterator2 >

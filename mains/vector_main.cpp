@@ -51,7 +51,7 @@ int main()
 void test_vector_pushback()
 {
 	header_test_section("Push Back");
-	ft::Vector<std::string> My_pushback_vect;
+	ft::vector<std::string> My_pushback_vect;
 	My_pushback_vect.push_back("okok");
 	My_pushback_vect.push_back("eeeee");
 	My_pushback_vect.push_back("okok");
@@ -107,15 +107,15 @@ void testrev_it_operators()
 
 void test_vector_size()
 {
-	header_test_section("Vector size");
-	ft::Vector<std::string> testsize(10, "okokokk");
+	header_test_section("vector size");
+	ft::vector<std::string> testsize(10, "okokokk");
 	std::cout << "VECT SIZE >> " << testsize.size() << std::endl;
 }
 
 void test_vector_popback()
 {
-	header_test_section("Vector PopBack");
-	ft::Vector<test> pop_back_test;
+	header_test_section("vector PopBack");
+	ft::vector<test> pop_back_test;
 	test A;
 	test B;
 	test C;
@@ -130,8 +130,8 @@ void test_vector_popback()
 void test_vector_swap()
 {
 	header_test_section("SWAP");
-	ft::Vector<std::string> swap1(10, "bonsoir");
-	ft::Vector<std::string> swap2(10, "bonjour");
+	ft::vector<std::string> swap1(10, "bonsoir");
+	ft::vector<std::string> swap2(10, "bonjour");
 	std::cout << "Vec1 before swapping : ";
 	swap1.print();
 	std::cout << "Vec2 before swapping : ";
@@ -146,7 +146,7 @@ void test_vector_swap()
 void test_vector_copy_constructor()
 {
 	header_test_section("Copy constructor");
-	ft::Vector<std::string> Base;
+	ft::vector<std::string> Base;
 	Base.push_back("bsoir");
 	Base.push_back("c le tst");
 	Base.push_back("des string");
@@ -154,7 +154,7 @@ void test_vector_copy_constructor()
 	std::cout << "Base vector : ";
 	Base.print();
 	std::cout << "Copy vector : ";
-	ft::Vector<std::string> Copy(Base);
+	ft::vector<std::string> Copy(Base);
 	Copy.print();
 	std::cout << "Modifying copy vector..." << std::endl;
 	Copy[1] = "vamos";
@@ -168,7 +168,7 @@ void test_vector_copy_constructor()
 void test_vector_insert()
 {
 	header_test_section("Insert");
-	ft::Vector<std::string> insertTest;
+	ft::vector<std::string> insertTest;
 	std::vector<std::string> BaseVect;
 	insertTest.push_back("a");BaseVect.push_back("a");
 	insertTest.push_back("LA");BaseVect.push_back("LA");
@@ -232,7 +232,7 @@ void test_normal_iterator()
 {
 	header_test_section("Normal iterator");
 	std::vector<std::string> normal_iterator_vect;
-	ft::Vector<std::string> my_normal_iterator_vect;
+	ft::vector<std::string> my_normal_iterator_vect;
 	normal_iterator_vect.push_back("elden");my_normal_iterator_vect.push_back("elden");
 	normal_iterator_vect.push_back("ring");my_normal_iterator_vect.push_back("ring");
 	normal_iterator_vect.push_back("torrent");my_normal_iterator_vect.push_back("torrent");
@@ -240,7 +240,7 @@ void test_normal_iterator()
 	normal_iterator_vect.push_back("limier");my_normal_iterator_vect.push_back("limier");
 	normal_iterator_vect.push_back("saignement");my_normal_iterator_vect.push_back("saignement");
 	std::vector<std::string>::iterator nrm_it = normal_iterator_vect.begin();
-	ft::Vector<std::string>::iterator norm_it = my_normal_iterator_vect.begin();
+	ft::vector<std::string>::iterator norm_it = my_normal_iterator_vect.begin();
 	std::cout << *norm_it << "---" << *nrm_it << std::endl;
 	norm_it++;nrm_it++;
 	std::cout << *norm_it << "---" << *nrm_it << std::endl;
@@ -257,8 +257,8 @@ void test_normal_iterator()
 void test_vector_empty()
 {
 	header_test_section("Is the vector empty ?");
-	ft::Vector<std::string> NotEmpty(10,"Quarantqdos");
-	ft::Vector<std::string> Empty;
+	ft::vector<std::string> NotEmpty(10,"Quarantqdos");
+	ft::vector<std::string> Empty;
 	std::cout << "Not empty : " << NotEmpty.empty() << std::endl;
 	std::cout << "Empty : " << Empty.empty() << std::endl;
 }
@@ -266,7 +266,7 @@ void test_vector_empty()
 void test_vector_reserve()
 {
 	header_test_section("Reserve");
-	ft::Vector<std::string> reserveVec(15, "uneString");
+	ft::vector<std::string> reserveVec(15, "uneString");
 	std::cout << "Capacity : " << reserveVec.capacity() << std::endl;
 	std::cout << "Size : " << reserveVec.size() << std::endl;
 	reserveVec.reserve(54);
@@ -286,7 +286,7 @@ void test_vector_reserve()
 void test_vector_resize()
 {
 	header_test_section("Resize");
-	ft::Vector<std::string> resize_vect(10, "tob");
+	ft::vector<std::string> resize_vect(10, "tob");
 	std::vector<std::string> resize_original_vect(10,"Botika");
 	resize_vect.resize(4);
 	resize_original_vect.resize(4);
@@ -312,7 +312,7 @@ void test_vector_at()
 	base_at_vect.push_back("third");
 	base_at_vect.push_back("fourth");
 	base_at_vect.push_back("fifth");
-	ft::Vector<std::string> My_at_vec;
+	ft::vector<std::string> My_at_vec;
 	My_at_vec.push_back("first");
 	My_at_vec.push_back("second");
 	My_at_vec.push_back("third");
@@ -330,7 +330,7 @@ void test_vector_assign()
 {
 	header_test_section("Assign");
 	std::vector<std::string> base_assign_vec(10, "Coucoucmoa");
-	ft::Vector<std::string> my_assign_vec(10, "Coucoucmoa");
+	ft::vector<std::string> my_assign_vec(10, "Coucoucmoa");
 	for (std::vector<std::string>::iterator it = base_assign_vec.begin(); it < base_assign_vec.end(); it++)
 		std::cout << *it << "---";
 	std::cout << std::endl;
@@ -354,14 +354,14 @@ void test_vector_erase()
 {
 	header_test_section("Erase");
 	std::vector<std::string> erase_base_vect;
-	ft::Vector<std::string> erase_test_vect;
+	ft::vector<std::string> erase_test_vect;
 	erase_base_vect.push_back("wehsh");erase_test_vect.push_back("wehsh");
 	erase_base_vect.push_back("pelo");erase_test_vect.push_back("pelo");
 	erase_base_vect.push_back("eh");erase_test_vect.push_back("eh");
 	erase_base_vect.push_back("41");erase_test_vect.push_back("41");
 	erase_base_vect.push_back("Nikepitech");erase_test_vect.push_back("Nikepitech");
 	erase_base_vect.push_back("vivenous");erase_test_vect.push_back("vivenous");
-	std::cout << "Vectors before erase : " << std::endl;
+	std::cout << "vectors before erase : " << std::endl;
 	std::cout << "Base vect : ";
 	for (std::vector<std::string>::iterator it = erase_base_vect.begin(); it < erase_base_vect.end(); it++)
 			std::cout << *it << "---";
@@ -397,7 +397,7 @@ void test_vector_erase()
 void test_range_constructor()
 {
 	header_test_section("Range constructor");
-	ft::Vector<std::string> other_vec;
+	ft::vector<std::string> other_vec;
 	other_vec.push_back("on");
 	other_vec.push_back("tst");
 	other_vec.push_back("la");
@@ -405,20 +405,20 @@ void test_range_constructor()
 	other_vec.push_back("construction");
 	other_vec.push_back("un peu la");
 	std::cout << "Original vector :";
-	for (ft::Vector<std::string>::iterator it = other_vec.begin(); it < other_vec.end(); it++)
+	for (ft::vector<std::string>::iterator it = other_vec.begin(); it < other_vec.end(); it++)
 			std::cout << *it << "---";
 	std::cout << std::endl;
 	std::cout << "Constructed vector :";
-	ft::Vector<std::string> my_vect(other_vec.begin(), other_vec.end());
+	ft::vector<std::string> my_vect(other_vec.begin(), other_vec.end());
 	my_vect.print();
 }
 
 void test_const_iterators()
 {
 	header_test_section("Const iterator");
-	const ft::Vector<std::string> myvect(10, "vingt");
+	const ft::vector<std::string> myvect(10, "vingt");
 
-	for (ft::Vector<std::string>::const_iterator const_it = myvect.begin(); const_it != myvect.end(); const_it++)
+	for (ft::vector<std::string>::const_iterator const_it = myvect.begin(); const_it != myvect.end(); const_it++)
 	{
 		//*const_it = 5;
 		std::cout << *const_it << "---";
@@ -430,8 +430,8 @@ void test_relationnal_operators()
 {
 	header_test_section("Relationnal operators");
 	std::cout << "~~~==~~~" << std::endl;
-	ft::Vector<std::string> first_vec (10, "unsetring");
-	ft::Vector<std::string> scnd_vec (10, "deuxiemestring");
+	ft::vector<std::string> first_vec (10, "unsetring");
+	ft::vector<std::string> scnd_vec (10, "deuxiemestring");
 	std::cout << (first_vec == scnd_vec) << std::endl;
 	scnd_vec.assign(10, "unsetring");
 	std::cout << (first_vec == scnd_vec) << std::endl;
@@ -449,7 +449,7 @@ void test_relationnal_operators()
 	first_vec.print();
 	std::cout << std::endl;
 	scnd_vec.print();
-	ft::Vector<std::string> third_vec(scnd_vec);
+	ft::vector<std::string> third_vec(scnd_vec);
 	std::cout << (first_vec < scnd_vec) << std::endl;
 	std::cout << (third_vec < scnd_vec) << std::endl;
 
@@ -478,13 +478,13 @@ void test_relationnal_operators()
 void test_const_rev_it()
 {
 	header_test_section("Const rev iterators");
-	const ft::Vector<std::string> myvect(10, "karanteude");
-	ft::Vector<std::string>::const_iterator it = myvect.end();
-	ft::Vector<std::string>::const_iterator it2 = myvect.begin();
-	ft::reverse_iterator<ft::Vector<std::string>::const_iterator> rev_it(it);
-	ft::reverse_iterator<ft::Vector<std::string>::const_iterator> rev_it2(it2);
-	//std::reverse_iterator<ft::Vector<std::string>::const_iterator> rev_it(it);
-	//std::reverse_iterator<ft::Vector<std::string>::const_iterator> rev_it2(it2);
+	const ft::vector<std::string> myvect(10, "karanteude");
+	ft::vector<std::string>::const_iterator it = myvect.end();
+	ft::vector<std::string>::const_iterator it2 = myvect.begin();
+	ft::reverse_iterator<ft::vector<std::string>::const_iterator> rev_it(it);
+	ft::reverse_iterator<ft::vector<std::string>::const_iterator> rev_it2(it2);
+	//std::reverse_iterator<ft::vector<std::string>::const_iterator> rev_it(it);
+	//std::reverse_iterator<ft::vector<std::string>::const_iterator> rev_it2(it2);
 
 	while (rev_it != rev_it2)
 	{

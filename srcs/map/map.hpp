@@ -60,7 +60,7 @@ namespace ft
 
 	//MAP CONTAINER
 	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key,T> > > 
-	class Map
+	class map
 	{
 		public:
 			typedef Key 										key_type;
@@ -77,9 +77,9 @@ namespace ft
 			typedef size_t 										size_type;
 
 			//Constructors
-			Map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : cmp(comp), _my_alloc(alloc), rbt(cmp, node_allocator) {};
+			map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : cmp(comp), _my_alloc(alloc), rbt(cmp, node_allocator) {};
 			template <class InputIterator>
-			Map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : cmp(comp), _my_alloc(alloc), rbt(cmp, node_allocator)
+			map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : cmp(comp), _my_alloc(alloc), rbt(cmp, node_allocator)
 			{
 				while (first != last)
 				{
@@ -87,15 +87,15 @@ namespace ft
 					first++;
 				}
 			};
-			Map (const Map& x) : cmp(x.cmp), _my_alloc(x._my_alloc), rbt(x.cmp, x.node_allocator)
+			map (const map& x) : cmp(x.cmp), _my_alloc(x._my_alloc), rbt(x.cmp, x.node_allocator)
 			{
 				for(const_iterator it = x.begin(); it != NULL; it++)
 					this->insert(*it);
 			};
-			~Map() {};
+			~map() {};
 			class value_compare
 			{
-				friend class Map;
+				friend class map;
 				protected:
 				Compare comp;
 				value_compare (Compare c) : comp(c) {};
@@ -129,7 +129,7 @@ namespace ft
 			bool empty() const { return (rbt.get_root() == nullptr); };
 			size_t size() const { return (rbt.size()); }
 			size_type max_size() const { return (std::numeric_limits<size_type>::max() / sizeof(value_type)); };
-			void swap(Map& other)
+			void swap(map& other)
 			{
 				std::swap(*this, other);
 			};

@@ -60,22 +60,22 @@ namespace ft
 						incrementation();
 						return (*this);
 					}
-					rbt_iterator<U> &operator++(int)
+					rbt_iterator<U> operator++(int)
 					{
-						rbt_iterator<U> *tmp = this;
+						rbt_iterator<U> tmp(*this);
 						incrementation();
-						return (*tmp);
+						return (tmp);
 					}
 					rbt_iterator<U> &operator--()
 					{
 						decrementation();
 						return (*this);
 					}
-					rbt_iterator<U> &operator--(int)
+					rbt_iterator<U> operator--(int)
 					{
-						rbt_iterator<U> *tmp = this;
+						rbt_iterator<U> tmp(*this);
 						decrementation();
-						return (*tmp);
+						return (tmp);
 					}
 
 				private:
@@ -141,22 +141,22 @@ namespace ft
 						incrementation();
 						return (*this);
 					}
-					const_rbt_iterator<U> &operator++(int)
+					const_rbt_iterator<U> operator++(int)
 					{
-						const_rbt_iterator<U> *tmp = this;
+						const_rbt_iterator<U> tmp(*this);
 						incrementation();
-						return (*tmp);
+						return (tmp);
 					}
 					const_rbt_iterator<U> &operator--()
 					{
 						decrementation();
 						return (*this);
 					}
-					const_rbt_iterator<U> &operator--(int)
+					const_rbt_iterator<U> operator--(int)
 					{
-						const_rbt_iterator<U> *tmp = this;
+						const_rbt_iterator<U> tmp(*this);
 						decrementation();
-						return (*tmp);
+						return (tmp);
 					}
 	
 				private:
@@ -301,9 +301,10 @@ namespace ft
 			Node<T> *maxleft() const
 			{
 				Node<T> *tmp = this->root;
+
 				if (!tmp)
 					return (NULL);
-				while (tmp->left != nullptr)
+				while (tmp->left != NULL)
 					tmp = tmp->left;
 				return (tmp);
 			}
@@ -312,7 +313,7 @@ namespace ft
 				Node<T> *tmp = this->root;
 				if (!tmp)
 					return (NULL);
-				while (tmp->right != nullptr)
+				while (tmp->right != NULL)
 					tmp = tmp->right;
 				return (tmp);
 			}
@@ -373,6 +374,8 @@ namespace ft
 					this->erase(tmp);
 				}
 				this->erase(this->maxright());
+				this->_size = 0;
+
 			}
 		private:
 			Compare comp;

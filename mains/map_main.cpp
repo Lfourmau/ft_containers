@@ -1467,30 +1467,31 @@ void stackNonMemberOverloadsTests( void ) {
 	std::cout << "STACK NON MEMBER OVERLOADS TESTS:" << std::endl << std::endl;
 
 	{
-		ft::stack<int> foot;
 		ft::stack<int> foo;
+		ft::stack<int> bar;
+		std::cout << std::boolalpha << ( foo == bar ) << std::endl;
+		std::cout << std::boolalpha << ( foo != bar ) << std::endl;
+		std::cout << std::boolalpha << ( foo < bar ) << std::endl;
+		std::cout << std::boolalpha << ( foo <= bar ) << std::endl;
+		std::cout << std::boolalpha << ( foo > bar ) << std::endl;
+		std::cout << std::boolalpha << ( foo >= bar ) << std::endl;
 		foo.push( 42 );
-		ft::stack<int> bar(foo);
-		std::cout << bar.top() << std::endl;
-		std::cout << foo.top() << std::endl;
+		foo.push( 84 );
 		std::cout << std::boolalpha << ( foo == bar ) << std::endl;
 		std::cout << std::boolalpha << ( foo != bar ) << std::endl;
 		std::cout << std::boolalpha << ( foo < bar ) << std::endl;
 		std::cout << std::boolalpha << ( foo <= bar ) << std::endl;
 		std::cout << std::boolalpha << ( foo > bar ) << std::endl;
 		std::cout << std::boolalpha << ( foo >= bar ) << std::endl;
+		bar.push( 42 );
+		bar.push( 84 );
 		std::cout << std::boolalpha << ( foo == bar ) << std::endl;
 		std::cout << std::boolalpha << ( foo != bar ) << std::endl;
 		std::cout << std::boolalpha << ( foo < bar ) << std::endl;
 		std::cout << std::boolalpha << ( foo <= bar ) << std::endl;
 		std::cout << std::boolalpha << ( foo > bar ) << std::endl;
 		std::cout << std::boolalpha << ( foo >= bar ) << std::endl;
-		std::cout << std::boolalpha << ( foo == bar ) << std::endl;
-		std::cout << std::boolalpha << ( foo != bar ) << std::endl;
-		std::cout << std::boolalpha << ( foo < bar ) << std::endl;
-		std::cout << std::boolalpha << ( foo <= bar ) << std::endl;
-		std::cout << std::boolalpha << ( foo > bar ) << std::endl;
-		std::cout << std::boolalpha << ( foo >= bar ) << std::endl;
+		foo.pop();
 		std::cout << std::boolalpha << ( foo == bar ) << std::endl;
 		std::cout << std::boolalpha << ( foo != bar ) << std::endl;
 		std::cout << std::boolalpha << ( foo < bar ) << std::endl;
@@ -2412,33 +2413,33 @@ int	main(void) {
 	gettimeofday( &timer, NULL );
 	before = ( timer.tv_sec * 1000 ) + ( timer.tv_usec / 1000 );
 	// Iterator Tests
-	//iteratorTests();
-	//constIteratorTests();
-	//reverseIteratorTests();
-	//constReverseIteratorTests();
-	//treeIteratorTests();
-	//constTreeIteratorTests();
+	iteratorTests();
+	constIteratorTests();
+	reverseIteratorTests();
+	constReverseIteratorTests();
+	treeIteratorTests();
+	constTreeIteratorTests();
 
 	//// vector Tests
-	//vectorConstructorTests();
-	//vectorIteratorTests();
-	//vectorCapacityTests();
-	//vectorElementAccessTests();
-	//vectorModifiersTests();
-	//vectorNonMemberOverloadsTests();
+	vectorConstructorTests();
+	vectorIteratorTests();
+	vectorCapacityTests();
+	vectorElementAccessTests();
+	vectorModifiersTests();
+	vectorNonMemberOverloadsTests();
 
 	// stack Tests
-	stackConstructorTests();
-	//stackMemberFunctionTests();
-	stackNonMemberOverloadsTests();
+	// stackConstructorTests();
+	// stackMemberFunctionTests();
+	// stackNonMemberOverloadsTests();
 
 	// map Tests
-	//mapConstructorTests();
-	//mapIteratorTests();
-	//mapCapacityTests();
-	//mapElementAccessTests();
-	//mapModifiersTests();
-	//mapOperationsTests();
+	mapConstructorTests();
+	mapIteratorTests();
+	mapCapacityTests();
+	mapElementAccessTests();
+	mapModifiersTests();
+	mapOperationsTests();
 
 	// Set Tests
 	//setConstructorTests();

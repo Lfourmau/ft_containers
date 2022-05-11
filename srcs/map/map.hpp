@@ -89,7 +89,7 @@ namespace ft
 				for(const_iterator it = x.begin(); it != NULL; it++)
 					this->insert(*it);
 			};
-			~map() {};
+			~map() { this->clear(); };
 			class value_compare
 			{
 				friend class map;

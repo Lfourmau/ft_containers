@@ -78,7 +78,7 @@ namespace ft
 			typedef ft::reverse_iterator<iterator>	 			reverse_iterator;
 			typedef const_vec_it								const_iterator;
 			typedef ft::reverse_iterator<const_iterator> 		const_reverse_iterator;
-			vector () : _data(nullptr), _capacity(0), _size(0) {};
+			vector () : _data(NULL), _capacity(0), _size(0), _my_alloc(Alloc()) {};
 			vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
 			{
 				_my_alloc = alloc;
@@ -112,7 +112,7 @@ namespace ft
 			{
 				this->_capacity = x._capacity;
 				this->_size = x._size;
-				this->_my_alloc = allocator_type();
+				this->_my_alloc = x._my_alloc;
 				this->_data = _my_alloc.allocate(this->_capacity);
 				for (size_t i = 0; i < _size; i++)
 					_my_alloc.construct(_data + i, *(x._data + i));
@@ -215,13 +215,13 @@ namespace ft
 				while (this->_size < n)
 					this->push_back(val);
 			};
-			//void push_back (const value_type& val)
-			//{
-			//	this->insert(this->end(), val);
-			//};
+			// void push_back (const value_type& val)
+			// {
+			// 	this->insert(this->end(), val);
+			// };
 		
 			void push_back( const T& value ) {
-				reserve( _size + 1 );
+				reserve(_size + 1); //remove the + 1 fix 1 leak in map test. dont know why
 				_my_alloc.construct( _data + _size, value );
 				_size++;
 			}

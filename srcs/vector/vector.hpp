@@ -113,7 +113,7 @@ namespace ft
 				this->_capacity = x._capacity;
 				this->_size = x._size;
 				this->_my_alloc = allocator_type();
-				this->_data = _my_alloc.allocate(this->_size);
+				this->_data = _my_alloc.allocate(this->_capacity);
 				for (size_t i = 0; i < _size; i++)
 					_my_alloc.construct(_data + i, *(x._data + i));
 			};
@@ -121,7 +121,7 @@ namespace ft
 			{
 				for (size_t i = 0; i < this->_size; i++)
 					_my_alloc.destroy(_data + i);
-				_my_alloc.deallocate(this->_data, this->size());
+				_my_alloc.deallocate(this->_data, this->capacity());
 			};
 
 			//Iterators
@@ -168,7 +168,7 @@ namespace ft
 				{
 					vector tmp(*this);
 					if (this->_capacity > 0)
-						_my_alloc.deallocate(this->_data, this->_size);
+						_my_alloc.deallocate(this->_data, this->_capacity);
 					this->_data = this->_my_alloc.allocate(n);
 					copy(tmp.begin(), tmp.begin() + tmp._size, this->_data);
 					this->_capacity = n;
@@ -209,19 +209,25 @@ namespace ft
 			};
 			void assign (size_type n, const value_type& val)
 			{
-				//_my_alloc.deallocate(this->_data, this->_size);
+				//_my_alloc.deallocate(this->_data, this->_capacity);
 				this->clear();
 				reserve(n);
 				while (this->_size < n)
 					this->push_back(val);
 			};
-			void push_back (const value_type& val)
-			{
-				this->insert(this->end(), val);
-			};
+			//void push_back (const value_type& val)
+			//{
+			//	this->insert(this->end(), val);
+			//};
+		
+			void push_back( const T& value ) {
+				reserve( _size + 1 );
+				_my_alloc.construct( _data + _size, value );
+				_size++;
+			}
 			void pop_back()
 			{
-				_my_alloc.destroy(this->_data + this->_size);
+				_my_alloc.destroy(this->_data + _size);
 				this->_size--;
 			};
 			iterator insert (iterator position, const value_type& val)

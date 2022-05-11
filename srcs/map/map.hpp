@@ -174,52 +174,30 @@ namespace ft
 			};
 			iterator lower_bound (const key_type& key)
 			{
-				Node<value_type> *current = rbt.get_root();
+				iterator current = this->begin();
 				value_type k = ft::make_pair(key, 0);
 
-				while (current)
+				while (current != this->end())
 				{
-					if (cmp(k, current->value))
-					{
-						if (current->left)
-							current = current->left;
-						else
-							return iterator(current);
-					}
-					else if (cmp(current->value, k))
-					{
-						if (current->right)
-							return iterator(current->right);
-						return ++iterator(current);
-					}
-					else
-						return (iterator(current));
+					if (cmp(*current, k) == false)
+						return (current);
+					current++;
 				}
-				return this->end();
+				return (this->end());
 			};
 			const_iterator lower_bound (const key_type& k) const { return const_iterator(this->lower_bound(k)); };
 			iterator upper_bound(const key_type& key)
 			{
-				Node<value_type> *current = rbt.get_root();
+				iterator current = this->begin();
 				value_type k = ft::make_pair(key, 0);
 
-				while (current)
+				while (current != this->end())
 				{
-					if (cmp(k, current->value))
-					{
-						if (current->left)
-							current = current->left;
-						else
-							return iterator(current);
-					}
-					else
-					{
-						if (current->right)
-							return iterator(current->right);
-						return ++iterator(current);
-					}
+					if (cmp(*current, k) == false && (cmp(*current, k) || cmp(k, *current)))
+						return (current);
+					current++;
 				}
-				return this->end();
+				return (this->end());
 			}
 			const_iterator upper_bound (const key_type& k) const { return const_iterator(this->upper_bound(k)); };
 			ft::pair<iterator,iterator> equal_range( const Key& key ) { return (ft::make_pair(this->lower_bound(key), this->upper_bound(key))); };

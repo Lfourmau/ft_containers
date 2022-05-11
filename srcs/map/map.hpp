@@ -53,10 +53,7 @@ namespace ft
 	bool operator>=( const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs ) { return (!(lhs < rhs)); };
 	//MAKE PAIR
 	template< class T1, class T2 >
-	ft::pair<T1,T2> make_pair(T1 t, T2 u)
-	{
-		return ( ft::pair<T1,T2>(t,u) );
-	};
+	ft::pair<T1,T2> make_pair(T1 t, T2 u) { return ( ft::pair<T1,T2>(t,u) ); };
 
 	//MAP CONTAINER
 	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key,T> > > 
@@ -131,7 +128,7 @@ namespace ft
 			size_type max_size() const { return (std::numeric_limits<size_type>::max() / sizeof(value_type)); };
 			void swap(map& other)
 			{
-				std::swap(*this, other);
+				rbt.swap(other.rbt); 
 			};
 			iterator find(const Key& key)
 			{
@@ -166,10 +163,10 @@ namespace ft
 				return(this->end());
 			}
 			void clear() { rbt.clear(); };
-			reverse_iterator rbegin() { return iterator(rbt.maxright()); };
-			const_reverse_iterator rbegin() const { return const_iterator(rbt.maxright()); };
-			reverse_iterator rend() { return iterator(NULL); };
-			const_reverse_iterator rend() const { return const_iterator(NULL); };
+			reverse_iterator rbegin() { return reverse_iterator(rbt.maxright()); };
+			const_reverse_iterator rbegin() const { return const_reverse_iterator(rbt.maxright()); };
+			reverse_iterator rend() { return reverse_iterator(NULL); };
+			const_reverse_iterator rend() const { return const_reverse_iterator(NULL); };
 			allocator_type get_allocator() const { return (_my_alloc); };
 			mapped_type& operator[] (const key_type& k)
 			{

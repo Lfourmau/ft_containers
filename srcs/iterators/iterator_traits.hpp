@@ -80,7 +80,6 @@ namespace ft
 				reverse_iterator<Iter> tmp(*this);
 				this->iter--;
 				return (tmp);
-
 			};
 			reverse_iterator& operator-=(difference_type n)
 			{
@@ -158,6 +157,53 @@ namespace ft
 			pointer operator->() const
 			{
 				return &(this->operator*());
+			};
+			rbt_reverse_iterator operator+(difference_type n) const
+			{
+				rbt_reverse_iterator<Iter> cpy(*this);
+				cpy.iter -= n;
+
+				return (cpy);
+			};
+			rbt_reverse_iterator& operator++()
+			{
+				this->iter--;
+				return (*this);
+			};
+			rbt_reverse_iterator  operator++(int)
+			{
+				rbt_reverse_iterator<Iter> tmp(*this);
+				this->iter--;
+				return (tmp);
+			};
+			rbt_reverse_iterator& operator-=(difference_type n)
+			{
+				this->iter += n;
+				return (*this);
+			};
+			rbt_reverse_iterator& operator+=(difference_type n)
+			{
+				this->iter -= n;
+				return (*this);
+			};
+			rbt_reverse_iterator operator-(difference_type n) const
+			{
+			 	rbt_reverse_iterator<Iter> cpy(*this);
+				cpy.iter += n;
+
+			 	return (cpy);
+			};
+			rbt_reverse_iterator& operator--()
+			{
+				this->iter++;
+				return (*this);
+			};
+			rbt_reverse_iterator  operator--(int)
+			{
+				rbt_reverse_iterator<Iter> tmp(*this);
+				this->iter++;
+				return (tmp);
+
 			};
 	};
 	template< class Iterator1, class Iterator2 >

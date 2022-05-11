@@ -2,7 +2,6 @@
 # define RED_BLACK_TREE_HPP
 
 #include "map.hpp"
-
 namespace ft
 {
 	enum node_color
@@ -44,6 +43,7 @@ namespace ft
 			{
 				public:
 					rbt_iterator() {};
+					rbt_iterator(rbt_iterator const& it) : node(it.node) {};
 					rbt_iterator(Node<U> *n) : node(n) {};
 					U& operator *() { return (node->value); };
 					Node<U> *base() { return (node); };
@@ -376,6 +376,16 @@ namespace ft
 				this->erase(this->maxright());
 				this->_size = 0;
 
+			}
+			void swap(red_black_tree& rbt)
+			{
+				Node<T> *tmp_node = rbt.root;
+				rbt.root = this->root;
+				this->root = tmp_node;
+
+				size_t tmp_size = rbt._size;
+				rbt._size = this->_size;
+				this->_size = tmp_size;
 			}
 		private:
 			Compare comp;

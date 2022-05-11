@@ -1,18 +1,18 @@
 #include <iostream>
 #include <deque>
 
-#ifdef STL_CONTAINERS
+//#ifdef STL_CONTAINERS
 	#include <iterator>
 	#include <vector>
 	#include <stack>
 	#include <map>
 	#include <set>
 	namespace ft = std;
-#else
-	#include "../srcs/vector/vector.hpp"
-	#include "../srcs/stack/stack.hpp"
-	#include "../srcs/map/map.hpp"
-#endif
+//#else
+//	#include "../srcs/vector/vector.hpp"
+//	#include "../srcs/stack/stack.hpp"
+//	#include "../srcs/map/map.hpp"
+//#endif
 
 template<typename T>
 void	displayVect( ft::vector<T> &vect, std::string test ) {
@@ -2406,20 +2406,20 @@ void mapOperationsTests( void ) {
 
 int	main(void) {
 	// Iterator Tests
-	iteratorTests();
-	constIteratorTests();
-	reverseIteratorTests();
-	constReverseIteratorTests();
-	treeIteratorTests();
-	constTreeIteratorTests();
+	//iteratorTests();
+	//constIteratorTests();
+	//reverseIteratorTests();
+	//constReverseIteratorTests();
+	//treeIteratorTests();
+	//constTreeIteratorTests();
 
 	// vector Tests
-	vectorConstructorTests();
-	vectorIteratorTests();
-	vectorCapacityTests();
-	vectorElementAccessTests();
-	vectorModifiersTests();
-	vectorNonMemberOverloadsTests();
+	//vectorConstructorTests();
+	//vectorIteratorTests();
+	//vectorCapacityTests();
+	//vectorElementAccessTests();
+	//vectorModifiersTests();
+	//vectorNonMemberOverloadsTests();
 
 	// Stack Tests
 	//stackConstructorTests();
@@ -2427,11 +2427,11 @@ int	main(void) {
 	//stackNonMemberOverloadsTests();
 
 	// map Tests
-	//mapConstructorTests();
-	//mapIteratorTests(); problem on ++ rev it
-	//mapCapacityTests();
-	//mapElementAccessTests();
-	//mapModifiersTests(); problem on swap
+	mapConstructorTests();
+	mapIteratorTests();
+	mapCapacityTests();
+	mapElementAccessTests();
+	mapModifiersTests();
 	mapOperationsTests();
 
 	// Set Tests

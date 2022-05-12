@@ -2429,9 +2429,9 @@ int	main(void) {
 	vectorNonMemberOverloadsTests();
 
 	// stack Tests
-	// stackConstructorTests();
-	// stackMemberFunctionTests();
-	// stackNonMemberOverloadsTests();
+	stackConstructorTests();
+	stackMemberFunctionTests();
+	stackNonMemberOverloadsTests();
 
 	// map Tests
 	mapConstructorTests();

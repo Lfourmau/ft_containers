@@ -909,6 +909,48 @@ foo is greater than or equal to bar
 foo and bar are not equal
 foo is less than bar
 foo is less than or equal to bar
+STACK CONSTRUCTOR TESTS:
+
+size of first: 0
+size of second: 2
+size of third: 0
+size of fourth: 3
+second top: 200
+fourth top: 100
+STACK MEMBER FUNCTION TESTS:
+
+Empty tests
+
+=======================================================
+true
+false
+true
+STACK NON MEMBER OVERLOADS TESTS:
+
+true
+false
+false
+true
+false
+true
+false
+true
+false
+false
+true
+true
+true
+false
+false
+true
+false
+true
+false
+true
+true
+true
+false
+false
 MAP CONSTRUCTOR TESTS:
 
 =======================================================
@@ -1851,4 +1893,4 @@ true
 true
 5 5
 
-6 ms
+8 ms

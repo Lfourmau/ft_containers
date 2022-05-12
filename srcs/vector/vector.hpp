@@ -99,6 +99,7 @@ namespace ft
          	vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
 			 	typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
 			{
+				_data = NULL;
 				_size = 0;
 				_capacity = 0;
 				_my_alloc = alloc;
@@ -167,7 +168,7 @@ namespace ft
 				if (n > this->_capacity)
 				{
 					vector tmp(*this);
-					if (this->_capacity > 0)
+					if (this->_data)
 						_my_alloc.deallocate(this->_data, this->_capacity);
 					this->_data = this->_my_alloc.allocate(n);
 					copy(tmp.begin(), tmp.begin() + tmp._size, this->_data);

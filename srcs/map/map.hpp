@@ -125,7 +125,7 @@ namespace ft
 			};
 			bool empty() const { return (rbt.get_root() == nullptr); };
 			size_t size() const { return (rbt.size()); }
-			size_type max_size() const { return (std::numeric_limits<size_type>::max() / sizeof(value_type)); };
+			size_type max_size() const { return (std::numeric_limits<size_type>::max() / sizeof(Node<value_type>)); };
 			void swap(map& other)
 			{
 				rbt.swap(other.rbt); 

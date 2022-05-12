@@ -6,12 +6,8 @@ INC = 	srcs/vector/vector.hpp \
 		srcs/map/red_black_tree.hpp \
 		srcs/set/set.hpp \
 		srcs/iterators/iterator_traits.hpp \
-		debug_test.hpp \
 
-#SRCS = mains/vector_main.cpp
-#SRCS = mains/arsene_main.cpp
-#SRCS = mains/stack_main.cpp
-SRCS = mains/map_main.cpp
+SRCS = mains/main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

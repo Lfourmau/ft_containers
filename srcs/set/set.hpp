@@ -186,6 +186,8 @@ namespace ft
 					return (1);
 				return (0);
 			};
+			key_compare 	key_comp() const { return (this->cmp); };
+			value_compare	value_comp() const { return (this->cmp); }
 			allocator_type get_allocator() const { return (_my_alloc); };
 		protected:
 			typedef typename Alloc::template rebind<Node<value_type> >::other _Alty;

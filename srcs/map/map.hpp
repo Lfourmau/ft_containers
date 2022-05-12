@@ -7,7 +7,7 @@
 #include "red_black_tree.hpp"
 
 namespace ft
-{
+{	
 	//PAIR
 	template<class T1, class T2>
 	struct pair
@@ -187,6 +187,8 @@ namespace ft
 				}
 				return (this->end());
 			}
+			key_compare 	key_comp() const { return (this->cmp.comp); };
+			value_compare	value_comp() const { return (this->cmp); }
 			const_iterator upper_bound (const key_type& k) const { return const_iterator(this->upper_bound(k)); };
 			ft::pair<iterator,iterator> equal_range( const Key& key ) { return (ft::make_pair(this->lower_bound(key), this->upper_bound(key))); };
 			ft::pair<const_iterator,const_iterator> equal_range( const Key& key ) const { return (ft::make_pair(this->lower_bound(key), this->upper_bound(key))); };
@@ -267,6 +269,54 @@ namespace ft
 			value_compare cmp;
 			allocator_type _my_alloc;
 			red_black_tree<value_type, _Alty, value_compare> rbt;
+	};
+	template< class Key, class T, class Compare, class Alloc >
+	void swap( ft::map<Key,T,Compare,Alloc>& lhs, ft::map<Key,T,Compare,Alloc>& rhs )
+	{
+		lhs.swap(rhs);
+	};
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator==( const ft::map<Key,T,Compare,Alloc>& lhs, const ft::map<Key,T,Compare,Alloc>& rhs )
+	{
+		if (!(lhs.size() == rhs.size()))
+			return false;
+		typedef typename ft::map<Key,T,Compare,Alloc>::iterator it;
+		it lhs_it = lhs.begin();
+		it rhs_it = rhs.beign();
+
+		while (lhs_it != lhs.end())
+		{
+			if (*lhs_it != rhs_it)
+				return false;
+			lhs_it++;
+			rhs_it++;
+		}
+		return true;
+	};
+	template< class Key, class T, class Compare, class Alloc >
+	bool	operator!=( const map<Key, T, Compare, Alloc> lhs, const map<Key, T, Compare, Alloc> rhs )
+	{ 
+		return (!(lhs == rhs)); 
+	}
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator<( const ft::map<Key,T,Compare,Alloc>& lhs, const ft::map<Key,T,Compare,Alloc>& rhs )
+	{
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	};
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator<=( const ft::map<Key,T,Compare,Alloc>& lhs, const ft::map<Key,T,Compare,Alloc>& rhs )
+	{
+		return ((lhs == rhs) || (lhs < rhs));
+	};
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator>( const ft::map<Key,T,Compare,Alloc>& lhs, const ft::map<Key,T,Compare,Alloc>& rhs )
+	{
+		return (!(lhs <= rhs));
+	};
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator>=( const ft::map<Key,T,Compare,Alloc>& lhs, const ft::map<Key,T,Compare,Alloc>& rhs )
+	{
+		return (!(lhs < rhs));
 	};
 }
 

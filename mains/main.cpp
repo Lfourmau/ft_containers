@@ -3,19 +3,19 @@
 #include <ctime>
 #include <sys/time.h>
 
-//#ifdef STL_CONTAINERS
+#ifdef STL_CONTAINERS
 	#include <iterator>
 	#include <vector>
 	#include <stack>
 	#include <map>
 	#include <set>
 	namespace ft = std;
-//#else
-//	#include "../srcs/vector/vector.hpp"
-//	#include "../srcs/stack/stack.hpp"
-//	#include "../srcs/map/map.hpp"
-//	#include "../srcs/set/set.hpp"
-//#endif
+#else
+	#include "../srcs/vector/vector.hpp"
+	#include "../srcs/stack/stack.hpp"
+	#include "../srcs/map/map.hpp"
+	#include "../srcs/set/set.hpp"
+#endif
 
 template<typename T>
 void	displayVect( ft::vector<T> &vect, std::string test ) {
@@ -1311,34 +1311,34 @@ void vectorNonMemberOverloadsTests( void ) {
 		if ( foo <= bar ) std::cout << "foo is less than or equal to bar" << std::endl;
 		if ( foo >= bar ) std::cout << "foo is greater than or equal to bar" << std::endl;
 	}
-	//{
-	//	ft::vector<int> foo ( 4,400 );
-	//	ft::vector<int> bar ( 2,100 );
-	//	ft::swap( foo, bar );
-	//	displayVect( foo, "Swap test 1.1" );
-	//	displayVect( bar, "Swap test 1.2" );
-	//}
-	//{
-	//	ft::vector<int> foo ( 2,100 );
-	//	ft::vector<int> bar ( 4,400 );
-	//	ft::swap( foo, bar );
-	//	displayVect( foo, "Swap test 2.1" );
-	//	displayVect( bar, "Swap test 2.2" );
-	//}
-	//{
-	//	ft::vector<int> foo ( 4,100 );
-	//	ft::vector<int> bar ( 4,100 );
-	//	ft::swap( foo, bar );
-	//	displayVect( foo, "Swap test 3.1" );
-	//	displayVect( bar, "Swap test 3.2" );
-	//}
-	//{
-	//	ft::vector<int> foo ( 3,100 );
-	//	ft::vector<int> bar ( 2,200 );
-	//	ft::swap( foo, bar );
-	//	displayVect( foo, "Swap test 4.1" );
-	//	displayVect( bar, "Swap test 4.2" );
-	//}
+	{
+		ft::vector<int> foo ( 4,400 );
+		ft::vector<int> bar ( 2,100 );
+		ft::swap( foo, bar );
+		displayVect( foo, "Swap test 1.1" );
+		displayVect( bar, "Swap test 1.2" );
+	}
+	{
+		ft::vector<int> foo ( 2,100 );
+		ft::vector<int> bar ( 4,400 );
+		ft::swap( foo, bar );
+		displayVect( foo, "Swap test 2.1" );
+		displayVect( bar, "Swap test 2.2" );
+	}
+	{
+		ft::vector<int> foo ( 4,100 );
+		ft::vector<int> bar ( 4,100 );
+		ft::swap( foo, bar );
+		displayVect( foo, "Swap test 3.1" );
+		displayVect( bar, "Swap test 3.2" );
+	}
+	{
+		ft::vector<int> foo ( 3,100 );
+		ft::vector<int> bar ( 2,200 );
+		ft::swap( foo, bar );
+		displayVect( foo, "Swap test 4.1" );
+		displayVect( bar, "Swap test 4.2" );
+	}
 }
 
 void stackConstructorTests( void ) {
@@ -1833,7 +1833,7 @@ void mapModifiersTests( void ) {
 		it++;
 		it++;
 		it++;
-		//a.erase( a.begin(), it );
+		a.erase( a.begin(), it );
 		displaymap( a, "Erase test 27" );
 		a.swap( b );
 		displaymap( a, "Swap test 1" );
@@ -1864,13 +1864,13 @@ void mapModifiersTests( void ) {
 		displaymap( a, "Clear test 5" );
 	}
 	{
-		//ft::map<char, int, classcomp> a;
-		//ft::pair<char, int> p1( 'f', 10 ), p2( 'h', 20 );
-		//ft::pair<char, int> p3( 'z', 10 ), p4( 'a', 20 );
-		//std::cout << std::boolalpha << a.key_comp()( 'f', 'h' ) << std::endl;
-		//std::cout << std::boolalpha << a.key_comp()( 'z', 'a' ) << std::endl;
-		//std::cout << std::boolalpha << a.value_comp()( p1, p2 ) << std::endl;
-		//std::cout << std::boolalpha << a.value_comp()( p3, p4 ) << std::endl;
+		ft::map<char, int, classcomp> a;
+		ft::pair<char, int> p1( 'f', 10 ), p2( 'h', 20 );
+		ft::pair<char, int> p3( 'z', 10 ), p4( 'a', 20 );
+		std::cout << std::boolalpha << a.key_comp()( 'f', 'h' ) << std::endl;
+		std::cout << std::boolalpha << a.key_comp()( 'z', 'a' ) << std::endl;
+		std::cout << std::boolalpha << a.value_comp()( p1, p2 ) << std::endl;
+		std::cout << std::boolalpha << a.value_comp()( p3, p4 ) << std::endl;
 	}
 }
 
@@ -2295,14 +2295,14 @@ void setModifiersTests( void ) {
 		a.clear();
 		displaySet( a, "Clear test 5" );
 	}
-	//{
-	//	ft::set<char, classcomp> d;
-	//	char f( 'h' ), h( 'h' ), z( 'z' ), a( 'a' );
-	//	std::cout << std::boolalpha << d.key_comp()( f, h ) << std::endl;
-	//	std::cout << std::boolalpha << d.key_comp()( z, a ) << std::endl;
-	//	std::cout << std::boolalpha << d.value_comp()( f, h ) << std::endl;
-	//	std::cout << std::boolalpha << d.value_comp()( z, a ) << std::endl;
-	//}
+	{
+		ft::set<char, classcomp> d;
+		char f( 'h' ), h( 'h' ), z( 'z' ), a( 'a' );
+		std::cout << std::boolalpha << d.key_comp()( f, h ) << std::endl;
+		std::cout << std::boolalpha << d.key_comp()( z, a ) << std::endl;
+		std::cout << std::boolalpha << d.value_comp()( f, h ) << std::endl;
+		std::cout << std::boolalpha << d.value_comp()( z, a ) << std::endl;
+	}
 }
 
 void setOperationsTests( void ) {
@@ -2421,7 +2421,7 @@ int	main(void) {
 	treeIteratorTests();
 	constTreeIteratorTests();
 
-	//// vector Tests
+	// vector Tests
 	vectorConstructorTests();
 	vectorIteratorTests();
 	vectorCapacityTests();

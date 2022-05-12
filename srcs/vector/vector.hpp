@@ -156,7 +156,7 @@ namespace ft
 				else if (n > this->_size)
 				{
 					if (this->_capacity < n)
-						this->reserve(n);
+						this->reserve(capacity_check(n));
 					while (this->_size < n)
 						this->push_back(val);
 				}
@@ -170,16 +170,8 @@ namespace ft
 					vector tmp(*this);
 					if (this->_data)
 						_my_alloc.deallocate(this->_data, this->_capacity);
-					if (n >= this->_capacity * 2)
-					{
-						this->_data = this->_my_alloc.allocate(n);
-						this->_capacity = n;
-					}
-					else
-					{
-						this->_data = this->_my_alloc.allocate(this->_capacity * 2);
-						this->_capacity = this->_capacity * 2;
-					}
+					this->_data = this->_my_alloc.allocate(n);
+					this->_capacity = n;
 					copy(tmp.begin(), tmp.begin() + tmp._size, this->_data);
 				}
 			};
@@ -212,6 +204,7 @@ namespace ft
 				this->clear();
 				while (first != last)
 				{
+					this->reserve(this->_size + 1);
 					this->push_back(*first);
 					first++;
 				}
@@ -229,8 +222,9 @@ namespace ft
 			// 	this->insert(this->end(), val);
 			// };
 		
-			void push_back( const T& value ) {
-				reserve(_size + 1); //remove the + 1 fix 1 leak in map test. dont know why
+			void push_back( const T& value )
+			{
+				this->reserve(this->capacity_check(_size + 1));
 				_my_alloc.construct( _data + _size, value );
 				_size++;
 			}
@@ -241,8 +235,7 @@ namespace ft
 			};
 			iterator insert (iterator position, const value_type& val)
 			{
-				if (this->_size == this->_capacity)
-					this->reserve(std::max(this->_capacity * 2, static_cast<size_t>(1)));
+				this->reserve(this->capacity_check(this->_size + 1));
 				for (iterator it = this->end(); it != position; --it)
 					*it = *(it - 1);
 				*position = val;
@@ -251,9 +244,13 @@ namespace ft
 			};
 			void insert (iterator position, size_type n, const value_type& val)
 			{
+				this->reserve(this->capacity_check(this->_size + n));
 				for (size_t i = 0; i < n; i++)
 				{
-					this->insert(position, val);
+					for (iterator it = this->end(); it != position; --it)
+						*it = *(it - 1);
+					*position = val;
+					this->_size++;
 					position++;
 				}
 			};
@@ -285,11 +282,10 @@ namespace ft
 			};
 			void swap (vector<T>& x)
 			{
-				vector<T> tmp;
-	
-				tmp = *this;
-				*this = x;
-				x = tmp;
+				std::swap(_data, x._data);
+				std::swap(this->_capacity, x._capacity);
+				std::swap(this->_size, x._size);
+				std::swap(this->_my_alloc, x._my_alloc);
 			};
 			void clear()
 			{
@@ -433,6 +429,15 @@ namespace ft
 						i++;
 					}
 				};
+				size_t capacity_check(size_type needed)
+				{
+					if (needed > this->_capacity * 2)
+						return (needed);
+					else if (needed > this->_capacity)
+						return (this->_capacity * 2);
+					else
+						return 0;
+				}
 	};
 	template<class InputIt1, class InputIt2>
 	bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)

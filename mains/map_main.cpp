@@ -3,19 +3,19 @@
 #include <ctime>
 #include <sys/time.h>
 
-#ifdef STL_CONTAINERS
+//#ifdef STL_CONTAINERS
 	#include <iterator>
 	#include <vector>
 	#include <stack>
 	#include <map>
 	#include <set>
 	namespace ft = std;
-#else
-	#include "../srcs/vector/vector.hpp"
-	#include "../srcs/stack/stack.hpp"
-	#include "../srcs/map/map.hpp"
-	#include "../srcs/set/set.hpp"
-#endif
+//#else
+//	#include "../srcs/vector/vector.hpp"
+//	#include "../srcs/stack/stack.hpp"
+//	#include "../srcs/map/map.hpp"
+//	#include "../srcs/set/set.hpp"
+//#endif
 
 template<typename T>
 void	displayVect( ft::vector<T> &vect, std::string test ) {

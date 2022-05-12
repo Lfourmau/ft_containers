@@ -197,6 +197,54 @@ namespace ft
 			red_black_tree<value_type, _Alty, key_compare> rbt;
 			
 	};
+	template< class Key, class T, class Compare, class Alloc >
+	void swap( ft::set<Key,Compare,Alloc>& lhs, ft::set<Key,Compare,Alloc>& rhs )
+	{
+		lhs.swap(rhs);
+	};
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator==( const ft::set<Key,Compare,Alloc>& lhs, const ft::set<Key,Compare,Alloc>& rhs )
+	{
+		if (!(lhs.size() == rhs.size()))
+			return false;
+		typedef typename ft::set<Key,Compare,Alloc>::iterator it;
+		it lhs_it = lhs.begin();
+		it rhs_it = rhs.beign();
+
+		while (lhs_it != lhs.end())
+		{
+			if (*lhs_it != rhs_it)
+				return false;
+			lhs_it++;
+			rhs_it++;
+		}
+		return true;
+	};
+	template< class Key, class T, class Compare, class Alloc >
+	bool	operator!=( const set<Key, Compare, Alloc> lhs, const set<Key, Compare, Alloc> rhs )
+	{ 
+		return (!(lhs == rhs)); 
+	}
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator<( const ft::set<Key,Compare,Alloc>& lhs, const ft::set<Key,Compare,Alloc>& rhs )
+	{
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	};
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator<=( const ft::set<Key,Compare,Alloc>& lhs, const ft::set<Key,Compare,Alloc>& rhs )
+	{
+		return ((lhs == rhs) || (lhs < rhs));
+	};
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator>( const ft::set<Key,Compare,Alloc>& lhs, const ft::set<Key,Compare,Alloc>& rhs )
+	{
+		return (!(lhs <= rhs));
+	};
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator>=( const ft::set<Key,Compare,Alloc>& lhs, const ft::set<Key,Compare,Alloc>& rhs )
+	{
+		return (!(lhs < rhs));
+	};
 }
 
 #endif

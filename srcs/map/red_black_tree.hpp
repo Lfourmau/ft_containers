@@ -43,6 +43,7 @@ namespace ft
 			{
 				public:
 					rbt_iterator() {};
+					rbt_iterator(Node<U> *n, Node<U> *limit) : node(n), extrem(limit) {};
 					rbt_iterator(rbt_iterator const& it) : node(it.node) {};
 					rbt_iterator(Node<U> *n) : node(n) {};
 					U& operator *() { return (node->value); };
@@ -81,7 +82,9 @@ namespace ft
 				private:
 					void incrementation()
 					{
-						if (node->right)
+						if (!node)
+							node = extrem;
+						else if (node->right)
 						{
 							node = node->right;
 							while (node->left)
@@ -96,7 +99,9 @@ namespace ft
 					}
 					void decrementation()
 					{
-						if (node->left)
+						if (!node)
+							node = extrem;
+						else if (node->left)
 						{
 							node = node->left;
 							while (node->right)
@@ -118,6 +123,7 @@ namespace ft
 					}
 
 					Node<U> *node;
+					Node<U> *extrem;
 			};
 			template<class U>
 			class const_rbt_iterator : public std::iterator<std::bidirectional_iterator_tag, U>
@@ -125,6 +131,7 @@ namespace ft
 				public:
 					typedef const U& reference; 
 					const_rbt_iterator() {};
+					const_rbt_iterator(Node<U> *n, Node<U> *limit) : node(n), extrem(limit) {};
 					const_rbt_iterator(Node<U> *n) : node(n) {};
 					Node<U> *base() { return (node); };
 					U const & operator *() { return (node->value); };
@@ -162,7 +169,9 @@ namespace ft
 				private:
 					void incrementation()
 					{
-						if (node->right)
+						if (!node)
+							node = extrem;
+						else if (node->right)
 						{
 							node = node->right;
 							while (node->left)
@@ -177,7 +186,9 @@ namespace ft
 					}
 					void decrementation()
 					{
-						if (node->left)
+						if (!node)
+							node = extrem;
+						else if (node->left)
 						{
 							node = node->left;
 							while (node->right)
@@ -198,6 +209,7 @@ namespace ft
 						}
 					}
 					Node<U> *node;
+					Node<U> *extrem;
 			};
 
 			void printBT()

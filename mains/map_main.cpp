@@ -3,18 +3,18 @@
 #include <ctime>
 #include <sys/time.h>
 
-#ifdef STL_CONTAINERS
+//#ifdef STL_CONTAINERS
 	#include <iterator>
 	#include <vector>
 	#include <stack>
 	#include <map>
 	#include <set>
 	namespace ft = std;
-#else
-	#include "../srcs/vector/vector.hpp"
-	#include "../srcs/stack/stack.hpp"
-	#include "../srcs/map/map.hpp"
-#endif
+//#else
+//	#include "../srcs/vector/vector.hpp"
+//	#include "../srcs/stack/stack.hpp"
+//	#include "../srcs/map/map.hpp"
+//#endif
 
 template<typename T>
 void	displayVect( ft::vector<T> &vect, std::string test ) {
@@ -689,9 +689,9 @@ void treeIteratorTests( void ) {
 		std::cout << a->first << " " << a->second << std::endl;
 		--a;
 		std::cout << a->first << " " << a->second << std::endl;
-		//for ( ft::map<int, int>::iterator it = --m.end(); it != m.begin(); --it )
-		//	std::cout << it->first << " " << it->second << std::endl;
-		//std::cout << "=======================================================" << std::endl;
+		for ( ft::map<int, int>::iterator it = --m.end(); it != m.begin(); --it )
+			std::cout << it->first << " " << it->second << std::endl;
+		std::cout << "=======================================================" << std::endl;
 	}
 }
 
@@ -779,9 +779,9 @@ void constTreeIteratorTests( void ) {
 		std::cout << a->first << " " << a->second << std::endl;
 		--a;
 		std::cout << a->first << " " << a->second << std::endl;
-		//for ( ft::map<int, int>::iterator it = --m.end(); it != --m.begin(); it-- )
-		//	std::cout << it->first << " " << it->second << std::endl;
-		//std::cout << "=======================================================" << std::endl;
+		for ( ft::map<int, int>::iterator it = --m.end(); it != --m.begin(); it-- )
+			std::cout << it->first << " " << it->second << std::endl;
+		std::cout << "=======================================================" << std::endl;
 	}
 }
 
@@ -1375,92 +1375,92 @@ void stackMemberFunctionTests( void ) {
 		stk.pop();
 		std::cout << std::boolalpha << stk.empty() << std::endl;
 	}
-	//{
-	//	ft::stack<int> mystack;
-	//	int sum( 0 );
-	//	for ( int i = 1; i <= 10; i++ )
-	//		mystack.push( i );
-	//	while ( !mystack.empty() ) {
-	//		sum += mystack.top();
-	//		mystack.pop();
-	//	}
-	//	std::cout << "total: " << sum << std::endl;
-	//}
-	//{
-	//	std::cout << "Size tests" << std::endl << std::endl;
-	//	std::cout << "=======================================================" << std::endl;
-	//	ft::stack<int> mystack;
-	//	std::cout << mystack.size() << std::endl;
-	//	mystack.push( 1 );
-	//	std::cout << mystack.size() << std::endl;
-	//	mystack.push( 4 );
-	//	std::cout << mystack.size() << std::endl;
-	//	mystack.pop();
-	//	std::cout << mystack.size() << std::endl;
-	//	mystack.pop();
-	//	std::cout << mystack.size() << std::endl;
-	//}
-	//{
-	//	ft::stack<int> mystack;
-	//	for ( size_t i = 0; i < 100; i++ )
-	//		mystack.push( i );
-	//	std::cout << mystack.size() << std::endl;
-	//	for ( size_t i = 0; i < 42; i++ )
-	//		mystack.pop();
-	//	std::cout << mystack.size() << std::endl;
-	//	while ( !mystack.empty() )
-	//		mystack.pop();
-	//	std::cout << mystack.size() << std::endl;
-	//}
-	//{
-	//	std::cout << "Top tests" << std::endl << std::endl;
-	//	std::cout << "=======================================================" << std::endl;
-	//	ft::stack<int> mystack;
-	//	mystack.push( 1 );
-	//	std::cout << mystack.top() << std::endl;
-	//	mystack.push( 4 );
-	//	std::cout << mystack.top() << std::endl;
-	//	mystack.pop();
-	//	std::cout << mystack.top() << std::endl;
-	//}
-	//{
-	//	ft::stack<int> mystack;
-	//	for ( size_t i = 0; i < 100; i++ )
-	//		mystack.push( i );
-	//	std::cout << mystack.top() << std::endl;
-	//	for ( size_t i = 0; i < 42; i++ )
-	//		mystack.pop();
-	//	std::cout << mystack.top() << std::endl;
-	//	while ( !mystack.empty() )
-	//		mystack.pop();
-	//}
-	//{
-	//	std::cout << "Push and pop tests" << std::endl << std::endl;
-	//	std::cout << "=======================================================" << std::endl;
-	//	ft::stack<int> a;
-	//	a.push( 42 );
-	//	std::cout << a.top() << " " << a.size() << std::endl;
-	//	a.push( 29 );
-	//	std::cout << a.top() << " " << a.size() << std::endl;
-	//	a.push( 41 );
-	//	std::cout << a.top() << " " << a.size() << std::endl;
-	//	a.push( 79 );
-	//	std::cout << a.top() << " " << a.size() << std::endl;
-	//	a.pop();
-	//	std::cout << a.top() << " " << a.size() << std::endl;
-	//	a.pop();
-	//	std::cout << a.top() << " " << a.size() << std::endl;
-	//	a.pop();
-	//	std::cout << a.top() << " " << a.size() << std::endl;
-	//	a.pop();
-	//}
-	//{
-	//	ft::stack<int> a;
-	//	for ( size_t i = 0; i < 42; i++ ) {
-	//		a.push( i * 3 );
-	//		std::cout << a.top() << " " << a.size() << std::endl;
-	//	}
-	//}
+	{
+		ft::stack<int> mystack;
+		int sum( 0 );
+		for ( int i = 1; i <= 10; i++ )
+			mystack.push( i );
+		while ( !mystack.empty() ) {
+			sum += mystack.top();
+			mystack.pop();
+		}
+		std::cout << "total: " << sum << std::endl;
+	}
+	{
+		std::cout << "Size tests" << std::endl << std::endl;
+		std::cout << "=======================================================" << std::endl;
+		ft::stack<int> mystack;
+		std::cout << mystack.size() << std::endl;
+		mystack.push( 1 );
+		std::cout << mystack.size() << std::endl;
+		mystack.push( 4 );
+		std::cout << mystack.size() << std::endl;
+		mystack.pop();
+		std::cout << mystack.size() << std::endl;
+		mystack.pop();
+		std::cout << mystack.size() << std::endl;
+	}
+	{
+		ft::stack<int> mystack;
+		for ( size_t i = 0; i < 100; i++ )
+			mystack.push( i );
+		std::cout << mystack.size() << std::endl;
+		for ( size_t i = 0; i < 42; i++ )
+			mystack.pop();
+		std::cout << mystack.size() << std::endl;
+		while ( !mystack.empty() )
+			mystack.pop();
+		std::cout << mystack.size() << std::endl;
+	}
+	{
+		std::cout << "Top tests" << std::endl << std::endl;
+		std::cout << "=======================================================" << std::endl;
+		ft::stack<int> mystack;
+		mystack.push( 1 );
+		std::cout << mystack.top() << std::endl;
+		mystack.push( 4 );
+		std::cout << mystack.top() << std::endl;
+		mystack.pop();
+		std::cout << mystack.top() << std::endl;
+	}
+	{
+		ft::stack<int> mystack;
+		for ( size_t i = 0; i < 100; i++ )
+			mystack.push( i );
+		std::cout << mystack.top() << std::endl;
+		for ( size_t i = 0; i < 42; i++ )
+			mystack.pop();
+		std::cout << mystack.top() << std::endl;
+		while ( !mystack.empty() )
+			mystack.pop();
+	}
+	{
+		std::cout << "Push and pop tests" << std::endl << std::endl;
+		std::cout << "=======================================================" << std::endl;
+		ft::stack<int> a;
+		a.push( 42 );
+		std::cout << a.top() << " " << a.size() << std::endl;
+		a.push( 29 );
+		std::cout << a.top() << " " << a.size() << std::endl;
+		a.push( 41 );
+		std::cout << a.top() << " " << a.size() << std::endl;
+		a.push( 79 );
+		std::cout << a.top() << " " << a.size() << std::endl;
+		a.pop();
+		std::cout << a.top() << " " << a.size() << std::endl;
+		a.pop();
+		std::cout << a.top() << " " << a.size() << std::endl;
+		a.pop();
+		std::cout << a.top() << " " << a.size() << std::endl;
+		a.pop();
+	}
+	{
+		ft::stack<int> a;
+		for ( size_t i = 0; i < 42; i++ ) {
+			a.push( i * 3 );
+			std::cout << a.top() << " " << a.size() << std::endl;
+		}
+	}
 }
 
 void stackNonMemberOverloadsTests( void ) {

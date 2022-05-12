@@ -107,22 +107,10 @@ namespace ft
 			typedef typename red_black_tree<value_type, typename Alloc::template rebind<Node<value_type> >::other, value_compare>::template const_rbt_iterator<value_type>	const_iterator;
 			typedef ft::rbt_reverse_iterator<iterator>	 			reverse_iterator;
 			typedef ft::rbt_reverse_iterator<const_iterator> 		const_reverse_iterator;
-			iterator begin()
-			{
-				return (iterator(rbt.maxleft()));
-			};
-			const_iterator begin() const
-			{
-				return (const_iterator(rbt.maxleft()));
-			};
-			iterator end()
-			{
-				return (iterator(NULL));
-			};
-			const_iterator end() const
-			{
-				return (const_iterator(NULL));
-			};
+			iterator begin() { return (iterator(rbt.maxleft())); };
+			const_iterator begin() const { return (const_iterator(rbt.maxleft())); };
+			iterator end() { return (iterator(NULL, rbt.maxright())); };
+			const_iterator end() const { return (const_iterator(NULL, rbt.maxright())); };
 			bool empty() const { return (rbt.get_root() == nullptr); };
 			size_t size() const { return (rbt.size()); }
 			size_type max_size() const { return (std::numeric_limits<size_type>::max() / sizeof(Node<value_type>)); };
@@ -165,8 +153,8 @@ namespace ft
 			void clear() { rbt.clear(); };
 			reverse_iterator rbegin() { return reverse_iterator(rbt.maxright()); };
 			const_reverse_iterator rbegin() const { return const_reverse_iterator(rbt.maxright()); };
-			reverse_iterator rend() { return reverse_iterator(NULL); };
-			const_reverse_iterator rend() const { return const_reverse_iterator(NULL); };
+			reverse_iterator rend() { return reverse_iterator(iterator(NULL, rbt.maxleft())); };
+			const_reverse_iterator rend() const { return const_reverse_iterator(iterator(NULL, rbt.maxleft())); };
 			allocator_type get_allocator() const { return (_my_alloc); };
 			mapped_type& operator[] (const key_type& k)
 			{

@@ -302,7 +302,6 @@ namespace ft
 					}
 					else
 					{
-						std::cout << n->value.first << std::endl;
 						return n;
 					}
 				}

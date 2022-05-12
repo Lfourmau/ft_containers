@@ -114,7 +114,7 @@ namespace ft
 				this->_capacity = x._capacity;
 				this->_size = x._size;
 				this->_my_alloc = x._my_alloc;
-				this->_data = _my_alloc.allocate(this->_capacity);
+				this->_data = _my_alloc.allocate(x._capacity);
 				for (size_t i = 0; i < _size; i++)
 					_my_alloc.construct(_data + i, *(x._data + i));
 			};
@@ -170,9 +170,17 @@ namespace ft
 					vector tmp(*this);
 					if (this->_data)
 						_my_alloc.deallocate(this->_data, this->_capacity);
-					this->_data = this->_my_alloc.allocate(n);
+					if (n >= this->_capacity * 2)
+					{
+						this->_data = this->_my_alloc.allocate(n);
+						this->_capacity = n;
+					}
+					else
+					{
+						this->_data = this->_my_alloc.allocate(this->_capacity * 2);
+						this->_capacity = this->_capacity * 2;
+					}
 					copy(tmp.begin(), tmp.begin() + tmp._size, this->_data);
-					this->_capacity = n;
 				}
 			};
 

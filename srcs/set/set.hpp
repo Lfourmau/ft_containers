@@ -25,7 +25,6 @@ namespace ft
 			typedef ft::rbt_reverse_iterator<const_iterator> 		const_reverse_iterator;
 			typedef size_t size_type;
 
-
 			explicit set (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : cmp(comp), _my_alloc(alloc), rbt(cmp, node_allocator) {};
 			template <class InputIterator>
   			set (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : cmp(comp), _my_alloc(alloc), rbt(cmp, node_allocator)
@@ -51,7 +50,7 @@ namespace ft
 			reverse_iterator rend() { return reverse_iterator(iterator(NULL, rbt.maxleft())); };
 			const_reverse_iterator rend() const { return const_reverse_iterator(iterator(NULL, rbt.maxleft())); };
 			bool empty() const { return (rbt.get_root() == nullptr); };
-			size_t size() const { return (rbt.size()); }
+			size_t size() const { return (rbt.size()); };
 			size_type max_size() const { return (std::numeric_limits<size_type>::max() / sizeof(Node<value_type>)); };
 
 			ft::pair<iterator, bool> insert (const value_type& val)
@@ -202,45 +201,45 @@ namespace ft
 	{
 		lhs.swap(rhs);
 	};
-	template< class Key, class T, class Compare, class Alloc >
+	template< class Key, class Compare, class Alloc >
 	bool operator==( const ft::set<Key,Compare,Alloc>& lhs, const ft::set<Key,Compare,Alloc>& rhs )
 	{
 		if (!(lhs.size() == rhs.size()))
 			return false;
-		typedef typename ft::set<Key,Compare,Alloc>::iterator it;
+		typedef typename ft::set<Key,Compare,Alloc>::const_iterator it;
 		it lhs_it = lhs.begin();
-		it rhs_it = rhs.beign();
+		it rhs_it = rhs.begin();
 
 		while (lhs_it != lhs.end())
 		{
-			if (*lhs_it != rhs_it)
+			if (*lhs_it != *rhs_it)
 				return false;
 			lhs_it++;
 			rhs_it++;
 		}
 		return true;
 	};
-	template< class Key, class T, class Compare, class Alloc >
-	bool	operator!=( const set<Key, Compare, Alloc> lhs, const set<Key, Compare, Alloc> rhs )
+	template< class Key, class Compare, class Alloc >
+	bool	operator!=( const ft::set<Key, Compare, Alloc> lhs, const ft::set<Key, Compare, Alloc> rhs )
 	{ 
 		return (!(lhs == rhs)); 
 	}
-	template< class Key, class T, class Compare, class Alloc >
+	template< class Key, class Compare, class Alloc >
 	bool operator<( const ft::set<Key,Compare,Alloc>& lhs, const ft::set<Key,Compare,Alloc>& rhs )
 	{
 		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 	};
-	template< class Key, class T, class Compare, class Alloc >
+	template< class Key, class Compare, class Alloc >
 	bool operator<=( const ft::set<Key,Compare,Alloc>& lhs, const ft::set<Key,Compare,Alloc>& rhs )
 	{
 		return ((lhs == rhs) || (lhs < rhs));
 	};
-	template< class Key, class T, class Compare, class Alloc >
+	template< class Key, class Compare, class Alloc >
 	bool operator>( const ft::set<Key,Compare,Alloc>& lhs, const ft::set<Key,Compare,Alloc>& rhs )
 	{
 		return (!(lhs <= rhs));
 	};
-	template< class Key, class T, class Compare, class Alloc >
+	template< class Key, class Compare, class Alloc >
 	bool operator>=( const ft::set<Key,Compare,Alloc>& lhs, const ft::set<Key,Compare,Alloc>& rhs )
 	{
 		return (!(lhs < rhs));

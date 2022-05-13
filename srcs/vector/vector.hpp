@@ -17,7 +17,7 @@ namespace ft
       	typedef T value_type;
       	typedef integral_constant type;
     	operator value_type() const { return value; };
-    	const value_type operator()() const { return value; }; //since c++14
+    	const value_type operator()() const { return value; };
   	};
 
 	typedef integral_constant<bool, true> true_type;
@@ -211,17 +211,11 @@ namespace ft
 			};
 			void assign (size_type n, const value_type& val)
 			{
-				//_my_alloc.deallocate(this->_data, this->_capacity);
 				this->clear();
 				reserve(n);
 				while (this->_size < n)
 					this->push_back(val);
-			};
-			// void push_back (const value_type& val)
-			// {
-			// 	this->insert(this->end(), val);
-			// };
-		
+			}
 			void push_back( const T& value )
 			{
 				this->reserve(this->capacity_check(_size + 1));
@@ -295,10 +289,6 @@ namespace ft
 
 			//Allocator
 			allocator_type get_allocator() const { return (this->_my_alloc); };
-
-			//Relationnal operators
-
-
 
 			class vec_it : public std::iterator<std::random_access_iterator_tag, value_type> 
 			{

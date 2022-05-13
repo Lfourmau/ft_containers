@@ -2449,6 +2449,15 @@ int	main(void) {
 	setModifiersTests();
 	setOperationsTests();
 
+	ft::set<int> a;
+	ft::set<int> b;
+	a.insert((5));
+	a.insert((4));
+	a.insert((6));
+	b.insert((5));
+	b.insert((4));
+	b.insert((6));
+	std::cout << (a == b) << std::endl;
 	gettimeofday( &timer, NULL );
 	after = ( timer.tv_sec * 1000 ) + ( timer.tv_usec / 1000 );
 

@@ -21,8 +21,6 @@ namespace ft
 		pair(const T1& x, const T2& y) : first(x), second(y) {};
 		template< class U1, class U2 >
 		pair( const pair<U1, U2>& p ) :first(p.first), second(p.second) {};
-		//pair( const pair& p ) = default;
-
 		pair& operator=(const pair& other) 
 		{ 
 			first = other.first;
@@ -280,13 +278,13 @@ namespace ft
 	{
 		if (!(lhs.size() == rhs.size()))
 			return false;
-		typedef typename ft::map<Key,T,Compare,Alloc>::iterator it;
+		typedef typename ft::map<Key,T,Compare,Alloc>::const_iterator it;
 		it lhs_it = lhs.begin();
-		it rhs_it = rhs.beign();
+		it rhs_it = rhs.begin();
 
 		while (lhs_it != lhs.end())
 		{
-			if (*lhs_it != rhs_it)
+			if (*lhs_it != *rhs_it)
 				return false;
 			lhs_it++;
 			rhs_it++;

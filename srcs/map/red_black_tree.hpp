@@ -232,7 +232,6 @@ namespace ft
 					ret = this->root;
 					*flag = true;
 					this->_size++;
-					//_my_alloc.deallocate(inserted, 1);
 					return ret;
 				}
 				while(n != nullptr)
